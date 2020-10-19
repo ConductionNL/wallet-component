@@ -94,12 +94,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/participants",
+							"raw": "{{baseUrl}}/claims",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"participants"
+								"claims"
 							]
 						}
 					},
@@ -1105,12 +1105,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/participants",
+							"raw": "{{baseUrl}}/proofs",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"participants"
+								"proofs"
 							]
 						}
 					},
@@ -3883,12 +3883,12 @@
 	],
 	"variable": [
 		{
-			"id": "0cc121ba-4318-4277-9bf6-51f16b4c94eb",
+			"id": "098d1884-226a-4378-b538-88e84a0e203b",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "36eec62a-709d-48c0-8fdd-98e5056e5002",
+			"id": "9b9dda70-8409-472b-93ca-891094b81bb0",
 			"key": "baseUrl",
 			"value": "localhost"
 		}
