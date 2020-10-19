@@ -184,7 +184,7 @@ parameters:
     env(APP_COMMONGROUND_STUF_LOCATION): "https://stuf.%env(APP_DOMAIN)%"
     env(APP_COMMONGROUND_STUF_APIKEY): "%env(APP_COMMONGROUND_KEY)%"
 
-    # Test for commonground component by array
+    # Proof for commonground component by array
     common_ground.components:
         be:
             location: "%env(APP_COMMONGROUND_BE_LOCATION)%"

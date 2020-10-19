@@ -8,9 +8,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Repository\ContractRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\ProofRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
@@ -20,13 +18,13 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Contract gives an application access to data in claims.
+ * Proof is a way to prove that claims are correct.
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
- * @ORM\Entity(repositoryClass=ContractRepository::class)
+ * @ORM\Entity(repositoryClass=ProofRepository::class)
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
  *
  * @ApiFilter(BooleanFilter::class)
@@ -34,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
  * @ApiFilter(SearchFilter::class)
  */
-class Contract
+class Proof
 {
     /**
      * @var UuidInterface The UUID identifier of this resource
@@ -51,46 +49,68 @@ class Contract
     private $id;
 
     /**
-     * @var array The scope of this Contract (which data is retrieved).
+     * @var string The type of this Proof.
      *
-     * @Groups({"read","write"})
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $scope = [];
-
-    /**
-     * @var string The goal of this Contract (what are the data used for).
-     *
-     * @example Get email adres for sending news every week
+     * @example RsaSignature2018
      *
      * @Gedmo\Versioned
-     * @Assert\NotNull
      * @Assert\Length(
      *      max = 255
      * )
      * @Gedmo\Versioned
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $goal;
+    private $type;
 
     /**
-     * @var string The application of this Contract.
+     * @var string The purpose of this Proof.
      *
-     * @example https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]
+     * @example assertionMethod
      *
-     * @Assert\NotNull
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $proofPurpose;
+
+    /**
+     * @var string The identifier of the public key that can verify the signature.
+     *
+     * @example https://example.edu/issuers/keys/1
+     *
+     * @Gedmo\Versioned
      * @Assert\Url
      * @Assert\Length(
-     *     max = 255
+     *      max = 255
      * )
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $application;
+    private $verificationMethod;
 
     /**
-     * @var Datetime The moment this contract was created
+     * @var string The digital signature value.
+     *
+     * @example eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+     *
+     * @Gedmo\Versioned
+     * @Assert\Length(
+     *      max = 255
+     * )
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $jws;
+
+    /**
+     * @var Datetime The moment this proof was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -99,7 +119,7 @@ class Contract
     private $dateCreated;
 
     /**
-     * @var Datetime The moment this contract was last Modified
+     * @var Datetime The moment this proof was last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -110,52 +130,60 @@ class Contract
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="contracts")
+     * @ORM\ManyToOne(targetEntity=Claim::class, inversedBy="proofs")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $claims;
-
-    public function __construct()
-    {
-        $this->claims = new ArrayCollection();
-    }
+    private $claim;
 
     public function getId(): Uuid
     {
         return $this->id;
     }
 
-    public function getScope(): ?array
+    public function getType(): ?string
     {
-        return $this->scope;
+        return $this->type;
     }
 
-    public function setScope(?array $scope): self
+    public function setType(?string $type): self
     {
-        $this->scope = $scope;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getGoal(): ?string
+    public function getProofPurpose(): ?string
     {
-        return $this->goal;
+        return $this->proofPurpose;
     }
 
-    public function setGoal(string $goal): self
+    public function setProofPurpose(?string $proofPurpose): self
     {
-        $this->goal = $goal;
+        $this->proofPurpose = $proofPurpose;
 
         return $this;
     }
 
-    public function getApplication(): ?string
+    public function getVerificationMethod(): ?string
     {
-        return $this->application;
+        return $this->verificationMethod;
     }
 
-    public function setApplication(string $application): self
+    public function setVerificationMethod(?string $verificationMethod): self
     {
-        $this->application = $application;
+        $this->verificationMethod = $verificationMethod;
+
+        return $this;
+    }
+
+    public function getJws(): ?string
+    {
+        return $this->jws;
+    }
+
+    public function setJws(?string $jws): self
+    {
+        $this->jws = $jws;
 
         return $this;
     }
@@ -184,30 +212,14 @@ class Contract
         return $this;
     }
 
-    /**
-     * @return Collection|Claim[]
-     */
-    public function getClaims(): Collection
+    public function getClaim(): ?Claim
     {
-        return $this->claims;
+        return $this->claim;
     }
 
-    public function addClaim(Claim $claim): self
+    public function setClaim(?Claim $claim): self
     {
-        if (!$this->claims->contains($claim)) {
-            $this->claims[] = $claim;
-            $claim->addContract($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClaim(Claim $claim): self
-    {
-        if ($this->claims->contains($claim)) {
-            $this->claims->removeElement($claim);
-            $claim->removeContract($this);
-        }
+        $this->claim = $claim;
 
         return $this;
     }

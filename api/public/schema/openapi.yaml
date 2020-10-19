@@ -1956,7 +1956,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -1966,7 +1966,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -1976,58 +1976,273 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/json+hal:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/vnd.api+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/json+vnd.api:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/health+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/json+health:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             application/x-yaml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             text/csv:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
             text/html:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: '#/components/schemas/Claim-read'
       parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[person]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[property]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[data]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[token]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: person
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'person[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: property
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'property[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: data
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'data[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: deepObject
+          explode: true
+        -
+          name: token
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'token[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: page
           in: query
@@ -2129,43 +2344,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
           links:
             GetClaimItem:
               parameters:
@@ -2180,43 +2395,43 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Claim:jsonld'
+              $ref: '#/components/schemas/Claim:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Claim:jsonld'
+              $ref: '#/components/schemas/Claim:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
         description: 'The new Claim resource'
       parameters:
         -
@@ -2338,43 +2553,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
         404:
           description: 'Resource not found'
       produces:
@@ -2472,43 +2687,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
         400:
           description: 'Invalid input'
         404:
@@ -2517,43 +2732,43 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Claim:jsonld'
+              $ref: '#/components/schemas/Claim:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Claim:jsonld'
+              $ref: '#/components/schemas/Claim:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
         description: 'The updated Claim resource'
     patch:
       tags:
@@ -2602,43 +2817,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Claim:jsonld'
+                $ref: '#/components/schemas/Claim:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Claim'
+                $ref: '#/components/schemas/Claim-read'
         400:
           description: 'Invalid input'
         404:
@@ -2647,31 +2862,31 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Claim:jsonld'
+              $ref: '#/components/schemas/Claim:jsonld-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/merge-patch+json:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           applications/x-yaml:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Claim'
+              $ref: '#/components/schemas/Claim-write'
         description: 'The updated Claim resource'
   /contracts:
     get:
@@ -2687,7 +2902,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -2697,7 +2912,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -2707,58 +2922,248 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/json+hal:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/vnd.api+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/json+vnd.api:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/health+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/json+health:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             application/x-yaml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             text/csv:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
             text/html:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Contract'
+                  $ref: '#/components/schemas/Contract-read'
       parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[scope]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[goal]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[application]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: scope
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'scope[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: deepObject
+          explode: true
+        -
+          name: goal
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'goal[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: application
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'application[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: page
           in: query
@@ -2860,43 +3265,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
           links:
             GetContractItem:
               parameters:
@@ -2911,43 +3316,43 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Contract:jsonld'
+              $ref: '#/components/schemas/Contract:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Contract:jsonld'
+              $ref: '#/components/schemas/Contract:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
         description: 'The new Contract resource'
       parameters:
         -
@@ -3069,43 +3474,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
         404:
           description: 'Resource not found'
       produces:
@@ -3203,43 +3608,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
         400:
           description: 'Invalid input'
         404:
@@ -3248,43 +3653,43 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Contract:jsonld'
+              $ref: '#/components/schemas/Contract:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Contract:jsonld'
+              $ref: '#/components/schemas/Contract:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
         description: 'The updated Contract resource'
     patch:
       tags:
@@ -3333,43 +3738,43 @@ paths:
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Contract:jsonld'
+                $ref: '#/components/schemas/Contract:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Contract'
+                $ref: '#/components/schemas/Contract-read'
         400:
           description: 'Invalid input'
         404:
@@ -3378,47 +3783,47 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Contract:jsonld'
+              $ref: '#/components/schemas/Contract:jsonld-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/merge-patch+json:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           applications/x-yaml:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Contract'
+              $ref: '#/components/schemas/Contract-write'
         description: 'The updated Contract resource'
-  /tests:
+  /proofs:
     get:
       tags:
-        - Test
-      operationId: getTestCollection
-      summary: 'Retrieves the collection of Test resources.'
+        - Proof
+      operationId: getProofCollection
+      summary: 'Retrieves the collection of Proof resources.'
       responses:
         200:
-          description: 'Test collection response'
+          description: 'Proof collection response'
           content:
             application/ld+json:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Test:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Proof:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -3428,7 +3833,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Test:jsonld' } }
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Proof:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
                   'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
@@ -3438,58 +3843,273 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/json+hal:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/vnd.api+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/json+vnd.api:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/health+json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/json+health:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/xml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             application/x-yaml:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             text/csv:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
             text/html:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Test'
+                  $ref: '#/components/schemas/Proof-read'
       parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[type]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[proofPurpose]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[verificationMethod]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[jws]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: type
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'type[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: proofPurpose
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'proofPurpose[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: verificationMethod
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'verificationMethod[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: jws
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'jws[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: page
           in: query
@@ -3582,58 +4202,58 @@ paths:
         - application/health+json
     post:
       tags:
-        - Test
-      operationId: postTestCollection
-      summary: 'Creates a Test resource.'
+        - Proof
+      operationId: postProofCollection
+      summary: 'Creates a Proof resource.'
       responses:
         201:
-          description: 'Test resource created'
+          description: 'Proof resource created'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
           links:
-            GetTestItem:
+            GetProofItem:
               parameters:
                 id: '$response.body#/id'
-              operationId: getTestItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /tests/{id}`.'
+              operationId: getProofItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /proofs/{id}`.'
         400:
           description: 'Invalid input'
         404:
@@ -3642,44 +4262,44 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Test:jsonld'
+              $ref: '#/components/schemas/Proof:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Test:jsonld'
+              $ref: '#/components/schemas/Proof:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Test'
-        description: 'The new Test resource'
+              $ref: '#/components/schemas/Proof-write'
+        description: 'The new Proof resource'
       parameters:
         -
           name: Authorization
@@ -3710,12 +4330,12 @@ paths:
           name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
-  '/tests/{id}':
+  '/proofs/{id}':
     get:
       tags:
-        - Test
-      operationId: getTestItem
-      summary: 'Retrieves a Test resource.'
+        - Proof
+      operationId: getProofItem
+      summary: 'Retrieves a Proof resource.'
       parameters:
         -
           name: id
@@ -3796,59 +4416,59 @@ paths:
           in: query
       responses:
         200:
-          description: 'Test resource response'
+          description: 'Proof resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
         404:
           description: 'Resource not found'
       produces:
         - application/health+json
     delete:
       tags:
-        - Test
-      operationId: deleteTestItem
-      summary: 'Removes the Test resource.'
+        - Proof
+      operationId: deleteProofItem
+      summary: 'Removes the Proof resource.'
       responses:
         204:
-          description: 'Test resource deleted'
+          description: 'Proof resource deleted'
         404:
           description: 'Resource not found'
       parameters:
@@ -3889,9 +4509,9 @@ paths:
           in: header
     put:
       tags:
-        - Test
-      operationId: putTestItem
-      summary: 'Replaces the Test resource.'
+        - Proof
+      operationId: putProofItem
+      summary: 'Replaces the Proof resource.'
       parameters:
         -
           name: id
@@ -3930,47 +4550,47 @@ paths:
           in: header
       responses:
         200:
-          description: 'Test resource updated'
+          description: 'Proof resource updated'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
         400:
           description: 'Invalid input'
         404:
@@ -3979,49 +4599,49 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Test:jsonld'
+              $ref: '#/components/schemas/Proof:jsonld-write'
           application/json+ld:
             schema:
-              $ref: '#/components/schemas/Test:jsonld'
+              $ref: '#/components/schemas/Proof:jsonld-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json+hal:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json+vnd.api:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/health+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/json+health:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/x-yaml:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Test'
-        description: 'The updated Test resource'
+              $ref: '#/components/schemas/Proof-write'
+        description: 'The updated Proof resource'
     patch:
       tags:
-        - Test
-      operationId: patchTestItem
-      summary: 'Updates the Test resource.'
+        - Proof
+      operationId: patchProofItem
+      summary: 'Updates the Proof resource.'
       parameters:
         -
           name: id
@@ -4060,47 +4680,47 @@ paths:
           in: header
       responses:
         200:
-          description: 'Test resource updated'
+          description: 'Proof resource updated'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Test:jsonld'
+                $ref: '#/components/schemas/Proof:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Test'
+                $ref: '#/components/schemas/Proof-read'
         400:
           description: 'Invalid input'
         404:
@@ -4109,32 +4729,32 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Test:jsonld'
+              $ref: '#/components/schemas/Proof:jsonld-write'
           application/json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/hal+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/merge-patch+json:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           applications/x-yaml:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           text/csv:
             schema:
-              $ref: '#/components/schemas/Test'
+              $ref: '#/components/schemas/Proof-write'
           text/html:
             schema:
-              $ref: '#/components/schemas/Test'
-        description: 'The updated Test resource'
+              $ref: '#/components/schemas/Proof-write'
+        description: 'The updated Proof resource'
 components:
   schemas:
     AuditTrail-read:
@@ -4527,93 +5147,260 @@ components:
         '@type':
           readOnly: true
           type: string
-    Claim:
+    Claim-read:
       type: object
-      description: ''
+      description: 'Claim is a statement about a Subject (person).'
       properties:
         id:
           readOnly: true
-          type: integer
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
         person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
           type: string
-          nullable: true
-        token:
+        property:
+          description: 'The property of this Claim.'
           type: string
-          nullable: true
         data:
+          description: 'The data (Value) of this Claim.'
+          type: array
+          items:
+            type: string
+        token:
+          description: 'The jwt token of this Claim.'
+          type: string
+          nullable: true
+        dateCreated:
+          description: 'The moment this claim was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this claim was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        contracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract-read'
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof-read'
+      required:
+        - person
+        - property
+        - data
+    Claim-write:
+      type: object
+      description: 'Claim is a statement about a Subject (person).'
+      required:
+        - person
+        - property
+        - data
+      properties:
+        person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        property:
+          description: 'The property of this Claim.'
+          type: string
+        data:
+          description: 'The data (Value) of this Claim.'
+          type: array
+          items:
+            type: string
+        token:
+          description: 'The jwt token of this Claim.'
+          type: string
+          nullable: true
+        contracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract-write'
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof-write'
+    'Claim:jsonld-read':
+      type: object
+      description: 'Claim is a statement about a Subject (person).'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        property:
+          description: 'The property of this Claim.'
+          type: string
+        data:
+          description: 'The data (Value) of this Claim.'
+          type: array
+          items:
+            type: string
+        token:
+          description: 'The jwt token of this Claim.'
+          type: string
+          nullable: true
+        dateCreated:
+          description: 'The moment this claim was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this claim was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        contracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract:jsonld-read'
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof:jsonld-read'
+      required:
+        - person
+        - property
+        - data
+    'Claim:jsonld-write':
+      type: object
+      description: 'Claim is a statement about a Subject (person).'
+      required:
+        - person
+        - property
+        - data
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        property:
+          description: 'The property of this Claim.'
+          type: string
+        data:
+          description: 'The data (Value) of this Claim.'
+          type: array
+          items:
+            type: string
+        token:
+          description: 'The jwt token of this Claim.'
+          type: string
+          nullable: true
+        contracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract:jsonld-write'
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof:jsonld-write'
+    Contract-read:
+      type: object
+      description: 'Contract gives an application access to data in claims.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        scope:
+          description: 'The scope of this Contract (which data is retrieved).'
           type: array
           items:
             type: string
           nullable: true
-    'Claim:jsonld':
+        goal:
+          description: 'The goal of this Contract (what are the data used for).'
+          type: string
+        application:
+          description: 'The application of this Contract.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        dateCreated:
+          description: 'The moment this contract was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this contract was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim-read'
+      required:
+        - goal
+        - application
+    Contract-write:
       type: object
-      description: ''
+      description: 'Contract gives an application access to data in claims.'
       properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        person:
-          type: string
-          nullable: true
-        token:
-          type: string
-          nullable: true
-        data:
+        scope:
+          description: 'The scope of this Contract (which data is retrieved).'
           type: array
           items:
             type: string
           nullable: true
-    Contract:
+        goal:
+          description: 'The goal of this Contract (what are the data used for).'
+          type: string
+        application:
+          description: 'The application of this Contract.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim-write'
+      required:
+        - goal
+        - application
+    'Contract:jsonld-read':
       type: object
-      description: ''
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        organization:
-          type: string
-          nullable: true
-    'Contract:jsonld':
-      type: object
-      description: ''
-      properties:
-        '@context':
-          readOnly: true
-          type: string
-        '@id':
-          readOnly: true
-          type: string
-        '@type':
-          readOnly: true
-          type: string
-        id:
-          readOnly: true
-          type: integer
-        organization:
-          type: string
-          nullable: true
-    Test:
-      type: object
-      description: ''
-      properties:
-        id:
-          readOnly: true
-          type: integer
-        person:
-          type: string
-          nullable: true
-    'Test:jsonld':
-      type: object
-      description: ''
+      description: 'Contract gives an application access to data in claims.'
       properties:
         '@context':
           readOnly: true
@@ -4626,11 +5413,402 @@ components:
           type: string
         id:
           readOnly: true
-          type: integer
-        person:
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        scope:
+          description: 'The scope of this Contract (which data is retrieved).'
+          type: array
+          items:
+            type: string
+          nullable: true
+        goal:
+          description: 'The goal of this Contract (what are the data used for).'
+          type: string
+        application:
+          description: 'The application of this Contract.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        dateCreated:
+          description: 'The moment this contract was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this contract was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim:jsonld-read'
+      required:
+        - goal
+        - application
+    'Contract:jsonld-write':
+      type: object
+      description: 'Contract gives an application access to data in claims.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        scope:
+          description: 'The scope of this Contract (which data is retrieved).'
+          type: array
+          items:
+            type: string
+          nullable: true
+        goal:
+          description: 'The goal of this Contract (what are the data used for).'
+          type: string
+        application:
+          description: 'The application of this Contract.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        claims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Claim:jsonld-write'
+      required:
+        - goal
+        - application
+    Proof-read:
+      type: object
+      description: 'Proof is a way to prove that claims are correct.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        type:
+          description: 'The type of this Proof.'
           type: string
           nullable: true
+        proofPurpose:
+          description: 'The purpose of this Proof.'
+          type: string
+          nullable: true
+        verificationMethod:
+          description: 'The identifier of the public key that can verify the signature.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        jws:
+          description: 'The digital signature value.'
+          type: string
+          nullable: true
+        dateCreated:
+          description: 'The moment this proof was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this proof was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        claim:
+          $ref: '#/components/schemas/Claim-read'
+    Proof-write:
+      type: object
+      description: 'Proof is a way to prove that claims are correct.'
+      properties:
+        type:
+          description: 'The type of this Proof.'
+          type: string
+          nullable: true
+        proofPurpose:
+          description: 'The purpose of this Proof.'
+          type: string
+          nullable: true
+        verificationMethod:
+          description: 'The identifier of the public key that can verify the signature.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        jws:
+          description: 'The digital signature value.'
+          type: string
+          nullable: true
+        claim:
+          $ref: '#/components/schemas/Claim-write'
+    'Proof:jsonld-read':
+      type: object
+      description: 'Proof is a way to prove that claims are correct.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        type:
+          description: 'The type of this Proof.'
+          type: string
+          nullable: true
+        proofPurpose:
+          description: 'The purpose of this Proof.'
+          type: string
+          nullable: true
+        verificationMethod:
+          description: 'The identifier of the public key that can verify the signature.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        jws:
+          description: 'The digital signature value.'
+          type: string
+          nullable: true
+        dateCreated:
+          description: 'The moment this proof was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this proof was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        claim:
+          $ref: '#/components/schemas/Claim:jsonld-read'
+    'Proof:jsonld-write':
+      type: object
+      description: 'Proof is a way to prove that claims are correct.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        type:
+          description: 'The type of this Proof.'
+          type: string
+          nullable: true
+        proofPurpose:
+          description: 'The purpose of this Proof.'
+          type: string
+          nullable: true
+        verificationMethod:
+          description: 'The identifier of the public key that can verify the signature.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
+        jws:
+          description: 'The digital signature value.'
+          type: string
+          nullable: true
+        claim:
+          $ref: '#/components/schemas/Claim:jsonld-write'
 definitions:
+  Claim-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this claim was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this claim was last Modified'
+        type: \Datetime
+      contracts: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
+  Claim-write:
+    properties:
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      contracts: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
+  Contract-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      scope:
+        description: 'The scope of this Contract (which data is retrieved).'
+        type: array
+      goal:
+        description: 'The goal of this Contract (what are the data used for).'
+        type: string
+        example: 'Get email adres for sending news every week'
+        maxLength: 255
+      application:
+        description: 'The application of this Contract.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]'
+        format: url
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this contract was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this contract was last Modified'
+        type: \Datetime
+      claims: []
+    required:
+      - goal
+      - application
+  Contract-write:
+    properties:
+      scope:
+        description: 'The scope of this Contract (which data is retrieved).'
+        type: array
+      goal:
+        description: 'The goal of this Contract (what are the data used for).'
+        type: string
+        example: 'Get email adres for sending news every week'
+        maxLength: 255
+      application:
+        description: 'The application of this Contract.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]'
+        format: url
+        maxLength: 255
+      claims: []
+    required:
+      - goal
+      - application
+  Proof-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this proof was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this proof was last Modified'
+        type: \Datetime
+      claim: []
+    required: []
+  Proof-write:
+    properties:
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      claim: []
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -4735,12 +5913,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-19 10:40:52'
+        example: '2020-10-19 14:19:36'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-19 10:40:52'
+        example: '2020-10-19 14:19:36'
     required: []
   AuditTrail-write:
     properties:
@@ -4788,12 +5966,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-19 10:40:52'
+        example: '2020-10-19 14:19:36'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-19 10:40:52'
+        example: '2020-10-19 14:19:36'
     required: []
   ChangeLog-write:
     properties:
@@ -4807,19 +5985,19 @@ tags:
   -
     name: Claim
     description: |
+      Claim is a statement about a Subject (person).
       
-      
-      
+      Built on the basis of the subject-property-value relationship (https://w3c.github.io/vc-data-model/#claims).
   -
     name: Contract
     description: |
-      
+      Contract gives an application access to data in claims.
       
       
   -
-    name: Test
+    name: Proof
     description: |
-      
+      Proof is a way to prove that claims are correct.
       
       
   -
