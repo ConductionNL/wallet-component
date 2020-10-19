@@ -1942,6 +1942,2199 @@ paths:
             schema:
               $ref: '#/components/schemas/ChangeLog-write'
         description: 'The updated ChangeLog resource'
+  /claims:
+    get:
+      tags:
+        - Claim
+      operationId: getClaimCollection
+      summary: 'Retrieves the collection of Claim resources.'
+      responses:
+        200:
+          description: 'Claim collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Claim'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Claim
+      operationId: postClaimCollection
+      summary: 'Creates a Claim resource.'
+      responses:
+        201:
+          description: 'Claim resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Claim'
+          links:
+            GetClaimItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getClaimItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /claims/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Claim:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Claim:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Claim'
+        description: 'The new Claim resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/claims/{id}':
+    get:
+      tags:
+        - Claim
+      operationId: getClaimItem
+      summary: 'Retrieves a Claim resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Claim resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Claim'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Claim
+      operationId: deleteClaimItem
+      summary: 'Removes the Claim resource.'
+      responses:
+        204:
+          description: 'Claim resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Claim
+      operationId: putClaimItem
+      summary: 'Replaces the Claim resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Claim resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Claim'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Claim:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Claim:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Claim'
+        description: 'The updated Claim resource'
+    patch:
+      tags:
+        - Claim
+      operationId: patchClaimItem
+      summary: 'Updates the Claim resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Claim resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Claim:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Claim'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Claim:jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Claim'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Claim'
+        description: 'The updated Claim resource'
+  /contracts:
+    get:
+      tags:
+        - Contract
+      operationId: getContractCollection
+      summary: 'Retrieves the collection of Contract resources.'
+      responses:
+        200:
+          description: 'Contract collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Contract
+      operationId: postContractCollection
+      summary: 'Creates a Contract resource.'
+      responses:
+        201:
+          description: 'Contract resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract'
+          links:
+            GetContractItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getContractItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /contracts/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Contract:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Contract:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Contract'
+        description: 'The new Contract resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/contracts/{id}':
+    get:
+      tags:
+        - Contract
+      operationId: getContractItem
+      summary: 'Retrieves a Contract resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Contract resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Contract
+      operationId: deleteContractItem
+      summary: 'Removes the Contract resource.'
+      responses:
+        204:
+          description: 'Contract resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Contract
+      operationId: putContractItem
+      summary: 'Replaces the Contract resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Contract resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Contract:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Contract:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Contract'
+        description: 'The updated Contract resource'
+    patch:
+      tags:
+        - Contract
+      operationId: patchContractItem
+      summary: 'Updates the Contract resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Contract resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Contract:jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Contract'
+        description: 'The updated Contract resource'
+  /tests:
+    get:
+      tags:
+        - Test
+      operationId: getTestCollection
+      summary: 'Retrieves the collection of Test resources.'
+      responses:
+        200:
+          description: 'Test collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Test:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Test:jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Test
+      operationId: postTestCollection
+      summary: 'Creates a Test resource.'
+      responses:
+        201:
+          description: 'Test resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Test'
+          links:
+            GetTestItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getTestItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /tests/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Test:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Test:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Test'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Test'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Test'
+        description: 'The new Test resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/tests/{id}':
+    get:
+      tags:
+        - Test
+      operationId: getTestItem
+      summary: 'Retrieves a Test resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Test resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Test'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Test
+      operationId: deleteTestItem
+      summary: 'Removes the Test resource.'
+      responses:
+        204:
+          description: 'Test resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Test
+      operationId: putTestItem
+      summary: 'Replaces the Test resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Test resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Test'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Test:jsonld'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Test:jsonld'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Test'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Test'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Test'
+        description: 'The updated Test resource'
+    patch:
+      tags:
+        - Test
+      operationId: patchTestItem
+      summary: 'Updates the Test resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Test resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Test:jsonld'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Test'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Test'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Test:jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Test'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Test'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Test'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Test'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Test'
+        description: 'The updated Test resource'
 components:
   schemas:
     AuditTrail-read:
@@ -2334,6 +4527,109 @@ components:
         '@type':
           readOnly: true
           type: string
+    Claim:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        person:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: string
+          nullable: true
+    'Claim:jsonld':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        person:
+          type: string
+          nullable: true
+        token:
+          type: string
+          nullable: true
+        data:
+          type: array
+          items:
+            type: string
+          nullable: true
+    Contract:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        organization:
+          type: string
+          nullable: true
+    'Contract:jsonld':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        organization:
+          type: string
+          nullable: true
+    Test:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        person:
+          type: string
+          nullable: true
+    'Test:jsonld':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        person:
+          type: string
+          nullable: true
 definitions:
   AuditTrail-read:
     properties:
@@ -2439,12 +4735,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-19 10:19:07'
+        example: '2020-10-19 10:40:52'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-19 10:19:07'
+        example: '2020-10-19 10:40:52'
     required: []
   AuditTrail-write:
     properties:
@@ -2492,12 +4788,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-19 10:19:07'
+        example: '2020-10-19 10:40:52'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-19 10:19:07'
+        example: '2020-10-19 10:40:52'
     required: []
   ChangeLog-write:
     properties:
@@ -2508,6 +4804,24 @@ definitions:
         maxLength: 2555
     required: []
 tags:
+  -
+    name: Claim
+    description: |
+      
+      
+      
+  -
+    name: Contract
+    description: |
+      
+      
+      
+  -
+    name: Test
+    description: |
+      
+      
+      
   -
     name: AuditTrail
     description: |
