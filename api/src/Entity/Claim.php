@@ -54,7 +54,7 @@ class Claim
     /**
      * @var string The person (Subject) of this Claim.
      *
-     * @example https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]
+     * @example https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]
      *
      * @Assert\NotNull
      * @Assert\Url
@@ -134,7 +134,7 @@ class Claim
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim")
+     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim", cascade={"persist", "remove"})
      */
     private $proofs;
 
