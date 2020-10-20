@@ -2984,6 +2984,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[person]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[scope]'
           in: query
           required: false
@@ -3084,6 +3093,22 @@ paths:
             type: string
         -
           name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: person
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'person[]'
           in: query
           required: false
           schema:
@@ -4755,6 +4780,1017 @@ paths:
             schema:
               $ref: '#/components/schemas/Proof-write'
         description: 'The updated Proof resource'
+  /purpose_limitations:
+    get:
+      tags:
+        - PurposeLimitation
+      operationId: getPurposeLimitationCollection
+      summary: 'Retrieves the collection of PurposeLimitation resources.'
+      responses:
+        200:
+          description: 'PurposeLimitation collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/PurposeLimitation:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/PurposeLimitation:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurposeLimitation-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[data]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[noticePeriod]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[expiryPeriod]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'noticePeriod[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'noticePeriod[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'noticePeriod[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'noticePeriod[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryPeriod[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryPeriod[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryPeriod[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryPeriod[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: data
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'data[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: deepObject
+          explode: true
+        -
+          name: noticePeriod
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'noticePeriod[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: expiryPeriod
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryPeriod[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - PurposeLimitation
+      operationId: postPurposeLimitationCollection
+      summary: 'Creates a PurposeLimitation resource.'
+      responses:
+        201:
+          description: 'PurposeLimitation resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+          links:
+            GetPurposeLimitationItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getPurposeLimitationItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /purpose_limitations/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+        description: 'The new PurposeLimitation resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/purpose_limitations/{id}':
+    get:
+      tags:
+        - PurposeLimitation
+      operationId: getPurposeLimitationItem
+      summary: 'Retrieves a PurposeLimitation resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'PurposeLimitation resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - PurposeLimitation
+      operationId: deletePurposeLimitationItem
+      summary: 'Removes the PurposeLimitation resource.'
+      responses:
+        204:
+          description: 'PurposeLimitation resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - PurposeLimitation
+      operationId: putPurposeLimitationItem
+      summary: 'Replaces the PurposeLimitation resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'PurposeLimitation resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+        description: 'The updated PurposeLimitation resource'
+    patch:
+      tags:
+        - PurposeLimitation
+      operationId: patchPurposeLimitationItem
+      summary: 'Updates the PurposeLimitation resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'PurposeLimitation resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurposeLimitation-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/PurposeLimitation-write'
+        description: 'The updated PurposeLimitation resource'
 components:
   schemas:
     AuditTrail-read:
@@ -5342,6 +6378,12 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
+        person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scope:
           description: 'The scope of this Contract (which data is retrieved).'
           type: array
@@ -5370,6 +6412,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Claim-read'
+        purposeLimitation:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/PurposeLimitation-read'
       required:
         - goal
         - application
@@ -5377,6 +6424,12 @@ components:
       type: object
       description: 'Contract gives an application access to data in claims.'
       properties:
+        person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scope:
           description: 'The scope of this Contract (which data is retrieved).'
           type: array
@@ -5395,6 +6448,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Claim-write'
+        purposeLimitation:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/PurposeLimitation-write'
       required:
         - goal
         - application
@@ -5418,6 +6476,12 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
+        person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scope:
           description: 'The scope of this Contract (which data is retrieved).'
           type: array
@@ -5446,6 +6510,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Claim:jsonld-read'
+        purposeLimitation:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
       required:
         - goal
         - application
@@ -5462,6 +6531,12 @@ components:
         '@type':
           readOnly: true
           type: string
+        person:
+          description: 'The person (Subject) of this Claim.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scope:
           description: 'The scope of this Contract (which data is retrieved).'
           type: array
@@ -5480,6 +6555,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Claim:jsonld-write'
+        purposeLimitation:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/PurposeLimitation:jsonld-write'
       required:
         - goal
         - application
@@ -5631,6 +6711,198 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim:jsonld-write'
+    PurposeLimitation-read:
+      type: object
+      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'The name of this PurposeLimitation.'
+          type: string
+        description:
+          description: 'The description of this application.'
+          type: string
+          nullable: true
+        data:
+          description: 'The data of this PurposeLimitation.'
+          type: array
+          items:
+            type: string
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        expiryPeriod:
+          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        dateCreated:
+          description: 'The moment this contract was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this contract was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        contract:
+          $ref: '#/components/schemas/Contract-read'
+      required:
+        - name
+    PurposeLimitation-write:
+      type: object
+      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      required:
+        - name
+      properties:
+        name:
+          description: 'The name of this PurposeLimitation.'
+          type: string
+        description:
+          description: 'The description of this application.'
+          type: string
+          nullable: true
+        data:
+          description: 'The data of this PurposeLimitation.'
+          type: array
+          items:
+            type: string
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        expiryPeriod:
+          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        contract:
+          $ref: '#/components/schemas/Contract-write'
+    'PurposeLimitation:jsonld-read':
+      type: object
+      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'The name of this PurposeLimitation.'
+          type: string
+        description:
+          description: 'The description of this application.'
+          type: string
+          nullable: true
+        data:
+          description: 'The data of this PurposeLimitation.'
+          type: array
+          items:
+            type: string
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        expiryPeriod:
+          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        dateCreated:
+          description: 'The moment this contract was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this contract was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        contract:
+          $ref: '#/components/schemas/Contract:jsonld-read'
+      required:
+        - name
+    'PurposeLimitation:jsonld-write':
+      type: object
+      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      required:
+        - name
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'The name of this PurposeLimitation.'
+          type: string
+        description:
+          description: 'The description of this application.'
+          type: string
+          nullable: true
+        data:
+          description: 'The data of this PurposeLimitation.'
+          type: array
+          items:
+            type: string
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        expiryPeriod:
+          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          externalDocs:
+            url: 'http://schema.org/DateTime'
+          type: string
+          format: date-time
+          nullable: true
+        contract:
+          $ref: '#/components/schemas/Contract:jsonld-write'
 definitions:
   Claim-read:
     properties:
@@ -5642,7 +6914,7 @@ definitions:
       person:
         description: 'The person (Subject) of this Claim.'
         type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]'
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
         format: url
         maxLength: 255
       property:
@@ -5675,7 +6947,7 @@ definitions:
       person:
         description: 'The person (Subject) of this Claim.'
         type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]'
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
         format: url
         maxLength: 255
       property:
@@ -5704,6 +6976,12 @@ definitions:
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
       scope:
         description: 'The scope of this Contract (which data is retrieved).'
         type: array
@@ -5725,11 +7003,18 @@ definitions:
         description: 'The moment this contract was last Modified'
         type: \Datetime
       claims: []
+      purposeLimitation: []
     required:
       - goal
       - application
   Contract-write:
     properties:
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
       scope:
         description: 'The scope of this Contract (which data is retrieved).'
         type: array
@@ -5745,6 +7030,7 @@ definitions:
         format: url
         maxLength: 255
       claims: []
+      purposeLimitation: []
     required:
       - goal
       - application
@@ -5809,59 +7095,73 @@ definitions:
         maxLength: 255
       claim: []
     required: []
-  ChangeLog-read:
+  PurposeLimitation-read:
     properties:
       id:
-        description: 'The UUID identifier of this object'
+        description: 'The UUID identifier of this resource'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'The name of this PurposeLimitation.'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
+        example: PurposeLimitation
         maxLength: 255
+      description:
+        description: 'The description of this application.'
+        type: string
+        example: 'The PurposeLimitation for Contract x.'
+        maxLength: 255
+      data:
+        description: 'The data of this PurposeLimitation.'
+        type: array
+      noticePeriod:
+        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        type: string
+        example: '2020-10-20 10:26:06'
+        format: date-time
+      expiryPeriod:
+        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        type: string
+        example: '2020-10-20 10:26:06'
+        format: date-time
       dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-10-19 14:37:49'
+        description: 'The moment this contract was created'
+        type: \Datetime
       dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-10-19 14:37:49'
-    required: []
-  ChangeLog-write:
+        description: 'The moment this contract was last Modified'
+        type: \Datetime
+      contract: []
+    required:
+      - name
+  PurposeLimitation-write:
     properties:
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'The name of this PurposeLimitation.'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
+        example: PurposeLimitation
+        maxLength: 255
+      description:
+        description: 'The description of this application.'
+        type: string
+        example: 'The PurposeLimitation for Contract x.'
+        maxLength: 255
+      data:
+        description: 'The data of this PurposeLimitation.'
+        type: array
+      noticePeriod:
+        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        type: string
+        example: '2020-10-20 10:26:06'
+        format: date-time
+      expiryPeriod:
+        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        type: string
+        example: '2020-10-20 10:26:06'
+        format: date-time
+      contract: []
+    required:
+      - name
   AuditTrail-read:
     properties:
       id:
@@ -5966,12 +7266,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-19 14:37:49'
+        example: '2020-10-20 10:26:07'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-19 14:37:49'
+        example: '2020-10-20 10:26:07'
     required: []
   AuditTrail-write:
     properties:
@@ -5979,6 +7279,59 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-10-20 10:26:07'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-10-20 10:26:07'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -6001,13 +7354,19 @@ tags:
       
       
   -
-    name: ChangeLog
+    name: PurposeLimitation
+    description: |
+      PurposeLimitation is de purpose limitation of a Contract.
+      
+      
+  -
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -6018,15 +7377,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
