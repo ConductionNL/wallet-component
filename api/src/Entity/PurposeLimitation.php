@@ -9,8 +9,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\PurposeLimitationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
@@ -90,26 +88,24 @@ class PurposeLimitation
     private $data = [];
 
     /**
-     * @var DateTime The notice period for (the Contract of) this PurposeLimitation.
+     * @var DateInterval The notice period for (the Contract of) this PurposeLimitation.
      *
-     * @example 13-07-2020 12:00:00
+     * @example P3Y6M4DT12H30M5S
      *
-     * @Assert\DateTime
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="dateinterval", nullable=true)
      */
     private $noticePeriod;
 
     /**
-     * @var DateTime The expiry period for (the Contract of) this PurposeLimitation.
+     * @var DateInterval The expiry period for (the Contract of) this PurposeLimitation.
      *
-     * @example 13-07-2020 12:00:00
+     * @example P3Y6M4DT12H30M5S
      *
-     * @Assert\DateTime
      * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="dateinterval", nullable=true)
      */
     private $expiryPeriod;
 
@@ -180,24 +176,24 @@ class PurposeLimitation
         return $this;
     }
 
-    public function getNoticePeriod(): ?\DateTimeInterface
+    public function getNoticePeriod(): ?\DateInterval
     {
         return $this->noticePeriod;
     }
 
-    public function setNoticePeriod(?\DateTimeInterface $noticePeriod): self
+    public function setNoticePeriod(\DateInterval $noticePeriod): self
     {
         $this->noticePeriod = $noticePeriod;
 
         return $this;
     }
 
-    public function getExpiryPeriod(): ?\DateTimeInterface
+    public function getExpiryPeriod(): ?\DateInterval
     {
         return $this->expiryPeriod;
     }
 
-    public function setExpiryPeriod(\DateTimeInterface $expiryPeriod): self
+    public function setExpiryPeriod(\DateInterval $expiryPeriod): self
     {
         $this->expiryPeriod = $expiryPeriod;
 
