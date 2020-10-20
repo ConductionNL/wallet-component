@@ -776,7 +776,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"person\": \"https://cc.conduction.nl/people\"\n}",
+							"raw": "{\n    \"person\": \"https://cc.conduction.nl/people\",\n    \"property\": \"jobTitle\",\n    \"data\": {\n        \"jobTitle\": \"professor\"\n    }\n}",
 							"options": {
 								"raw": {}
 							}
@@ -3883,12 +3883,12 @@
 	],
 	"variable": [
 		{
-			"id": "098d1884-226a-4378-b538-88e84a0e203b",
+			"id": "1195eab6-34b9-41cc-aa8f-78f77296df74",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "9b9dda70-8409-472b-93ca-891094b81bb0",
+			"id": "3b3dc83e-3192-4589-aea1-2995b37f72e2",
 			"key": "baseUrl",
 			"value": "localhost"
 		}
