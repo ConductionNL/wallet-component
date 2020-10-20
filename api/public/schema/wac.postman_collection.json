@@ -2798,7 +2798,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"scope\": [\n        \"jobTitle\"\n    ],\n    \"goal\": \"Controle omdat x\",\n    \"application\": \"https://dev.zuid-drecht.nl/api/v1/wrc/applications\",\n    \"claims\": [\n        \"/claims/{{claim}}\"\n    ]\n}",
+							"raw": "{\n    \"person\": \"https://dev.zuid-drecht.nl/api/v1/cc/people\",\n    \"scope\": [\n        \"jobTitle\"\n    ],\n    \"goal\": \"Controle omdat x\",\n    \"application\": \"https://dev.zuid-drecht.nl/api/v1/wrc/applications\",\n    \"claims\": [\n        \"/claims/{{claim}}\"\n    ]\n}",
 							"options": {
 								"raw": {}
 							}
@@ -5162,12 +5162,12 @@
 	],
 	"variable": [
 		{
-			"id": "4bb32ca7-c6be-47b2-b14b-415ab3dcf76a",
+			"id": "94b727a0-1449-4471-bc68-b2c40cafde68",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "d7dd2166-b0e3-4568-ab5a-ac25977d61cf",
+			"id": "efe42bb5-20ea-4ea7-8358-5c40f1cdb46e",
 			"key": "baseUrl",
 			"value": "localhost"
 		}
