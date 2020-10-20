@@ -2140,105 +2140,7 @@ paths:
           schema:
             type: string
         -
-          name: id
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: person
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'person[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: property
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'property[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: data
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'data[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: deepObject
-          explode: true
-        -
-          name: token
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'token[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
           in: query
           required: false
           schema:
@@ -3086,105 +2988,13 @@ paths:
           schema:
             type: string
         -
-          name: id
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: person
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'person[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: scope
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'scope[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: deepObject
-          explode: true
-        -
-          name: goal
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'goal[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: application
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'application[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
           in: query
           required: false
           schema:
@@ -6697,17 +6507,13 @@ components:
           nullable: true
         noticePeriod:
           description: 'The notice period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         expiryPeriod:
           description: 'The expiry period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         dateCreated:
           description: 'The moment this contract was created'
@@ -6744,17 +6550,13 @@ components:
           nullable: true
         noticePeriod:
           description: 'The notice period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         expiryPeriod:
           description: 'The expiry period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         contract:
           $ref: '#/components/schemas/Contract-write'
@@ -6793,17 +6595,13 @@ components:
           nullable: true
         noticePeriod:
           description: 'The notice period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         expiryPeriod:
           description: 'The expiry period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         dateCreated:
           description: 'The moment this contract was created'
@@ -6849,17 +6647,13 @@ components:
           nullable: true
         noticePeriod:
           description: 'The notice period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         expiryPeriod:
           description: 'The expiry period for (the Contract of) this PurposeLimitation.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
-          format: date-time
+          format: duration
           nullable: true
         contract:
           $ref: '#/components/schemas/Contract:jsonld-write'
@@ -6994,6 +6788,67 @@ definitions:
     required:
       - goal
       - application
+  Proof-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this proof was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this proof was last Modified'
+        type: \Datetime
+      claim: []
+    required: []
+  Proof-write:
+    properties:
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      claim: []
+    required: []
   PurposeLimitation-read:
     properties:
       id:
@@ -7057,120 +6912,6 @@ definitions:
       contract: []
     required:
       - name
-  Proof-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this proof was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this proof was last Modified'
-        type: \Datetime
-      claim: []
-    required: []
-  Proof-write:
-    properties:
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      claim: []
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-10-20 13:00:56'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-10-20 13:00:56'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
   AuditTrail-read:
     properties:
       id:
@@ -7275,12 +7016,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-20 13:00:56'
+        example: '2020-10-20 13:45:40'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-20 13:00:56'
+        example: '2020-10-20 13:45:40'
     required: []
   AuditTrail-write:
     properties:
@@ -7288,6 +7029,59 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-10-20 13:45:40'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-10-20 13:45:40'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -7304,25 +7098,25 @@ tags:
       
       
   -
-    name: PurposeLimitation
-    description: |
-      PurposeLimitation is de purpose limitation of a Contract.
-      
-      
-  -
     name: Proof
     description: |
       Proof is a way to prove that claims are correct.
       
       
   -
-    name: ChangeLog
+    name: PurposeLimitation
+    description: |
+      PurposeLimitation is de purpose limitation of a Contract.
+      
+      
+  -
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -7333,15 +7127,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
