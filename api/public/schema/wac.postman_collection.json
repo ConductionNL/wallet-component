@@ -3883,12 +3883,12 @@
 	],
 	"variable": [
 		{
-			"id": "1195eab6-34b9-41cc-aa8f-78f77296df74",
+			"id": "a9421b7f-b39f-4a50-bd34-83f2d134ce5f",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "3b3dc83e-3192-4589-aea1-2995b37f72e2",
+			"id": "dc871717-0e9a-433d-87ba-ae11e48d6d2c",
 			"key": "baseUrl",
 			"value": "localhost"
 		}
