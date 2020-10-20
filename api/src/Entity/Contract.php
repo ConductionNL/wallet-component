@@ -51,6 +51,20 @@ class Contract
     private $id;
 
     /**
+     * @var string The person (Subject) of this Claim.
+     *
+     * @example https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]
+     *
+     * @Assert\Url
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $person;
+
+    /**
      * @var array The scope of this Contract (which data is retrieved).
      *
      * @Groups({"read","write"})
@@ -114,6 +128,13 @@ class Contract
      */
     private $claims;
 
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="contract", cascade={"persist", "remove"})
+     */
+    private $purposeLimitation;
+
     public function __construct()
     {
         $this->claims = new ArrayCollection();
@@ -122,6 +143,18 @@ class Contract
     public function getId(): Uuid
     {
         return $this->id;
+    }
+
+    public function getPerson(): ?string
+    {
+        return $this->person;
+    }
+
+    public function setPerson(?string $person): self
+    {
+        $this->person = $person;
+
+        return $this;
     }
 
     public function getScope(): ?array
@@ -207,6 +240,23 @@ class Contract
         if ($this->claims->contains($claim)) {
             $this->claims->removeElement($claim);
             $claim->removeContract($this);
+        }
+
+        return $this;
+    }
+
+    public function getPurposeLimitation(): ?PurposeLimitation
+    {
+        return $this->purposeLimitation;
+    }
+
+    public function setPurposeLimitation(PurposeLimitation $purposeLimitation): self
+    {
+        $this->purposeLimitation = $purposeLimitation;
+
+        // set the owning side of the relation if necessary
+        if ($purposeLimitation->getContract() !== $this) {
+            $purposeLimitation->setContract($this);
         }
 
         return $this;
