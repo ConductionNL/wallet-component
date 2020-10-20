@@ -3225,7 +3225,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"PurposeLimitation\",\n    \"description\": \"The PurposeLimitation for Contract x.\",\n    \"data\": [\n        \"somedata\"\n    ],\n    \"contract\": \"/contracts/{{contract}}\"\n}",
+							"raw": "{\n    \"name\": \"PurposeLimitation\",\n    \"description\": \"The PurposeLimitation for Contract x.\",\n    \"data\": [\n        \"somedata\"\n    ],\n    \"contract\": \"/contracts/{{contract}}\",\n    \"noticePeriod\": \"P3Y6M4DT12H30M5S\",\n    \"expiryPeriod\": \"P3Y6M4DT12H30M5S\"\n}",
 							"options": {
 								"raw": {}
 							}
@@ -5162,12 +5162,12 @@
 	],
 	"variable": [
 		{
-			"id": "94b727a0-1449-4471-bc68-b2c40cafde68",
+			"id": "1217844f-aaec-49ce-8fa3-0da544477a46",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "efe42bb5-20ea-4ea7-8358-5c40f1cdb46e",
+			"id": "73a42999-8b84-4e84-9dd7-22b44303b29c",
 			"key": "baseUrl",
 			"value": "localhost"
 		}

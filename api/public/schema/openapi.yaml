@@ -4939,54 +4939,6 @@ paths:
               - asc
               - desc
         -
-          name: 'noticePeriod[before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'noticePeriod[strictly_before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'noticePeriod[after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'noticePeriod[strictly_after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'expiryPeriod[before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'expiryPeriod[strictly_before]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'expiryPeriod[after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'expiryPeriod[strictly_after]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
           name: 'dateCreated[before]'
           in: query
           required: false
@@ -5109,7 +5061,11 @@ paths:
           in: query
           required: false
           schema:
-            type: string
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: expiryPeriod
           in: query
@@ -5121,7 +5077,11 @@ paths:
           in: query
           required: false
           schema:
-            type: string
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: dateCreated
           in: query
@@ -7034,6 +6994,69 @@ definitions:
     required:
       - goal
       - application
+  PurposeLimitation-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this PurposeLimitation.'
+        type: string
+        example: PurposeLimitation
+        maxLength: 255
+      description:
+        description: 'The description of this application.'
+        type: string
+        example: 'The PurposeLimitation for Contract x.'
+        maxLength: 255
+      data:
+        description: 'The data of this PurposeLimitation.'
+        type: array
+      noticePeriod:
+        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      expiryPeriod:
+        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      dateCreated:
+        description: 'The moment this contract was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this contract was last Modified'
+        type: \Datetime
+      contract: []
+    required:
+      - name
+  PurposeLimitation-write:
+    properties:
+      name:
+        description: 'The name of this PurposeLimitation.'
+        type: string
+        example: PurposeLimitation
+        maxLength: 255
+      description:
+        description: 'The description of this application.'
+        type: string
+        example: 'The PurposeLimitation for Contract x.'
+        maxLength: 255
+      data:
+        description: 'The data of this PurposeLimitation.'
+        type: array
+      noticePeriod:
+        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      expiryPeriod:
+        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      contract: []
+    required:
+      - name
   Proof-read:
     properties:
       id:
@@ -7095,73 +7118,59 @@ definitions:
         maxLength: 255
       claim: []
     required: []
-  PurposeLimitation-read:
+  ChangeLog-read:
     properties:
       id:
-        description: 'The UUID identifier of this resource'
+        description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      name:
-        description: 'The name of this PurposeLimitation.'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: PurposeLimitation
-        maxLength: 255
-      description:
-        description: 'The description of this application.'
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
         type: string
-        example: 'The PurposeLimitation for Contract x.'
-        maxLength: 255
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
       data:
-        description: 'The data of this PurposeLimitation.'
+        description: ''
         type: array
-      noticePeriod:
-        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+      username:
+        description: ''
         type: string
-        example: '2020-10-20 10:26:06'
-        format: date-time
-      expiryPeriod:
-        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+      session:
+        description: 'The moment this request was created'
         type: string
-        example: '2020-10-20 10:26:06'
-        format: date-time
+        maxLength: 255
       dateCreated:
-        description: 'The moment this contract was created'
-        type: \Datetime
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-10-20 13:00:56'
       dateModified:
-        description: 'The moment this contract was last Modified'
-        type: \Datetime
-      contract: []
-    required:
-      - name
-  PurposeLimitation-write:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-10-20 13:00:56'
+    required: []
+  ChangeLog-write:
     properties:
-      name:
-        description: 'The name of this PurposeLimitation.'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: PurposeLimitation
-        maxLength: 255
-      description:
-        description: 'The description of this application.'
-        type: string
-        example: 'The PurposeLimitation for Contract x.'
-        maxLength: 255
-      data:
-        description: 'The data of this PurposeLimitation.'
-        type: array
-      noticePeriod:
-        description: 'The notice period for (the Contract of) this PurposeLimitation.'
-        type: string
-        example: '2020-10-20 10:26:06'
-        format: date-time
-      expiryPeriod:
-        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
-        type: string
-        example: '2020-10-20 10:26:06'
-        format: date-time
-      contract: []
-    required:
-      - name
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -7266,12 +7275,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-20 10:26:07'
+        example: '2020-10-20 13:00:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-20 10:26:07'
+        example: '2020-10-20 13:00:56'
     required: []
   AuditTrail-write:
     properties:
@@ -7279,59 +7288,6 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-10-20 10:26:07'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-10-20 10:26:07'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -7348,25 +7304,25 @@ tags:
       
       
   -
-    name: Proof
-    description: |
-      Proof is a way to prove that claims are correct.
-      
-      
-  -
     name: PurposeLimitation
     description: |
       PurposeLimitation is de purpose limitation of a Contract.
       
       
   -
-    name: AuditTrail
+    name: Proof
+    description: |
+      Proof is a way to prove that claims are correct.
+      
+      
+  -
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -7377,15 +7333,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -
