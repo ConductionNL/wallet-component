@@ -3,7 +3,7 @@ entries:
   wac:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-10-19T14:36:43.8693682Z"
+    created: "2020-10-20T09:00:13.4141485Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
     digest: 25bf01875586114ee4843fedae02f64240d1ec7b13323bb8475bee1996598205
@@ -13,4 +13,4 @@ entries:
     urls:
     - wac-0.1.0.tgz
     version: 0.1.0
-generated: "2020-10-19T14:36:43.8576206Z"
+generated: "2020-10-20T09:00:13.3974586Z"
