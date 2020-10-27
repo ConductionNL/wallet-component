@@ -127,7 +127,7 @@ class Claim
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity=Contract::class, inversedBy="claims")
+     * @ORM\ManyToMany(targetEntity=Contract::class, inversedBy="claims", cascade={"persist"})
      */
     private $contracts;
 

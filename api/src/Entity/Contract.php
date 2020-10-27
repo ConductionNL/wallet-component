@@ -126,7 +126,7 @@ class Contract
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="contracts")
+     * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="contracts", cascade={"persist"})
      */
     private $claims;
 
@@ -136,6 +136,13 @@ class Contract
      * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="contract", cascade={"persist", "remove"})
      */
     private $purposeLimitation;
+
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\OneToOne(targetEntity=Dossier::class, mappedBy="contract", cascade={"persist"})
+     */
+    private $dossier;
 
     public function __construct()
     {
@@ -259,6 +266,23 @@ class Contract
         // set the owning side of the relation if necessary
         if ($purposeLimitation->getContract() !== $this) {
             $purposeLimitation->setContract($this);
+        }
+
+        return $this;
+    }
+
+    public function getDossier(): ?Dossier
+    {
+        return $this->dossier;
+    }
+
+    public function setDossier(Dossier $dossier): self
+    {
+        $this->dossier = $dossier;
+
+        // set the owning side of the relation if necessary
+        if ($dossier->getContract() !== $this) {
+            $dossier->setContract($this);
         }
 
         return $this;
