@@ -137,6 +137,8 @@ class IdVaultFixtures extends Fixture
         ]);
         $contract->setGoal('Get the job and email for a job offer on a vacancy site');
         $contract->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'22888b97-d12b-4505-9a20-ee9cc148d442'])); // id-vault
+        $date = new \DateTime();
+        $contract->setStartingDate($date);
         $manager->persist($contract);
         $contract->setId($id);
         $manager->persist($contract);
