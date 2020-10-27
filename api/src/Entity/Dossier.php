@@ -8,7 +8,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Repository\PurposeLimitationRepository;
+use App\Repository\DossierRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
@@ -18,21 +18,21 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * PurposeLimitation is de purpose limitation of a Contract.
+ * Dossier is a external data set that is blocking the cancellation of a contract.
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
- * @ORM\Entity(repositoryClass=PurposeLimitationRepository::class)
+ * @ORM\Entity(repositoryClass=DossierRepository::class)
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
  *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"contract.id": "exact"}))
  */
-class PurposeLimitation
+class Dossier
 {
     /**
      * @var UuidInterface The UUID identifier of this resource
@@ -49,9 +49,9 @@ class PurposeLimitation
     private $id;
 
     /**
-     * @var string The name of this PurposeLimitation.
+     * @var string The basis of this Dossier (reason for keeping a contract).
      *
-     * @example PurposeLimitation
+     * @example an order with amazon
      *
      * @Gedmo\Versioned
      * @Assert\NotNull
@@ -62,52 +62,31 @@ class PurposeLimitation
      * @Groups({"read","write"})
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $basis;
 
     /**
-     * @var string The description of this application.
+     * @var Datetime The end date of this dossier.
      *
-     * @example The PurposeLimitation for Contract x.
+     * @example 27-10-2020 10:47:00
      *
-     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $endDate;
+
+    /**
+     * @var string A URL with which the user can view this Dossier.
+     *
+     * @example https://dev.id-vault.com/dossiers/x (?)
+     *
+     * @Assert\Url
      * @Assert\Length(
-     *      max = 255
+     *     max = 255
      * )
-     * @Gedmo\Versioned
-     * @Groups({"read","write"})
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
-    /**
-     * @var array The data of this PurposeLimitation.
-     *
-     * @Groups({"read","write"})
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $data = [];
-
-    /**
-     * @var DateInterval The notice period for (the Contract of) this PurposeLimitation.
-     *
-     * @example P3Y6M4DT12H30M5S
-     *
-     * @Gedmo\Versioned
      * @Groups({"read", "write"})
-     * @ORM\Column(type="dateinterval", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $noticePeriod;
-
-    /**
-     * @var DateInterval The expiry period for (the Contract of) this PurposeLimitation.
-     *
-     * @example P3Y6M4DT12H30M5S
-     *
-     * @Gedmo\Versioned
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="dateinterval", nullable=true)
-     */
-    private $expiryPeriod;
+    private $url;
 
     /**
      * @var Datetime The moment this contract was created
@@ -130,10 +109,21 @@ class PurposeLimitation
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=Contract::class, inversedBy="purposeLimitation")
+     * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="dossiers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $contract;
+
+    /**
+     * @var bool wheter or not to this Dossier is on legal basis.
+     *
+     * @example true
+     *
+     * @Assert\Type("bool")
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $legal = false;
 
     public function getId(): Uuid
     {
@@ -147,62 +137,38 @@ class PurposeLimitation
         return $this;
     }
 
-    public function getName(): ?string
+    public function getBasis(): ?string
     {
-        return $this->name;
+        return $this->basis;
     }
 
-    public function setName(string $name): self
+    public function setBasis(string $basis): self
     {
-        $this->name = $name;
+        $this->basis = $basis;
 
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->description;
+        return $this->endDate;
     }
 
-    public function setDescription(?string $description): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
-        $this->description = $description;
+        $this->endDate = $endDate;
 
         return $this;
     }
 
-    public function getData(): ?array
+    public function getUrl(): ?string
     {
-        return $this->data;
+        return $this->url;
     }
 
-    public function setData(?array $data): self
+    public function setUrl(?string $url): self
     {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    public function getNoticePeriod(): ?\DateInterval
-    {
-        return $this->noticePeriod;
-    }
-
-    public function setNoticePeriod(\DateInterval $noticePeriod): self
-    {
-        $this->noticePeriod = $noticePeriod;
-
-        return $this;
-    }
-
-    public function getExpiryPeriod(): ?\DateInterval
-    {
-        return $this->expiryPeriod;
-    }
-
-    public function setExpiryPeriod(\DateInterval $expiryPeriod): self
-    {
-        $this->expiryPeriod = $expiryPeriod;
+        $this->url = $url;
 
         return $this;
     }
@@ -239,6 +205,18 @@ class PurposeLimitation
     public function setContract(Contract $contract): self
     {
         $this->contract = $contract;
+
+        return $this;
+    }
+
+    public function getLegal(): ?bool
+    {
+        return $this->legal;
+    }
+
+    public function setLegal(?bool $legal): self
+    {
+        $this->legal = $legal;
 
         return $this;
     }

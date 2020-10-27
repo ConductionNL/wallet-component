@@ -133,18 +133,33 @@ class Contract
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="contract", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="contract", orphanRemoval=true, cascade={"persist"})
      */
     private $purposeLimitation;
+
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="contract")
+     */
+    private $dossiers;
 
     public function __construct()
     {
         $this->claims = new ArrayCollection();
+        $this->dossiers = new ArrayCollection();
     }
 
     public function getId(): Uuid
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getPerson(): ?string
@@ -259,6 +274,34 @@ class Contract
         // set the owning side of the relation if necessary
         if ($purposeLimitation->getContract() !== $this) {
             $purposeLimitation->setContract($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dossier[]
+     */
+    public function getDossiers(): Collection
+    {
+        return $this->dossiers;
+    }
+
+    public function addDossier(Dossier $dossier): self
+    {
+        if (!$this->dossiers->contains($dossier)) {
+            $this->dossiers[] = $dossier;
+            $dossier->addContract($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDossier(Dossier $dossier): self
+    {
+        if ($this->dossiers->contains($dossier)) {
+            $this->dossiers->removeElement($dossier);
+            $dossier->removeContract($this);
         }
 
         return $this;

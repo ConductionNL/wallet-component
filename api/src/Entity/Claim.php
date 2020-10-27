@@ -134,7 +134,7 @@ class Claim
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim", orphanRemoval=true)
      */
     private $proofs;
 
@@ -147,6 +147,13 @@ class Claim
     public function getId(): Uuid
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getPerson(): ?string
