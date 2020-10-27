@@ -126,21 +126,21 @@ class Contract
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="contracts", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="contracts")
      */
     private $claims;
 
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="contract", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="contract", orphanRemoval=true, cascade={"persist"})
      */
     private $purposeLimitation;
 
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="contract", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="contract")
      */
     private $dossiers;
 

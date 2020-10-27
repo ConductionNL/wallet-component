@@ -109,7 +109,7 @@ class Dossier
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="dossiers", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="dossiers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $contract;

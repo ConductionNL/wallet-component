@@ -127,14 +127,14 @@ class Claim
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity=Contract::class, inversedBy="claims", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Contract::class, inversedBy="claims")
      */
     private $contracts;
 
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim", orphanRemoval=true)
      */
     private $proofs;
 
