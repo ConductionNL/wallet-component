@@ -3731,6 +3731,12 @@ paths:
                   $ref: '#/components/schemas/Dossier-read'
       parameters:
         -
+          name: legal
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'order[id]'
           in: query
           required: false
@@ -3777,6 +3783,15 @@ paths:
               - desc
         -
           name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[legal]'
           in: query
           required: false
           schema:
@@ -3940,6 +3955,22 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: legal
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'legal[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: boolean
+          style: form
+          explode: true
         -
           name: page
           in: query
@@ -7128,11 +7159,6 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/PurposeLimitation-read'
-        dossier:
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Dossier-read'
       required:
         - goal
         - application
@@ -7169,11 +7195,6 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/PurposeLimitation-write'
-        dossier:
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Dossier-write'
       required:
         - goal
         - application
@@ -7236,11 +7257,6 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
-        dossier:
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Dossier:jsonld-read'
       required:
         - goal
         - application
@@ -7286,11 +7302,6 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/PurposeLimitation:jsonld-write'
-        dossier:
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Dossier:jsonld-write'
       required:
         - goal
         - application
@@ -7331,6 +7342,10 @@ components:
           nullable: true
         contract:
           $ref: '#/components/schemas/Contract-read'
+        legal:
+          description: 'wheter or not to this Dossier is on legal basis.'
+          type: boolean
+          nullable: true
       required:
         - basis
     Dossier-write:
@@ -7355,6 +7370,10 @@ components:
           nullable: true
         contract:
           $ref: '#/components/schemas/Contract-write'
+        legal:
+          description: 'wheter or not to this Dossier is on legal basis.'
+          type: boolean
+          nullable: true
     'Dossier:jsonld-read':
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of a contract.'
@@ -7401,6 +7420,10 @@ components:
           nullable: true
         contract:
           $ref: '#/components/schemas/Contract:jsonld-read'
+        legal:
+          description: 'wheter or not to this Dossier is on legal basis.'
+          type: boolean
+          nullable: true
       required:
         - basis
     'Dossier:jsonld-write':
@@ -7434,6 +7457,10 @@ components:
           nullable: true
         contract:
           $ref: '#/components/schemas/Contract:jsonld-write'
+        legal:
+          description: 'wheter or not to this Dossier is on legal basis.'
+          type: boolean
+          nullable: true
     Proof-read:
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -7859,7 +7886,7 @@ definitions:
         type: \Datetime
       claims: []
       purposeLimitation: []
-      dossier: []
+      dossiers: []
     required:
       - goal
       - application
@@ -7887,7 +7914,7 @@ definitions:
         maxLength: 255
       claims: []
       purposeLimitation: []
-      dossier: []
+      dossiers: []
     required:
       - goal
       - application
@@ -7906,6 +7933,7 @@ definitions:
       endDate:
         description: 'The end date of this dossier.'
         type: \Datetime
+        example: '27-10-2020 10:47:00'
       url:
         description: 'A URL with which the user can view this Dossier.'
         type: string
@@ -7918,6 +7946,10 @@ definitions:
       dateModified:
         description: 'The moment this contract was last Modified'
         type: \Datetime
+      legal:
+        description: 'wheter or not to this Dossier is on legal basis.'
+        type: bool
+        example: 'true'
       contract: []
     required:
       - basis
@@ -7931,12 +7963,17 @@ definitions:
       endDate:
         description: 'The end date of this dossier.'
         type: \Datetime
+        example: '27-10-2020 10:47:00'
       url:
         description: 'A URL with which the user can view this Dossier.'
         type: string
         example: 'https://dev.id-vault.com/dossiers/x (?)'
         format: url
         maxLength: 255
+      legal:
+        description: 'wheter or not to this Dossier is on legal basis.'
+        type: bool
+        example: 'true'
       contract: []
     required:
       - basis
@@ -8168,12 +8205,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-27 09:54:40'
+        example: '2020-10-27 10:36:51'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-27 09:54:40'
+        example: '2020-10-27 10:36:51'
     required: []
   AuditTrail-write:
     properties:
@@ -8221,12 +8258,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-27 09:54:40'
+        example: '2020-10-27 10:36:51'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-27 09:54:40'
+        example: '2020-10-27 10:36:51'
     required: []
   ChangeLog-write:
     properties:

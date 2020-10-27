@@ -140,13 +140,14 @@ class Contract
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=Dossier::class, mappedBy="contract", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="contract", cascade={"persist"})
      */
-    private $dossier;
+    private $dossiers;
 
     public function __construct()
     {
         $this->claims = new ArrayCollection();
+        $this->dossiers = new ArrayCollection();
     }
 
     public function getId(): Uuid
@@ -271,18 +272,29 @@ class Contract
         return $this;
     }
 
-    public function getDossier(): ?Dossier
+    /**
+     * @return Collection|Dossier[]
+     */
+    public function getDossiers(): Collection
     {
-        return $this->dossier;
+        return $this->dossiers;
     }
 
-    public function setDossier(Dossier $dossier): self
+    public function addDossier(Dossier $dossier): self
     {
-        $this->dossier = $dossier;
+        if (!$this->dossiers->contains($dossier)) {
+            $this->dossiers[] = $dossier;
+            $dossier->addContract($this);
+        }
 
-        // set the owning side of the relation if necessary
-        if ($dossier->getContract() !== $this) {
-            $dossier->setContract($this);
+        return $this;
+    }
+
+    public function removeDossier(Dossier $dossier): self
+    {
+        if ($this->dossiers->contains($dossier)) {
+            $this->dossiers->removeElement($dossier);
+            $dossier->removeContract($this);
         }
 
         return $this;

@@ -109,10 +109,21 @@ class Dossier
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=Contract::class, inversedBy="dossier", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="dossiers", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $contract;
+
+    /**
+     * @var bool wheter or not to this Dossier is on legal basis.
+     *
+     * @example true
+     *
+     * @Assert\Type("bool")
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $legal = false;
 
     public function getId(): Uuid
     {
@@ -187,6 +198,18 @@ class Dossier
     public function setContract(Contract $contract): self
     {
         $this->contract = $contract;
+
+        return $this;
+    }
+
+    public function getLegal(): ?bool
+    {
+        return $this->legal;
+    }
+
+    public function setLegal(?bool $legal): self
+    {
+        $this->legal = $legal;
 
         return $this;
     }
