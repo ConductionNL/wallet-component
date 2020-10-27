@@ -44,7 +44,7 @@ class IdVaultFixtures extends Fixture
         $claim1->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6'])); // Jan@zwarteraaf.nl
         $claim1->setProperty('job title');
         $claim1->setData([
-            "jobTitle" => "professor"
+            'jobTitle' => 'professor',
         ]);
         // Maybe we should generate this token :) but this is just random test data:
         $claim1->setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI');
@@ -88,8 +88,8 @@ class IdVaultFixtures extends Fixture
         $claim2->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6'])); // Jan@zwarteraaf.nl
         $claim2->setProperty('email addresses');
         $claim2->setData([
-            "email1" => "jan@zwarteraaf.nl",
-            "email2" => "janZwarteraaf@gmail.com"
+            'email1' => 'jan@zwarteraaf.nl',
+            'email2' => 'janZwarteraaf@gmail.com',
         ]);
         // Maybe we should generate this token :) but this is just random test data:
         $claim2->setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI');
@@ -132,8 +132,8 @@ class IdVaultFixtures extends Fixture
         $contract = new Contract();
         $contract->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6'])); // Jan@zwarteraaf.nl
         $contract->setScope([
-            "job title",
-            "email addresses"
+            'job title',
+            'email addresses',
         ]);
         $contract->setGoal('Get the job and email for a job offer on a vacancy site');
         $contract->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'22888b97-d12b-4505-9a20-ee9cc148d442'])); // id-vault
@@ -152,7 +152,7 @@ class IdVaultFixtures extends Fixture
         $purposeLimitation->setName('PurposeLimitation');
         $purposeLimitation->setDescription('the purpose limitation for this contract');
         $purposeLimitation->setData([
-            "testdata" => "testdata"
+            'testdata' => 'testdata',
         ]);
         $dateInterval = new \DateInterval('P1Y1M1D');
         $purposeLimitation->setNoticePeriod($dateInterval);
