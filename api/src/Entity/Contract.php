@@ -106,6 +106,14 @@ class Contract
     private $application;
 
     /**
+     * @var Datetime The date access was obtained to the data of this contract
+     *
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $startingDate;
+
+    /**
      * @var Datetime The moment this contract was created
      *
      * @Groups({"read"})
@@ -206,6 +214,18 @@ class Contract
     public function setApplication(string $application): self
     {
         $this->application = $application;
+
+        return $this;
+    }
+
+    public function getStartingDate(): ?\DateTimeInterface
+    {
+        return $this->startingDate;
+    }
+
+    public function setStartingDate(\DateTimeInterface $startingDate): self
+    {
+        $this->startingDate = $startingDate;
 
         return $this;
     }
