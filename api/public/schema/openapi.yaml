@@ -3737,61 +3737,7 @@ paths:
           schema:
             type: boolean
         -
-          name: 'order[id]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[basis]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[endDate]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[url]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[dateCreated]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[dateModified]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
-          name: 'order[legal]'
+          name: 'order[contract.dateCreated]'
           in: query
           required: false
           schema:
@@ -3872,21 +3818,11 @@ paths:
           schema:
             type: string
         -
-          name: contract.id
+          name: contract.person
           in: query
           required: false
           schema:
             type: string
-        -
-          name: 'contract.id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
         -
           name: page
           in: query
@@ -7762,69 +7698,6 @@ definitions:
     required:
       - goal
       - application
-  PurposeLimitation-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'The name of this PurposeLimitation.'
-        type: string
-        example: PurposeLimitation
-        maxLength: 255
-      description:
-        description: 'The description of this application.'
-        type: string
-        example: 'The PurposeLimitation for Contract x.'
-        maxLength: 255
-      data:
-        description: 'The data of this PurposeLimitation.'
-        type: array
-      noticePeriod:
-        description: 'The notice period for (the Contract of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      expiryPeriod:
-        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      dateCreated:
-        description: 'The moment this contract was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this contract was last Modified'
-        type: \Datetime
-      contract: []
-    required:
-      - name
-  PurposeLimitation-write:
-    properties:
-      name:
-        description: 'The name of this PurposeLimitation.'
-        type: string
-        example: PurposeLimitation
-        maxLength: 255
-      description:
-        description: 'The description of this application.'
-        type: string
-        example: 'The PurposeLimitation for Contract x.'
-        maxLength: 255
-      data:
-        description: 'The data of this PurposeLimitation.'
-        type: array
-      noticePeriod:
-        description: 'The notice period for (the Contract of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      expiryPeriod:
-        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      contract: []
-    required:
-      - name
   Dossier-read:
     properties:
       id:
@@ -7945,59 +7818,69 @@ definitions:
         maxLength: 255
       claim: []
     required: []
-  ChangeLog-read:
+  PurposeLimitation-read:
     properties:
       id:
-        description: 'The UUID identifier of this object'
+        description: 'The UUID identifier of this resource'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'The name of this PurposeLimitation.'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
+        example: PurposeLimitation
         maxLength: 255
+      description:
+        description: 'The description of this application.'
+        type: string
+        example: 'The PurposeLimitation for Contract x.'
+        maxLength: 255
+      data:
+        description: 'The data of this PurposeLimitation.'
+        type: array
+      noticePeriod:
+        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      expiryPeriod:
+        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
       dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-10-27 13:44:35'
+        description: 'The moment this contract was created'
+        type: \Datetime
       dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-10-27 13:44:35'
-    required: []
-  ChangeLog-write:
+        description: 'The moment this contract was last Modified'
+        type: \Datetime
+      contract: []
+    required:
+      - name
+  PurposeLimitation-write:
     properties:
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'The name of this PurposeLimitation.'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
+        example: PurposeLimitation
+        maxLength: 255
+      description:
+        description: 'The description of this application.'
+        type: string
+        example: 'The PurposeLimitation for Contract x.'
+        maxLength: 255
+      data:
+        description: 'The data of this PurposeLimitation.'
+        type: array
+      noticePeriod:
+        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      expiryPeriod:
+        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      contract: []
+    required:
+      - name
   AuditTrail-read:
     properties:
       id:
@@ -8102,12 +7985,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-27 13:44:35'
+        example: '2020-10-27 14:16:12'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-27 13:44:35'
+        example: '2020-10-27 14:16:12'
     required: []
   AuditTrail-write:
     properties:
@@ -8115,6 +7998,59 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
+        maxLength: 2555
+    required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-10-27 14:16:12'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-10-27 14:16:12'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -8131,12 +8067,6 @@ tags:
       
       
   -
-    name: PurposeLimitation
-    description: |
-      PurposeLimitation is de purpose limitation of a Contract.
-      
-      
-  -
     name: Dossier
     description: |
       Dossier is a external data set that is blocking the cancellation of a contract.
@@ -8149,13 +8079,19 @@ tags:
       
       
   -
-    name: ChangeLog
+    name: PurposeLimitation
+    description: |
+      PurposeLimitation is de purpose limitation of a Contract.
+      
+      
+  -
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -8166,15 +8102,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
