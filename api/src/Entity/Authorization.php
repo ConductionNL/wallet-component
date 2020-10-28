@@ -125,7 +125,6 @@ class Authorization
      */
     private $application;
 
-
     /**
      * @var Datetime The date access was obtained to the data of this contract
      *
