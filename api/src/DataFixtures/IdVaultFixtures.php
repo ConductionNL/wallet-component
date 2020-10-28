@@ -3,8 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Application;
-use App\Entity\Claim;
 use App\Entity\Authorization;
+use App\Entity\Claim;
 use App\Entity\Dossier;
 use App\Entity\Proof;
 use App\Entity\PurposeLimitation;
@@ -141,7 +141,6 @@ class IdVaultFixtures extends Fixture
         $manager->persist($application);
         $manager->flush();
         $application = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
-
 
         // Test authorization
         $id = Uuid::fromString('49ff9063-c080-48a0-a398-701cec0814c0');

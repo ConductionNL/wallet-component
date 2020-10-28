@@ -207,14 +207,12 @@ class Application
         return $this->name;
     }
 
-
     public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
-
 
     public function getSecret(): ?string
     {
@@ -251,7 +249,6 @@ class Application
         return $this->organization;
     }
 
-
     public function setOrganization(string $organization): self
     {
         $this->organization = $organization;
@@ -266,7 +263,6 @@ class Application
     {
         return $this->contact;
     }
-
 
     public function setContact(string $contact): self
     {
@@ -324,5 +320,4 @@ class Application
 
         return $this;
     }
-
 }
