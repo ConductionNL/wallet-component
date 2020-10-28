@@ -164,7 +164,7 @@ class IdVaultFixtures extends Fixture
         $authorization->addClaim($claim2);
         $manager->persist($authorization);
         $manager->flush();
-        
+
         // Test Purpose Limitation
         $id = Uuid::fromString('9a42c6bc-f6a4-472e-a905-3ffc5721c45a');
         $purposeLimitation = new PurposeLimitation();
