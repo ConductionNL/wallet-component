@@ -134,7 +134,7 @@ class IdVaultFixtures extends Fixture
         $application->setName('stage platform');
         $application->setSecret('kjdIDAkj49283hasdnbdDASD84Os2Q');
         $application->setDescription('stage platform application');
-        $application->setAuthorizationUrl('https://dev.conduction.academy/auth/id-vault');
+        $application->setAuthorizationUrl('https://dev.conduction.academy/users/auth/idvault');
         $application->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $application->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => 'c1f6b98b-9e37-42c0-9b22-17a738a52f8e']));
         $manager->persist($application);
