@@ -96,6 +96,17 @@ class Application
     private $name;
 
     /**
+     * @var string authorization url of the application
+     *
+     * @example stage platform
+     *
+     * @Groups({"read","write"})
+     * @Assert\NotNull
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $authorizationUrl;
+
+    /**
      * @var string Random generated secret for the application
      *
      * @Gedmo\Versioned
@@ -210,6 +221,18 @@ class Application
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getAuthorizationUrl(): ?string
+    {
+        return $this->authorizationUrl;
+    }
+
+    public function setAuthorizationUrl(string $authorizationUrl): self
+    {
+        $this->authorizationUrl = $authorizationUrl;
 
         return $this;
     }
