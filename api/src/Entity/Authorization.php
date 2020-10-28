@@ -64,7 +64,7 @@ class Authorization
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $person;
+    private $user;
 
     /**
      * @var array scopes this authorization has access to
@@ -195,14 +195,14 @@ class Authorization
         return $this;
     }
 
-    public function getPerson(): ?string
+    public function getUser(): ?string
     {
-        return $this->person;
+        return $this->user;
     }
 
-    public function setPerson(?string $person): self
+    public function setUser(?string $user): self
     {
-        $this->person = $person;
+        $this->user = $user;
 
         return $this;
     }
