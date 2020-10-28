@@ -3225,7 +3225,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"https://dev.zuid-drecht.nl/api/v1/cc/people\",\n    \"scope\": [\n        \"jobTitle\"\n    ],\n    \"goal\": \"Controle omdat x\",\n    \"application\": \"/applications/{{application}}\",\n    \"claims\": [\n        \"/claims/{{claim}}\"\n    ]\n}",
+							"raw": "{\n    \"userUrl\": \"https://dev.zuid-drecht.nl/api/v1/cc/people\",\n    \"scope\": [\n        \"jobTitle\"\n    ],\n    \"goal\": \"Controle omdat x\",\n    \"application\": \"/applications/{{application}}\",\n    \"claims\": [\n        \"/claims/{{claim}}\"\n    ]\n}",
 							"options": {
 								"raw": {}
 							}
@@ -3809,7 +3809,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": \"https://dev.zuid-drecht.nl/api/v1/cc/people\",\n    \"scope\": [\n        \"jobTitle\"\n    ],\n    \"goal\": \"Controle omdat x\",\n    \"application\": \"/applications/{{application}}\",\n    \"claims\": [\n        \"/claims/{{claim}}\"\n    ]\n}",
+							"raw": "{\n    \"userUrl\": \"https://dev.zuid-drecht.nl/api/v1/cc/people\",\n    \"scope\": [\n        \"jobTitle\"\n    ],\n    \"goal\": \"Controle omdat x\",\n    \"application\": \"/applications/{{application}}\",\n    \"claims\": [\n        \"/claims/{{claim}}\"\n    ]\n}",
 							"options": {
 								"raw": {}
 							}
@@ -7726,12 +7726,12 @@
 	],
 	"variable": [
 		{
-			"id": "c6fb6ff8-69ad-41d5-b46a-f3a8ba64b1bf",
+			"id": "aa0c6164-501f-4da8-aa3b-65d62aa1c54b",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "47175bf9-8845-418b-b613-4d93a4b2047c",
+			"id": "275efaab-91c4-473a-bdc4-7e8cc455e4ff",
 			"key": "baseUrl",
 			"value": "localhost"
 		}
