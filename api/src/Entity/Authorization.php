@@ -33,9 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={
- *     "person": "partial",
- *     "application": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"person": "partial", "application": "partial", "code": "exact"})
  */
 class Authorization
 {
@@ -75,15 +73,6 @@ class Authorization
      * @ORM\Column(type="json")
      */
     private $scopes = [];
-
-    /**
-     * @var array The data this authorization has access to
-     *
-     * @Gedmo\Versioned
-     * @Groups({"read","write"})
-     * @ORM\Column(type="json")
-     */
-    private $data = [];
 
     /**
      * @var string Random generated code for authorization
@@ -237,18 +226,6 @@ class Authorization
     public function setScopes(?array $scopes): self
     {
         $this->scopes = $scopes;
-
-        return $this;
-    }
-
-    public function getData(): ?array
-    {
-        return $this->data;
-    }
-
-    public function setData(?array $data): self
-    {
-        $this->data = $data;
 
         return $this;
     }
