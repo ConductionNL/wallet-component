@@ -2214,7 +2214,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"name\",\n    \"description\": \"description\",\n    \"organization\": \"https://dev.zuid-drecht.nl/api/v1/wrc/organizations\",\n    \"contact\": \"https://dev.zuid-drecht.nl/api/v1/wrc/applications\"\n}",
+							"raw": "{\n    \"name\": \"name\",\n    \"description\": \"description\",\n    \"organization\": \"https://dev.zuid-drecht.nl/api/v1/wrc/organizations\",\n    \"contact\": \"https://dev.zuid-drecht.nl/api/v1/wrc/applications\",\n    \"authorizationUrl\": \"https://dev.conduction.academy/auth/id-vault\"\n}",
 							"options": {
 								"raw": {}
 							}
@@ -2798,7 +2798,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"name\",\n    \"description\": \"description\",\n    \"organization\": \"https://dev.zuid-drecht.nl/api/v1/wrc/organizations\",\n    \"contact\": \"https://dev.zuid-drecht.nl/api/v1/wrc/applications\"\n}",
+							"raw": "{\n    \"name\": \"name\",\n    \"description\": \"description\",\n    \"organization\": \"https://dev.zuid-drecht.nl/api/v1/wrc/organizations\",\n    \"contact\": \"https://dev.zuid-drecht.nl/api/v1/wrc/applications\",\n    \"authorizationUrl\": \"https://dev.conduction.academy/auth/id-vault\"\n}",
 							"options": {
 								"raw": {}
 							}
@@ -7726,12 +7726,12 @@
 	],
 	"variable": [
 		{
-			"id": "7f4cb9c9-e4b3-4670-bcd3-de9d7665320e",
+			"id": "1baaf330-1e28-4ccb-b6af-234af38890b9",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "228f918a-cabc-44ee-94fb-eb92a20500dd",
+			"id": "e85198d6-d183-4be8-9001-c18b5a050ec6",
 			"key": "baseUrl",
 			"value": "localhost"
 		}
