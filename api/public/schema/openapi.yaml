@@ -2193,15 +2193,6 @@ paths:
               - asc
               - desc
         -
-          name: 'order[data]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
           name: 'order[code]'
           in: query
           required: false
@@ -2332,6 +2323,22 @@ paths:
             type: string
         -
           name: 'application[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'code[]'
           in: query
           required: false
           schema:
@@ -7899,11 +7906,6 @@ components:
           type: array
           items:
             type: string
-        data:
-          description: 'The data this authorization has access to'
-          type: array
-          items:
-            type: string
         code:
           description: 'Random generated code for authorization'
           type: string
@@ -7957,11 +7959,6 @@ components:
           nullable: true
         scopes:
           description: 'scopes this authorization has access to'
-          type: array
-          items:
-            type: string
-        data:
-          description: 'The data this authorization has access to'
           type: array
           items:
             type: string
@@ -8027,11 +8024,6 @@ components:
           type: array
           items:
             type: string
-        data:
-          description: 'The data this authorization has access to'
-          type: array
-          items:
-            type: string
         code:
           description: 'Random generated code for authorization'
           type: string
@@ -8094,11 +8086,6 @@ components:
           nullable: true
         scopes:
           description: 'scopes this authorization has access to'
-          type: array
-          items:
-            type: string
-        data:
-          description: 'The data this authorization has access to'
           type: array
           items:
             type: string
@@ -9001,9 +8988,6 @@ definitions:
       scopes:
         description: 'scopes this authorization has access to'
         type: array
-      data:
-        description: 'The data this authorization has access to'
-        type: array
       code:
         description: 'Random generated code for authorization'
         type: string
@@ -9042,9 +9026,6 @@ definitions:
         maxLength: 255
       scopes:
         description: 'scopes this authorization has access to'
-        type: array
-      data:
-        description: 'The data this authorization has access to'
         type: array
       code:
         description: 'Random generated code for authorization'
@@ -9420,12 +9401,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-28 12:32:32'
+        example: '2020-10-28 12:42:50'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-28 12:32:32'
+        example: '2020-10-28 12:42:50'
     required: []
   AuditTrail-write:
     properties:
@@ -9473,12 +9454,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-28 12:32:32'
+        example: '2020-10-28 12:42:50'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-28 12:32:32'
+        example: '2020-10-28 12:42:50'
     required: []
   ChangeLog-write:
     properties:
