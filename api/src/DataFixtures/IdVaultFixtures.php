@@ -2,8 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Application;
+use App\Entity\Authorization;
 use App\Entity\Claim;
-use App\Entity\Contract;
 use App\Entity\Dossier;
 use App\Entity\Proof;
 use App\Entity\PurposeLimitation;
@@ -127,32 +128,49 @@ class IdVaultFixtures extends Fixture
         $manager->flush();
         $manager->getRepository('App:Proof')->findOneBy(['id'=> $id]);
 
-        // Test Contract
+        // Test application
+        $id = Uuid::fromString('62817d5c-0ba5-4aaa-81f2-ad0e5a763cdd');
+        $application = new Application();
+        $application->setName('stage platform');
+        $application->setSecret('kjdIDAkj49283hasdnbdDASD84Os2Q');
+        $application->setDescription('stage platform application');
+        $application->setAuthorizationUrl('https://dev.conduction.academy/users/auth/idvault');
+        $application->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '4d1eded3-fbdf-438f-9536-8747dd8ab591']));
+        $application->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => 'c1f6b98b-9e37-42c0-9b22-17a738a52f8e']));
+        $manager->persist($application);
+        $application->setId($id);
+        $manager->persist($application);
+        $manager->flush();
+        $application = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
+
+        // Test authorization
         $id = Uuid::fromString('49ff9063-c080-48a0-a398-701cec0814c0');
-        $contract = new Contract();
-        $contract->setPerson($this->commonGroundService->cleanUrl(['component'=>'cc', 'type'=>'people', 'id'=>'841949b7-7488-429f-9171-3a4338b541a6'])); // Jan@zwarteraaf.nl
-        $contract->setScope([
+        $authorization = new Authorization();
+        $authorization->setUserUrl($this->commonGroundService->cleanUrl(['component'=>'uc', 'type'=>'users', 'id'=>'dc8449e9-805e-4ea9-b2a9-ac1040cfd33d'])); // Jan@zwarteraaf.nl
+        $authorization->setScopes([
             'job title',
             'email addresses',
         ]);
-        $contract->setGoal('Get the job and email for a job offer on a vacancy site');
-        $contract->setApplication($this->commonGroundService->cleanUrl(['component'=>'wrc', 'type'=>'applications', 'id'=>'22888b97-d12b-4505-9a20-ee9cc148d442'])); // id-vault
+        $authorization->setApplication($application);
+        $authorization->setGoal('Get the job and email for a job offer on a vacancy site');
         $date = new \DateTime();
-        $contract->setStartingDate($date);
-        $manager->persist($contract);
-        $contract->setId($id);
-        $manager->persist($contract);
+        $authorization->setStartingDate($date);
+        $manager->persist($authorization);
+        $authorization->setId($id);
+        $manager->persist($authorization);
         $manager->flush();
-        $contract = $manager->getRepository('App:Contract')->findOneBy(['id'=> $id]);
+        $authorization = $manager->getRepository('App:Authorization')->findOneBy(['id'=> $id]);
 
-        $contract->addClaim($claim1);
-        $contract->addClaim($claim2);
+        $authorization->addClaim($claim1);
+        $authorization->addClaim($claim2);
+        $manager->persist($authorization);
+        $manager->flush();
 
         // Test Purpose Limitation
         $id = Uuid::fromString('9a42c6bc-f6a4-472e-a905-3ffc5721c45a');
         $purposeLimitation = new PurposeLimitation();
         $purposeLimitation->setName('PurposeLimitation');
-        $purposeLimitation->setDescription('the purpose limitation for this contract');
+        $purposeLimitation->setDescription('the purpose limitation for this authorization');
         $purposeLimitation->setData([
             'testdata' => 'testdata',
         ]);
@@ -160,7 +178,7 @@ class IdVaultFixtures extends Fixture
         $purposeLimitation->setNoticePeriod($dateInterval);
         $dateInterval = new \DateInterval('P1Y2M5D');
         $purposeLimitation->setExpiryPeriod($dateInterval);
-        $purposeLimitation->setContract($contract);
+        $purposeLimitation->setAuthorization($authorization);
         $manager->persist($purposeLimitation);
         $purposeLimitation->setId($id);
         $manager->persist($purposeLimitation);
@@ -170,13 +188,13 @@ class IdVaultFixtures extends Fixture
         // Test Dossier
         $id = Uuid::fromString('e428ac4b-d90c-4af7-bc5d-2ebc9569a31e');
         $dossier = new Dossier();
-        $dossier->setBasis('An ongoing internship contract');
+        $dossier->setBasis('An ongoing internship authorization');
         $date = new \DateTime();
         $date->add(new \DateInterval('P5M'));
         $dossier->setEndDate($date);
         $dossier->setUrl('https://dev.conduction.academy/');
         $dossier->setLegal(true);
-        $dossier->setContract($contract);
+        $dossier->setAuthorization($authorization);
         $manager->persist($dossier);
         $dossier->setId($id);
         $manager->persist($dossier);

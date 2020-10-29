@@ -8,7 +8,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Repository\ContractRepository;
+use App\Repository\AuthorizationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,17 +26,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
  *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
  * )
- * @ORM\Entity(repositoryClass=ContractRepository::class)
+ * @ORM\Entity(repositoryClass=AuthorizationRepository::class)
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="authorization_table")
  *
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={
- *     "person": "partial",
- *     "application": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact"})
  */
-class Contract
+class Authorization
 {
     /**
      * @var UuidInterface The UUID identifier of this resource
@@ -64,15 +64,30 @@ class Contract
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $person;
+    private $userUrl;
 
     /**
-     * @var array The scope of this Contract (which data is retrieved).
+     * @var array scopes this authorization has access to
      *
+     * @Gedmo\Versioned
      * @Groups({"read","write"})
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json")
      */
-    private $scope = [];
+    private $scopes = [];
+
+    /**
+     * @var string Random generated code for authorization
+     *
+     * @Gedmo\Versioned
+     *
+     * @example 4Ad9sdDJA4123AS4Ad9sdDJA4123AS
+     * @Groups({"read","write"})
+     * @Assert\Length(
+     *     max=255
+     * )
+     * @ORM\Column(type="string", length=30, nullable=true, unique=true)
+     */
+    private $code;
 
     /**
      * @var string The goal of this Contract (what are the data used for).
@@ -91,17 +106,12 @@ class Contract
     private $goal;
 
     /**
-     * @var string The application of this Contract.
+     * @var Application The node where this checkin takes place
      *
-     * @example https://dev.zuid-drecht.nl/api/v1/wrc/applications/{{uuid}]
-     *
+     * @Groups({"read","write"})
      * @Assert\NotNull
-     * @Assert\Url
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="authorizations", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $application;
 
@@ -134,23 +144,38 @@ class Contract
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="contracts")
+     * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="authorizations")
      */
     private $claims;
 
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="contract", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="authorization", orphanRemoval=true, cascade={"persist"})
      */
     private $purposeLimitation;
 
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="contract")
+     * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="authorization")
      */
     private $dossiers;
+
+    /**
+     *  @ORM\PrePersist
+     *  @ORM\PreUpdate
+     *
+     *  */
+    public function prePersist()
+    {
+        if (!$this->getCode()) {
+            $validChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+            $code = substr(str_shuffle(str_repeat($validChars, ceil(30 / strlen($validChars)))), 1, 30);
+            $this->setCode($code);
+        }
+    }
 
     public function __construct()
     {
@@ -170,26 +195,38 @@ class Contract
         return $this;
     }
 
-    public function getPerson(): ?string
+    public function getUserUrl(): ?string
     {
-        return $this->person;
+        return $this->userUrl;
     }
 
-    public function setPerson(?string $person): self
+    public function setUserUrl(?string $userUrl): self
     {
-        $this->person = $person;
+        $this->userUrl = $userUrl;
 
         return $this;
     }
 
-    public function getScope(): ?array
+    public function getCode(): ?string
     {
-        return $this->scope;
+        return $this->code;
     }
 
-    public function setScope(?array $scope): self
+    public function setCode(string $code): self
     {
-        $this->scope = $scope;
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getScopes(): ?array
+    {
+        return $this->scopes;
+    }
+
+    public function setScopes(?array $scopes): self
+    {
+        $this->scopes = $scopes;
 
         return $this;
     }
@@ -206,12 +243,12 @@ class Contract
         return $this;
     }
 
-    public function getApplication(): ?string
+    public function getApplication(): ?Application
     {
         return $this->application;
     }
 
-    public function setApplication(string $application): self
+    public function setApplication(Application $application): self
     {
         $this->application = $application;
 
@@ -266,7 +303,7 @@ class Contract
     {
         if (!$this->claims->contains($claim)) {
             $this->claims[] = $claim;
-            $claim->addContract($this);
+            $claim->addAuthorization($this);
         }
 
         return $this;
@@ -276,7 +313,7 @@ class Contract
     {
         if ($this->claims->contains($claim)) {
             $this->claims->removeElement($claim);
-            $claim->removeContract($this);
+            $claim->removeAuthorization($this);
         }
 
         return $this;
@@ -292,8 +329,8 @@ class Contract
         $this->purposeLimitation = $purposeLimitation;
 
         // set the owning side of the relation if necessary
-        if ($purposeLimitation->getContract() !== $this) {
-            $purposeLimitation->setContract($this);
+        if ($purposeLimitation->getAuthorization() !== $this) {
+            $purposeLimitation->setAuthorization($this);
         }
 
         return $this;
@@ -311,7 +348,7 @@ class Contract
     {
         if (!$this->dossiers->contains($dossier)) {
             $this->dossiers[] = $dossier;
-            $dossier->addContract($this);
+            $dossier->setAuthorization($this);
         }
 
         return $this;
@@ -321,7 +358,7 @@ class Contract
     {
         if ($this->dossiers->contains($dossier)) {
             $this->dossiers->removeElement($dossier);
-            $dossier->removeContract($this);
+            $dossier->removeAuthorization($this);
         }
 
         return $this;

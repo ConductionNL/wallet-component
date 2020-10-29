@@ -109,10 +109,10 @@ class Dossier
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="dossiers")
+     * @ORM\ManyToOne(targetEntity=Authorization::class, inversedBy="dossiers")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $contract;
+    private $authorization;
 
     /**
      * @var bool wheter or not to this Dossier is on legal basis.
@@ -197,14 +197,14 @@ class Dossier
         return $this;
     }
 
-    public function getContract(): ?Contract
+    public function getAuthorization(): ?Authorization
     {
-        return $this->contract;
+        return $this->authorization;
     }
 
-    public function setContract(Contract $contract): self
+    public function setAuthorization(Authorization $authorization): self
     {
-        $this->contract = $contract;
+        $this->authorization = $authorization;
 
         return $this;
     }

@@ -130,10 +130,10 @@ class PurposeLimitation
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=Contract::class, inversedBy="purposeLimitation")
+     * @ORM\OneToOne(targetEntity=Authorization::class, inversedBy="purposeLimitation")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $contract;
+    private $authorization;
 
     public function getId(): Uuid
     {
@@ -231,14 +231,14 @@ class PurposeLimitation
         return $this;
     }
 
-    public function getContract(): ?Contract
+    public function getAuthorization(): ?Authorization
     {
-        return $this->contract;
+        return $this->authorization;
     }
 
-    public function setContract(Contract $contract): self
+    public function setAuthorization(Authorization $authorization): self
     {
-        $this->contract = $contract;
+        $this->authorization = $authorization;
 
         return $this;
     }
