@@ -120,6 +120,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[authorizationUrl]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[secret]'
           in: query
           required: false
@@ -261,6 +270,22 @@ paths:
             type: string
         -
           name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
           in: query
           required: false
           schema:
@@ -2175,7 +2200,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[person]'
+          name: 'order[userUrl]'
           in: query
           required: false
           schema:
@@ -2310,11 +2335,21 @@ paths:
           schema:
             type: string
         -
-          name: person
+          name: userUrl
           in: query
           required: false
           schema:
             type: string
+        -
+          name: 'userUrl[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: application
           in: query
@@ -7463,6 +7498,9 @@ components:
         name:
           description: 'Name of this application'
           type: string
+        authorizationUrl:
+          description: 'authorization url of the application'
+          type: string
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -7494,6 +7532,7 @@ components:
           nullable: true
       required:
         - name
+        - authorizationUrl
         - organization
         - contact
     Application-write:
@@ -7501,11 +7540,15 @@ components:
       description: 'An entity representing an node.'
       required:
         - name
+        - authorizationUrl
         - organization
         - contact
       properties:
         name:
           description: 'Name of this application'
+          type: string
+        authorizationUrl:
+          description: 'authorization url of the application'
           type: string
         description:
           description: 'description of this application'
@@ -7544,6 +7587,9 @@ components:
         name:
           description: 'Name of this application'
           type: string
+        authorizationUrl:
+          description: 'authorization url of the application'
+          type: string
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -7575,6 +7621,7 @@ components:
           nullable: true
       required:
         - name
+        - authorizationUrl
         - organization
         - contact
     'Application:jsonld-write':
@@ -7582,6 +7629,7 @@ components:
       description: 'An entity representing an node.'
       required:
         - name
+        - authorizationUrl
         - organization
         - contact
       properties:
@@ -7596,6 +7644,9 @@ components:
           type: string
         name:
           description: 'Name of this application'
+          type: string
+        authorizationUrl:
+          description: 'authorization url of the application'
           type: string
         description:
           description: 'description of this application'
@@ -7895,7 +7946,7 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        person:
+        userUrl:
           description: 'The person who makes his data available.'
           externalDocs:
             url: 'http://schema.org/url'
@@ -7951,7 +8002,7 @@ components:
       type: object
       description: 'Contract gives an application access to data in claims.'
       properties:
-        person:
+        userUrl:
           description: 'The person who makes his data available.'
           externalDocs:
             url: 'http://schema.org/url'
@@ -8013,7 +8064,7 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        person:
+        userUrl:
           description: 'The person who makes his data available.'
           externalDocs:
             url: 'http://schema.org/url'
@@ -8078,7 +8129,7 @@ components:
         '@type':
           readOnly: true
           type: string
-        person:
+        userUrl:
           description: 'The person who makes his data available.'
           externalDocs:
             url: 'http://schema.org/url'
@@ -8917,6 +8968,10 @@ definitions:
         description: 'Name of this application'
         type: string
         example: 'stage platform'
+      authorizationUrl:
+        description: 'authorization url of the application'
+        type: string
+        example: 'stage platform'
       secret:
         description: 'Random generated secret for the application'
         type: string
@@ -8946,12 +9001,17 @@ definitions:
         example: '20190101'
     required:
       - name
+      - authorizationUrl
       - organization
       - contact
   Application-write:
     properties:
       name:
         description: 'Name of this application'
+        type: string
+        example: 'stage platform'
+      authorizationUrl:
+        description: 'authorization url of the application'
         type: string
         example: 'stage platform'
       description:
@@ -8970,6 +9030,7 @@ definitions:
         format: url
     required:
       - name
+      - authorizationUrl
       - organization
       - contact
   Authorization-read:
@@ -8979,7 +9040,7 @@ definitions:
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      person:
+      userUrl:
         description: 'The person who makes his data available.'
         type: string
         example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
@@ -9018,7 +9079,7 @@ definitions:
       - application
   Authorization-write:
     properties:
-      person:
+      userUrl:
         description: 'The person who makes his data available.'
         type: string
         example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
@@ -9401,12 +9462,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-28 13:00:06'
+        example: '2020-10-29 09:37:13'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-28 13:00:06'
+        example: '2020-10-29 09:37:13'
     required: []
   AuditTrail-write:
     properties:
@@ -9454,12 +9515,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-28 13:00:06'
+        example: '2020-10-29 09:37:13'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-28 13:00:06'
+        example: '2020-10-29 09:37:13'
     required: []
   ChangeLog-write:
     properties:

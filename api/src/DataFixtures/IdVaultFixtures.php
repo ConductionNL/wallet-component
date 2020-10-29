@@ -146,7 +146,7 @@ class IdVaultFixtures extends Fixture
         // Test authorization
         $id = Uuid::fromString('49ff9063-c080-48a0-a398-701cec0814c0');
         $authorization = new Authorization();
-        $authorization->setUserUrl($this->commonGroundService->cleanUrl(['component'=>'uc', 'type'=>'users', 'id'=>'dc8449e9-805e-4ea9-b2a9-ac1040cfd33d'])); // Jan@zwarteraaf.nl
+        $authorization->setUserUrl($this->commonGroundService->cleanUrl(['component'=>'uc', 'type'=>'users', 'id'=>'47a5d31d-e7d8-4c7c-afec-5c84c74c778b'])); // Jan@zwarteraaf.nl
         $authorization->setScopes([
             'job title',
             'email addresses',
