@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Contract gives an application access to data in claims.
+ * Authorization gives an application access to data in claims.
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -90,7 +90,7 @@ class Authorization
     private $code;
 
     /**
-     * @var string The goal of this Contract (what are the data used for).
+     * @var string The goal of this Authorization (what are the data used for).
      *
      * @example Get email adres for sending news every week
      *
@@ -116,7 +116,7 @@ class Authorization
     private $application;
 
     /**
-     * @var Datetime The date access was obtained to the data of this contract
+     * @var Datetime The date access was obtained to the data of this authorization
      *
      * @Groups({"read", "write"})
      * @ORM\Column(type="datetime", nullable=true)
@@ -124,7 +124,7 @@ class Authorization
     private $startingDate;
 
     /**
-     * @var Datetime The moment this contract was created
+     * @var Datetime The moment this authorization was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -133,7 +133,7 @@ class Authorization
     private $dateCreated;
 
     /**
-     * @var Datetime The moment this contract was last Modified
+     * @var Datetime The moment this authorization was last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")

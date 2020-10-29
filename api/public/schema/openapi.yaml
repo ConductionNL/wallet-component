@@ -8807,7 +8807,7 @@ components:
           type: string
     Authorization-read:
       type: object
-      description: 'Contract gives an application access to data in claims.'
+      description: 'Authorization gives an application access to data in claims.'
       properties:
         id:
           readOnly: true
@@ -8832,23 +8832,23 @@ components:
           type: string
           nullable: true
         goal:
-          description: 'The goal of this Contract (what are the data used for).'
+          description: 'The goal of this Authorization (what are the data used for).'
           type: string
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application-read'
         startingDate:
-          description: 'The date access was obtained to the data of this contract'
+          description: 'The date access was obtained to the data of this authorization'
           type: string
           format: date-time
           nullable: true
         dateCreated:
-          description: 'The moment this contract was created'
+          description: 'The moment this authorization was created'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this contract was last Modified'
+          description: 'The moment this authorization was last Modified'
           type: string
           format: date-time
           nullable: true
@@ -8870,7 +8870,7 @@ components:
         - application
     Authorization-write:
       type: object
-      description: 'Contract gives an application access to data in claims.'
+      description: 'Authorization gives an application access to data in claims.'
       properties:
         userUrl:
           description: 'The person who makes his data available.'
@@ -8888,13 +8888,13 @@ components:
           type: string
           nullable: true
         goal:
-          description: 'The goal of this Contract (what are the data used for).'
+          description: 'The goal of this Authorization (what are the data used for).'
           type: string
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application-write'
         startingDate:
-          description: 'The date access was obtained to the data of this contract'
+          description: 'The date access was obtained to the data of this authorization'
           type: string
           format: date-time
           nullable: true
@@ -8916,7 +8916,7 @@ components:
         - application
     'Authorization:jsonld-read':
       type: object
-      description: 'Contract gives an application access to data in claims.'
+      description: 'Authorization gives an application access to data in claims.'
       properties:
         '@context':
           readOnly: true
@@ -8950,23 +8950,23 @@ components:
           type: string
           nullable: true
         goal:
-          description: 'The goal of this Contract (what are the data used for).'
+          description: 'The goal of this Authorization (what are the data used for).'
           type: string
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application:jsonld-read'
         startingDate:
-          description: 'The date access was obtained to the data of this contract'
+          description: 'The date access was obtained to the data of this authorization'
           type: string
           format: date-time
           nullable: true
         dateCreated:
-          description: 'The moment this contract was created'
+          description: 'The moment this authorization was created'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this contract was last Modified'
+          description: 'The moment this authorization was last Modified'
           type: string
           format: date-time
           nullable: true
@@ -8988,7 +8988,7 @@ components:
         - application
     'Authorization:jsonld-write':
       type: object
-      description: 'Contract gives an application access to data in claims.'
+      description: 'Authorization gives an application access to data in claims.'
       properties:
         '@context':
           readOnly: true
@@ -9015,13 +9015,13 @@ components:
           type: string
           nullable: true
         goal:
-          description: 'The goal of this Contract (what are the data used for).'
+          description: 'The goal of this Authorization (what are the data used for).'
           type: string
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application:jsonld-write'
         startingDate:
-          description: 'The date access was obtained to the data of this contract'
+          description: 'The date access was obtained to the data of this authorization'
           type: string
           format: date-time
           nullable: true
@@ -9468,7 +9468,7 @@ components:
             $ref: '#/components/schemas/Proof:jsonld-write'
     Dossier-read:
       type: object
-      description: 'Dossier is a external data set that is blocking the cancellation of a contract.'
+      description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       properties:
         id:
           readOnly: true
@@ -9478,7 +9478,7 @@ components:
           type: string
           format: uuid
         basis:
-          description: 'The basis of this Dossier (reason for keeping a contract).'
+          description: 'The basis of this Dossier (reason for keeping an authorization).'
           type: string
         endDate:
           description: 'The end date of this dossier.'
@@ -9492,12 +9492,12 @@ components:
           type: string
           nullable: true
         dateCreated:
-          description: 'The moment this contract was created'
+          description: 'The moment this Dossier was created'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this contract was last Modified'
+          description: 'The moment this Dossier was last Modified'
           type: string
           format: date-time
           nullable: true
@@ -9511,12 +9511,12 @@ components:
         - basis
     Dossier-write:
       type: object
-      description: 'Dossier is a external data set that is blocking the cancellation of a contract.'
+      description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       required:
         - basis
       properties:
         basis:
-          description: 'The basis of this Dossier (reason for keeping a contract).'
+          description: 'The basis of this Dossier (reason for keeping an authorization).'
           type: string
         endDate:
           description: 'The end date of this dossier.'
@@ -9537,7 +9537,7 @@ components:
           nullable: true
     'Dossier:jsonld-read':
       type: object
-      description: 'Dossier is a external data set that is blocking the cancellation of a contract.'
+      description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       properties:
         '@context':
           readOnly: true
@@ -9556,7 +9556,7 @@ components:
           type: string
           format: uuid
         basis:
-          description: 'The basis of this Dossier (reason for keeping a contract).'
+          description: 'The basis of this Dossier (reason for keeping an authorization).'
           type: string
         endDate:
           description: 'The end date of this dossier.'
@@ -9570,12 +9570,12 @@ components:
           type: string
           nullable: true
         dateCreated:
-          description: 'The moment this contract was created'
+          description: 'The moment this Dossier was created'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this contract was last Modified'
+          description: 'The moment this Dossier was last Modified'
           type: string
           format: date-time
           nullable: true
@@ -9589,7 +9589,7 @@ components:
         - basis
     'Dossier:jsonld-write':
       type: object
-      description: 'Dossier is a external data set that is blocking the cancellation of a contract.'
+      description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       required:
         - basis
       properties:
@@ -9603,7 +9603,7 @@ components:
           readOnly: true
           type: string
         basis:
-          description: 'The basis of this Dossier (reason for keeping a contract).'
+          description: 'The basis of this Dossier (reason for keeping an authorization).'
           type: string
         endDate:
           description: 'The end date of this dossier.'
@@ -9772,7 +9772,7 @@ components:
           $ref: '#/components/schemas/Claim:jsonld-write'
     PurposeLimitation-read:
       type: object
-      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      description: 'PurposeLimitation is de purpose limitation of a Authorization.'
       properties:
         id:
           readOnly: true
@@ -9795,22 +9795,22 @@ components:
             type: string
           nullable: true
         noticePeriod:
-          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          description: 'The notice period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
         expiryPeriod:
-          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
         dateCreated:
-          description: 'The moment this contract was created'
+          description: 'The moment this PurposeLimitation was created'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this contract was last Modified'
+          description: 'The moment this PurposeLimitation was last Modified'
           type: string
           format: date-time
           nullable: true
@@ -9820,7 +9820,7 @@ components:
         - name
     PurposeLimitation-write:
       type: object
-      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      description: 'PurposeLimitation is de purpose limitation of a Authorization.'
       required:
         - name
       properties:
@@ -9838,12 +9838,12 @@ components:
             type: string
           nullable: true
         noticePeriod:
-          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          description: 'The notice period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
         expiryPeriod:
-          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
@@ -9851,7 +9851,7 @@ components:
           $ref: '#/components/schemas/Authorization-write'
     'PurposeLimitation:jsonld-read':
       type: object
-      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      description: 'PurposeLimitation is de purpose limitation of a Authorization.'
       properties:
         '@context':
           readOnly: true
@@ -9883,22 +9883,22 @@ components:
             type: string
           nullable: true
         noticePeriod:
-          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          description: 'The notice period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
         expiryPeriod:
-          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
         dateCreated:
-          description: 'The moment this contract was created'
+          description: 'The moment this PurposeLimitation was created'
           type: string
           format: date-time
           nullable: true
         dateModified:
-          description: 'The moment this contract was last Modified'
+          description: 'The moment this PurposeLimitation was last Modified'
           type: string
           format: date-time
           nullable: true
@@ -9908,7 +9908,7 @@ components:
         - name
     'PurposeLimitation:jsonld-write':
       type: object
-      description: 'PurposeLimitation is de purpose limitation of a Contract.'
+      description: 'PurposeLimitation is de purpose limitation of a Authorization.'
       required:
         - name
       properties:
@@ -9935,12 +9935,12 @@ components:
             type: string
           nullable: true
         noticePeriod:
-          description: 'The notice period for (the Contract of) this PurposeLimitation.'
+          description: 'The notice period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
         expiryPeriod:
-          description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+          description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
           type: string
           format: duration
           nullable: true
@@ -10045,18 +10045,18 @@ definitions:
         example: 4Ad9sdDJA4123AS4Ad9sdDJA4123AS
         maxLength: 255
       goal:
-        description: 'The goal of this Contract (what are the data used for).'
+        description: 'The goal of this Authorization (what are the data used for).'
         type: string
         example: 'Get email adres for sending news every week'
         maxLength: 255
       startingDate:
-        description: 'The date access was obtained to the data of this contract'
+        description: 'The date access was obtained to the data of this authorization'
         type: \Datetime
       dateCreated:
-        description: 'The moment this contract was created'
+        description: 'The moment this authorization was created'
         type: \Datetime
       dateModified:
-        description: 'The moment this contract was last Modified'
+        description: 'The moment this authorization was last Modified'
         type: \Datetime
       application:
         description: 'The node where this checkin takes place'
@@ -10084,12 +10084,12 @@ definitions:
         example: 4Ad9sdDJA4123AS4Ad9sdDJA4123AS
         maxLength: 255
       goal:
-        description: 'The goal of this Contract (what are the data used for).'
+        description: 'The goal of this Authorization (what are the data used for).'
         type: string
         example: 'Get email adres for sending news every week'
         maxLength: 255
       startingDate:
-        description: 'The date access was obtained to the data of this contract'
+        description: 'The date access was obtained to the data of this authorization'
         type: \Datetime
       application:
         description: 'The node where this checkin takes place'
@@ -10218,7 +10218,7 @@ definitions:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       basis:
-        description: 'The basis of this Dossier (reason for keeping a contract).'
+        description: 'The basis of this Dossier (reason for keeping an authorization).'
         type: string
         example: 'an order with amazon'
         maxLength: 255
@@ -10233,10 +10233,10 @@ definitions:
         format: url
         maxLength: 255
       dateCreated:
-        description: 'The moment this contract was created'
+        description: 'The moment this Dossier was created'
         type: \Datetime
       dateModified:
-        description: 'The moment this contract was last Modified'
+        description: 'The moment this Dossier was last Modified'
         type: \Datetime
       legal:
         description: 'wheter or not to this Dossier is on legal basis.'
@@ -10248,7 +10248,7 @@ definitions:
   Dossier-write:
     properties:
       basis:
-        description: 'The basis of this Dossier (reason for keeping a contract).'
+        description: 'The basis of this Dossier (reason for keeping an authorization).'
         type: string
         example: 'an order with amazon'
         maxLength: 255
@@ -10345,24 +10345,24 @@ definitions:
       description:
         description: 'The description of this application.'
         type: string
-        example: 'The PurposeLimitation for Contract x.'
+        example: 'The PurposeLimitation for Authorization x.'
         maxLength: 255
       data:
         description: 'The data of this PurposeLimitation.'
         type: array
       noticePeriod:
-        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        description: 'The notice period for (the Authorization of) this PurposeLimitation.'
         type: \DateInterval
         example: P3Y6M4DT12H30M5S
       expiryPeriod:
-        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
         type: \DateInterval
         example: P3Y6M4DT12H30M5S
       dateCreated:
-        description: 'The moment this contract was created'
+        description: 'The moment this PurposeLimitation was created'
         type: \Datetime
       dateModified:
-        description: 'The moment this contract was last Modified'
+        description: 'The moment this PurposeLimitation was last Modified'
         type: \Datetime
       authorization: []
     required:
@@ -10377,17 +10377,17 @@ definitions:
       description:
         description: 'The description of this application.'
         type: string
-        example: 'The PurposeLimitation for Contract x.'
+        example: 'The PurposeLimitation for Authorization x.'
         maxLength: 255
       data:
         description: 'The data of this PurposeLimitation.'
         type: array
       noticePeriod:
-        description: 'The notice period for (the Contract of) this PurposeLimitation.'
+        description: 'The notice period for (the Authorization of) this PurposeLimitation.'
         type: \DateInterval
         example: P3Y6M4DT12H30M5S
       expiryPeriod:
-        description: 'The expiry period for (the Contract of) this PurposeLimitation.'
+        description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
         type: \DateInterval
         example: P3Y6M4DT12H30M5S
       authorization: []
@@ -10575,7 +10575,7 @@ tags:
   -
     name: Authorization
     description: |
-      Contract gives an application access to data in claims.
+      Authorization gives an application access to data in claims.
       
       
   -
@@ -10593,7 +10593,7 @@ tags:
   -
     name: Dossier
     description: |
-      Dossier is a external data set that is blocking the cancellation of a contract.
+      Dossier is a external data set that is blocking the cancellation of an authorization.
       
       
   -
@@ -10605,7 +10605,7 @@ tags:
   -
     name: PurposeLimitation
     description: |
-      PurposeLimitation is de purpose limitation of a Contract.
+      PurposeLimitation is de purpose limitation of a Authorization.
       
       
   -

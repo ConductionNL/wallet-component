@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * PurposeLimitation is de purpose limitation of a Contract.
+ * PurposeLimitation is de purpose limitation of a Authorization.
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -67,7 +67,7 @@ class PurposeLimitation
     /**
      * @var string The description of this application.
      *
-     * @example The PurposeLimitation for Contract x.
+     * @example The PurposeLimitation for Authorization x.
      *
      * @Gedmo\Versioned
      * @Assert\Length(
@@ -88,7 +88,7 @@ class PurposeLimitation
     private $data = [];
 
     /**
-     * @var DateInterval The notice period for (the Contract of) this PurposeLimitation.
+     * @var DateInterval The notice period for (the Authorization of) this PurposeLimitation.
      *
      * @example P3Y6M4DT12H30M5S
      *
@@ -99,7 +99,7 @@ class PurposeLimitation
     private $noticePeriod;
 
     /**
-     * @var DateInterval The expiry period for (the Contract of) this PurposeLimitation.
+     * @var DateInterval The expiry period for (the Authorization of) this PurposeLimitation.
      *
      * @example P3Y6M4DT12H30M5S
      *
@@ -110,7 +110,7 @@ class PurposeLimitation
     private $expiryPeriod;
 
     /**
-     * @var Datetime The moment this contract was created
+     * @var Datetime The moment this PurposeLimitation was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -119,7 +119,7 @@ class PurposeLimitation
     private $dateCreated;
 
     /**
-     * @var Datetime The moment this contract was last Modified
+     * @var Datetime The moment this PurposeLimitation was last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
