@@ -7685,13 +7685,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/authorization_logs/{{authorizationlog}}",
+							"raw": "{{baseUrl}}/authorization_logs/{{log}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"authorization_logs",
-								"{{authorizationlog}}"
+								"{{log}}"
 							]
 						}
 					},
@@ -9005,12 +9005,12 @@
 	],
 	"variable": [
 		{
-			"id": "631bd4c6-aa05-4a84-931c-fb1e0309bcd3",
+			"id": "cd91a16b-3d71-4aed-94e9-488929c1bb0d",
 			"key": "Authorization",
 			"value": "45c1a4b6-59d3-4a6e-86bf-88a872f35845"
 		},
 		{
-			"id": "202c1737-d61c-4f78-8863-7de2cb436252",
+			"id": "dd5a566c-09f5-46a6-bf67-acf5bc8ae4b3",
 			"key": "baseUrl",
 			"value": "localhost"
 		}
