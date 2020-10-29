@@ -163,6 +163,11 @@ class Authorization
     private $dossiers;
 
     /**
+     * @ORM\OneToMany(targetEntity=AuthorizationLog::class, mappedBy="authorization", orphanRemoval=true)
+     */
+    private $authorizationLogs;
+
+    /**
      *  @ORM\PrePersist
      *  @ORM\PreUpdate
      *
@@ -181,6 +186,7 @@ class Authorization
     {
         $this->claims = new ArrayCollection();
         $this->dossiers = new ArrayCollection();
+        $this->authorizationLogs = new ArrayCollection();
     }
 
     public function getId(): Uuid
@@ -359,6 +365,37 @@ class Authorization
         if ($this->dossiers->contains($dossier)) {
             $this->dossiers->removeElement($dossier);
             $dossier->removeAuthorization($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AuthorizationLog[]
+     */
+    public function getAuthorizationLogs(): Collection
+    {
+        return $this->authorizationLogs;
+    }
+
+    public function addAuthorizationLog(AuthorizationLog $authorizationLog): self
+    {
+        if (!$this->authorizationLogs->contains($authorizationLog)) {
+            $this->authorizationLogs[] = $authorizationLog;
+            $authorizationLog->setAuthorization($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthorizationLog(AuthorizationLog $authorizationLog): self
+    {
+        if ($this->authorizationLogs->contains($authorizationLog)) {
+            $this->authorizationLogs->removeElement($authorizationLog);
+            // set the owning side to null (unless already changed)
+            if ($authorizationLog->getAuthorization() === $this) {
+                $authorizationLog->setAuthorization(null);
+            }
         }
 
         return $this;

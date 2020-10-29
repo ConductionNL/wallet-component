@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * An entity representing an node.
  *
- * A node being a point where users can check in as part of a place
+ * entity that holds the application object for wallet component
  *
  * @author Gino Kok <gino@conduction.nl>
  *
@@ -323,6 +323,11 @@ class Application
         }
 
         return $this;
+    }
+
+    public function getDateCreated(): ?\DateTimeInterface
+    {
+        return $this->dateCreated;
     }
 
     public function setDateCreated(DateTimeInterface $dateCreated): self
