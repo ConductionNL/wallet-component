@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Dossier is a external data set that is blocking the cancellation of a contract.
+ * Dossier is a external data set that is blocking the cancellation of an authorization.
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"contract.person": "partial"}))
+ * @ApiFilter(SearchFilter::class, properties={"authorization.person": "partial"}))
  */
 class Dossier
 {
@@ -49,7 +49,7 @@ class Dossier
     private $id;
 
     /**
-     * @var string The basis of this Dossier (reason for keeping a contract).
+     * @var string The basis of this Dossier (reason for keeping an authorization).
      *
      * @example an order with amazon
      *
@@ -89,7 +89,7 @@ class Dossier
     private $url;
 
     /**
-     * @var Datetime The moment this contract was created
+     * @var Datetime The moment this Dossier was created
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
@@ -98,7 +98,7 @@ class Dossier
     private $dateCreated;
 
     /**
-     * @var Datetime The moment this contract was last Modified
+     * @var Datetime The moment this Dossier was last Modified
      *
      * @Groups({"read"})
      * @Gedmo\Timestampable(on="create")
