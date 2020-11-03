@@ -148,8 +148,9 @@ class IdVaultFixtures extends Fixture
         $authorization = new Authorization();
         $authorization->setUserUrl($this->commonGroundService->cleanUrl(['component'=>'uc', 'type'=>'users', 'id'=>'47a5d31d-e7d8-4c7c-afec-5c84c74c778b'])); // Jan@zwarteraaf.nl
         $authorization->setScopes([
-            'job title',
-            'email addresses',
+            'schema.person.email',
+            'schema.person.given_name',
+            'schema.person.family_name',
         ]);
         $authorization->setApplication($application);
         $authorization->setGoal('Get the job and email for a job offer on a vacancy site');
