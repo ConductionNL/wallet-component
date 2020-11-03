@@ -2332,6 +2332,22 @@ paths:
           style: form
           explode: true
         -
+          name: authorization.userUrl
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'authorization.userUrl[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -9317,7 +9333,6 @@ components:
           format: date-time
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization-read'
@@ -9355,7 +9370,6 @@ components:
           type: string
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization-write'
@@ -9411,7 +9425,6 @@ components:
           format: date-time
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization:jsonld-read'
@@ -9458,7 +9471,6 @@ components:
           type: string
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization:jsonld-write'
@@ -10497,12 +10509,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-29 11:23:20'
+        example: '2020-11-03 10:37:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-29 11:23:20'
+        example: '2020-11-03 10:37:56'
     required: []
   AuditTrail-write:
     properties:
@@ -10550,12 +10562,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-29 11:23:20'
+        example: '2020-11-03 10:37:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-29 11:23:20'
+        example: '2020-11-03 10:37:56'
     required: []
   ChangeLog-write:
     properties:
