@@ -8327,7 +8327,6 @@ components:
           format: date-time
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization-read'
@@ -8365,7 +8364,6 @@ components:
           type: string
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization-write'
@@ -8421,7 +8419,6 @@ components:
           format: date-time
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization:jsonld-read'
@@ -8468,7 +8465,6 @@ components:
           type: string
           nullable: true
         authorizations:
-          writeOnly: true
           type: array
           items:
             $ref: '#/components/schemas/Authorization:jsonld-write'
@@ -9462,12 +9458,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-29 10:34:03'
+        example: '2020-11-03 10:35:17'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-29 10:34:03'
+        example: '2020-11-03 10:35:17'
     required: []
   AuditTrail-write:
     properties:
@@ -9515,12 +9511,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-10-29 10:34:03'
+        example: '2020-11-03 10:35:17'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-10-29 10:34:03'
+        example: '2020-11-03 10:35:17'
     required: []
   ChangeLog-write:
     properties:
