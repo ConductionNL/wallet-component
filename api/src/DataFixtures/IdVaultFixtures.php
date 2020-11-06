@@ -8,7 +8,6 @@ use App\Entity\Claim;
 use App\Entity\Dossier;
 use App\Entity\Proof;
 use App\Entity\PurposeLimitation;
-use App\Entity\SendList;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
