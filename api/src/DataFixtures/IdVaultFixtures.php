@@ -174,19 +174,6 @@ class IdVaultFixtures extends Fixture
         $manager->flush();
         $application = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
 
-        // Test sendList
-        $id = Uuid::fromString('d4dc32dc-029d-4782-bdd7-ce36f3a49267');
-        $sendList = new SendList();
-        $sendList->setName('News email');
-        $sendList->setDescription('Mailing list for sending news');
-        $sendList->setMail(true);
-        $sendList->setApplication($application);
-        $manager->persist($sendList);
-        $sendList->setId($id);
-        $manager->persist($sendList);
-        $manager->flush();
-        $sendList = $manager->getRepository('App:Authorization')->findOneBy(['id'=> $id]);
-
         // Test authorization
         $id = Uuid::fromString('49ff9063-c080-48a0-a398-701cec0814c0');
         $authorization = new Authorization();
