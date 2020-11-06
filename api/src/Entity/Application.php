@@ -167,13 +167,6 @@ class Application
     private $proofs;
 
     /**
-     * @Groups({"read","write"})
-     * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=SendList::class, mappedBy="application", orphanRemoval=true)
-     */
-    private $sendLists;
-
-    /**
      * @var DateTime The moment this request was created by the submitter
      *
      * @example 20190101
@@ -214,7 +207,6 @@ class Application
     {
         $this->authorizations = new ArrayCollection();
         $this->proofs = new ArrayCollection();
-        $this->sendLists = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -366,37 +358,6 @@ class Application
             // set the owning side to null (unless already changed)
             if ($proof->getApplication() === $this) {
                 $proof->setApplication(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|SendList[]
-     */
-    public function getSendLists(): Collection
-    {
-        return $this->sendLists;
-    }
-
-    public function addSendList(SendList $sendList): self
-    {
-        if (!$this->sendLists->contains($sendList)) {
-            $this->sendLists[] = $sendList;
-            $sendList->setApplication($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSendList(SendList $sendList): self
-    {
-        if ($this->sendLists->contains($sendList)) {
-            $this->sendLists->removeElement($sendList);
-            // set the owning side to null (unless already changed)
-            if ($sendList->getApplication() === $this) {
-                $sendList->setApplication(null);
             }
         }
 
