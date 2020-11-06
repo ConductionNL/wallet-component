@@ -135,6 +135,14 @@ class Proof
      */
     private $claim;
 
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="proofs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $application;
+
     public function getId(): Uuid
     {
         return $this->id;
@@ -227,6 +235,18 @@ class Proof
     public function setClaim(?Claim $claim): self
     {
         $this->claim = $claim;
+
+        return $this;
+    }
+
+    public function getApplication(): ?Application
+    {
+        return $this->application;
+    }
+
+    public function setApplication(?Application $application): self
+    {
+        $this->application = $application;
 
         return $this;
     }

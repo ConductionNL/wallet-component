@@ -8389,6 +8389,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -8407,6 +8408,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -8419,7 +8424,6 @@ components:
           nullable: true
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
     Application-write:
@@ -8427,7 +8431,6 @@ components:
       description: 'An entity representing an node.'
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
       properties:
@@ -8437,6 +8440,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         description:
           description: 'description of this application'
           type: string
@@ -8451,6 +8455,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof-write'
     'Application:jsonld-read':
       type: object
       description: 'An entity representing an node.'
@@ -8477,6 +8485,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -8495,6 +8504,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof:jsonld-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -8507,7 +8520,6 @@ components:
           nullable: true
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
     'Application:jsonld-write':
@@ -8515,7 +8527,6 @@ components:
       description: 'An entity representing an node.'
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
       properties:
@@ -8534,6 +8545,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         description:
           description: 'description of this application'
           type: string
@@ -8548,6 +8560,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof:jsonld-write'
     AuditTrail-read:
       type: object
       description: 'An resource representing a log line.'
@@ -9675,6 +9691,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim-read'
+        application:
+          $ref: '#/components/schemas/Application-read'
     Proof-write:
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -9699,6 +9717,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim-write'
+        application:
+          $ref: '#/components/schemas/Application-write'
     'Proof:jsonld-read':
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -9749,6 +9769,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim:jsonld-read'
+        application:
+          $ref: '#/components/schemas/Application:jsonld-read'
     'Proof:jsonld-write':
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -9782,6 +9804,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim:jsonld-write'
+        application:
+          $ref: '#/components/schemas/Application:jsonld-write'
     PurposeLimitation-read:
       type: object
       description: 'PurposeLimitation is de purpose limitation of a Authorization.'
@@ -10001,9 +10025,9 @@ definitions:
         description: 'The moment this request was created by the submitter'
         type: \DateTime
         example: '20190101'
+      proofs: []
     required:
       - name
-      - authorizationUrl
       - organization
       - contact
   Application-write:
@@ -10030,9 +10054,9 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      proofs: []
     required:
       - name
-      - authorizationUrl
       - organization
       - contact
   Authorization-read:
@@ -10316,6 +10340,7 @@ definitions:
         description: 'The moment this proof was last Modified'
         type: \Datetime
       claim: []
+      application: []
     required: []
   Proof-write:
     properties:
@@ -10341,6 +10366,7 @@ definitions:
         example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
         maxLength: 255
       claim: []
+      application: []
     required: []
   PurposeLimitation-read:
     properties:
@@ -10509,12 +10535,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-03 10:37:56'
+        example: '2020-11-06 12:39:49'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-03 10:37:56'
+        example: '2020-11-06 12:39:49'
     required: []
   AuditTrail-write:
     properties:
@@ -10562,12 +10588,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-03 10:37:56'
+        example: '2020-11-06 12:39:49'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-03 10:37:56'
+        example: '2020-11-06 12:39:49'
     required: []
   ChangeLog-write:
     properties:

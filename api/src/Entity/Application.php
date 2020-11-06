@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -101,8 +102,7 @@ class Application
      * @example stage platform
      *
      * @Groups({"read","write"})
-     * @Assert\NotNull
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $authorizationUrl;
 
@@ -160,6 +160,13 @@ class Application
     private $authorizations;
 
     /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="application", orphanRemoval=true)
+     */
+    private $proofs;
+
+    /**
      * @var DateTime The moment this request was created by the submitter
      *
      * @example 20190101
@@ -199,6 +206,7 @@ class Application
     public function __construct()
     {
         $this->authorizations = new ArrayCollection();
+        $this->proofs = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -319,6 +327,37 @@ class Application
             // set the owning side to null (unless already changed)
             if ($authorization->getApplication() === $this) {
                 $authorization->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Proof[]
+     */
+    public function getProofs(): Collection
+    {
+        return $this->proofs;
+    }
+
+    public function addProof(Proof $proof): self
+    {
+        if (!$this->proofs->contains($proof)) {
+            $this->proofs[] = $proof;
+            $proof->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProof(Proof $proof): self
+    {
+        if ($this->proofs->contains($proof)) {
+            $this->proofs->removeElement($proof);
+            // set the owning side to null (unless already changed)
+            if ($proof->getApplication() === $this) {
+                $proof->setApplication(null);
             }
         }
 
