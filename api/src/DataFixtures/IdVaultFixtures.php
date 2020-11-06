@@ -233,7 +233,7 @@ class IdVaultFixtures extends Fixture
         $manager->getRepository('App:Dossier')->findOneBy(['id'=> $id]);
 
         // Commonground
-        $id = Uuid::fromString('62817d5c-0ba5-4aaa-81f2-ad0e5a763cdd');
+        $id = Uuid::fromString('2e7fe548-9a69-4536-b744-c82374f929c1');
         $application = new Application();
         $application->setName('Commonground.nu');
         $application->setDescription('Commonground.nu application');
