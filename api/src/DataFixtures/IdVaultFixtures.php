@@ -8,6 +8,7 @@ use App\Entity\Claim;
 use App\Entity\Dossier;
 use App\Entity\Proof;
 use App\Entity\PurposeLimitation;
+use App\Entity\SendList;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -39,6 +40,32 @@ class IdVaultFixtures extends Fixture
             return false;
         }
 
+        // Proof application gmail
+        $id = Uuid::fromString('35fcc2ef-d232-454f-b740-1d15d0dc985b');
+        $gmail = new Application();
+        $gmail->setName('gmail');
+        $gmail->setDescription('gmail');
+        $gmail->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '779e3c6f-bbf9-4a6a-aed3-c119cbea199b']));
+        $gmail->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => '4fd96e70-efb9-4e6d-8bbc-dc7b7e9ef144']));
+        $manager->persist($gmail);
+        $gmail->setId($id);
+        $manager->persist($gmail);
+        $manager->flush();
+        $gmail = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
+
+        // Proof application facebook
+        $id = Uuid::fromString('294504a6-c69e-4a10-99f5-b992f713bfa2');
+        $facebook = new Application();
+        $facebook->setName('facebook');
+        $facebook->setDescription('facebook');
+        $facebook->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '9fb287d7-c65b-4c2d-8db5-de8a0b954325']));
+        $facebook->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => 'da6463e7-b345-4d7d-b644-b9b1991ae616']));
+        $manager->persist($facebook);
+        $facebook->setId($id);
+        $manager->persist($facebook);
+        $manager->flush();
+        $facebook = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
+
         // Test Claim 1
         $id = Uuid::fromString('1acebad8-67ee-46fc-ab87-fd17e2ad72bb');
         $claim1 = new Claim();
@@ -62,6 +89,7 @@ class IdVaultFixtures extends Fixture
         $proof->setProofPurpose('assertionMethod');
         $proof->setVerificationMethod('https://example.wac/issuers/keys/1.1');
         $proof->setJws('eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM');
+        $proof->setApplication($gmail);
         $proof->setClaim($claim1);
         $manager->persist($proof);
         $proof->setId($id);
@@ -76,6 +104,7 @@ class IdVaultFixtures extends Fixture
         $proof->setProofPurpose('assertionMethod');
         $proof->setVerificationMethod('https://example.wac/issuers/keys/1.2');
         $proof->setJws('eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM');
+        $proof->setApplication($facebook);
         $proof->setClaim($claim1);
         $manager->persist($proof);
         $proof->setId($id);
@@ -106,7 +135,8 @@ class IdVaultFixtures extends Fixture
         $proof->setType('gmail');
         $proof->setProofPurpose('assertionMethod');
         $proof->setVerificationMethod('https://example.wac/issuers/keys/2.1');
-        $proof->setJws('eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM');
+        $proof->setJws('eyJhbGciOiJSUzI1NiIsImI2NCI6ZmF-sc2UsImNyaXQiOlsiYjY0Il19TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM');
+        $proof->setApplication($gmail);
         $proof->setClaim($claim2);
         $manager->persist($proof);
         $proof->setId($id);
@@ -121,6 +151,7 @@ class IdVaultFixtures extends Fixture
         $proof->setProofPurpose('assertionMethod');
         $proof->setVerificationMethod('https://example.wac/issuers/keys/2.2');
         $proof->setJws('eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM');
+        $proof->setApplication($facebook);
         $proof->setClaim($claim2);
         $manager->persist($proof);
         $proof->setId($id);
@@ -143,10 +174,23 @@ class IdVaultFixtures extends Fixture
         $manager->flush();
         $application = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
 
+        // Test sendList
+        $id = Uuid::fromString('d4dc32dc-029d-4782-bdd7-ce36f3a49267');
+        $sendList = new SendList();
+        $sendList->setName('News email');
+        $sendList->setDescription('Mailing list for sending news');
+        $sendList->setMail(true);
+        $sendList->setApplication($application);
+        $manager->persist($sendList);
+        $sendList->setId($id);
+        $manager->persist($sendList);
+        $manager->flush();
+        $sendList = $manager->getRepository('App:Authorization')->findOneBy(['id'=> $id]);
+
         // Test authorization
         $id = Uuid::fromString('49ff9063-c080-48a0-a398-701cec0814c0');
         $authorization = new Authorization();
-        $authorization->setUserUrl($this->commonGroundService->cleanUrl(['component'=>'uc', 'type'=>'users', 'id'=>'47a5d31d-e7d8-4c7c-afec-5c84c74c778b'])); // Jan@zwarteraaf.nl
+        $authorization->setUserUrl($this->commonGroundService->cleanUrl(['component'=>'uc', 'type'=>'users', 'id'=>'b2e94260-5474-4c1d-88c3-2e7df3410397'])); // Jan@zwarteraaf.nl
         $authorization->setScopes([
             'schema.person.email',
             'schema.person.given_name',

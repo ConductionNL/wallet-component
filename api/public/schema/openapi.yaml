@@ -8370,6 +8370,860 @@ paths:
             schema:
               $ref: '#/components/schemas/PurposeLimitation-write'
         description: 'The updated PurposeLimitation resource'
+  /send_lists:
+    get:
+      tags:
+        - SendList
+      operationId: getSendListCollection
+      summary: 'Retrieves the collection of SendList resources.'
+      responses:
+        200:
+          description: 'SendList collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/SendList:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/SendList:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SendList-read'
+      parameters:
+        -
+          name: mail
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: phone
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[mail]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[phone]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - SendList
+      operationId: postSendListCollection
+      summary: 'Creates a SendList resource.'
+      responses:
+        201:
+          description: 'SendList resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+          links:
+            GetSendListItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getSendListItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /send_lists/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/SendList:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/SendList:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+        description: 'The new SendList resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/send_lists/{id}':
+    get:
+      tags:
+        - SendList
+      operationId: getSendListItem
+      summary: 'Retrieves a SendList resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'SendList resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - SendList
+      operationId: deleteSendListItem
+      summary: 'Removes the SendList resource.'
+      responses:
+        204:
+          description: 'SendList resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - SendList
+      operationId: putSendListItem
+      summary: 'Replaces the SendList resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'SendList resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/SendList:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/SendList:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+        description: 'The updated SendList resource'
+    patch:
+      tags:
+        - SendList
+      operationId: patchSendListItem
+      summary: 'Updates the SendList resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'SendList resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/SendList:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SendList-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/SendList:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/SendList-write'
+        description: 'The updated SendList resource'
 components:
   schemas:
     Application-read:
@@ -8389,6 +9243,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -8407,6 +9262,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof-read'
+        sendLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/SendList-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -8419,7 +9282,6 @@ components:
           nullable: true
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
     Application-write:
@@ -8427,7 +9289,6 @@ components:
       description: 'An entity representing an node.'
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
       properties:
@@ -8437,6 +9298,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         description:
           description: 'description of this application'
           type: string
@@ -8451,6 +9313,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof-write'
+        sendLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/SendList-write'
     'Application:jsonld-read':
       type: object
       description: 'An entity representing an node.'
@@ -8477,6 +9347,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -8495,6 +9366,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof:jsonld-read'
+        sendLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/SendList:jsonld-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -8507,7 +9386,6 @@ components:
           nullable: true
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
     'Application:jsonld-write':
@@ -8515,7 +9393,6 @@ components:
       description: 'An entity representing an node.'
       required:
         - name
-        - authorizationUrl
         - organization
         - contact
       properties:
@@ -8534,6 +9411,7 @@ components:
         authorizationUrl:
           description: 'authorization url of the application'
           type: string
+          nullable: true
         description:
           description: 'description of this application'
           type: string
@@ -8548,6 +9426,14 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        proofs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proof:jsonld-write'
+        sendLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/SendList:jsonld-write'
     AuditTrail-read:
       type: object
       description: 'An resource representing a log line.'
@@ -9675,6 +10561,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim-read'
+        application:
+          $ref: '#/components/schemas/Application-read'
     Proof-write:
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -9699,6 +10587,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim-write'
+        application:
+          $ref: '#/components/schemas/Application-write'
     'Proof:jsonld-read':
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -9749,6 +10639,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim:jsonld-read'
+        application:
+          $ref: '#/components/schemas/Application:jsonld-read'
     'Proof:jsonld-write':
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -9782,6 +10674,8 @@ components:
           nullable: true
         claim:
           $ref: '#/components/schemas/Claim:jsonld-write'
+        application:
+          $ref: '#/components/schemas/Application:jsonld-write'
     PurposeLimitation-read:
       type: object
       description: 'PurposeLimitation is de purpose limitation of a Authorization.'
@@ -9958,6 +10852,142 @@ components:
           nullable: true
         authorization:
           $ref: '#/components/schemas/Authorization:jsonld-write'
+    SendList-read:
+      type: object
+      description: 'SendList is a way for Applications to send messages through email or phone.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'The name of this SendList.'
+          type: string
+        description:
+          description: 'The description of this SendList.'
+          type: string
+          nullable: true
+        mail:
+          description: 'True if this is an mailing list.'
+          type: boolean
+        phone:
+          description: 'True if this is an phone list.'
+          type: boolean
+        application:
+          $ref: '#/components/schemas/Application-read'
+        dateCreated:
+          description: 'The moment this proof was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this proof was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - name
+    SendList-write:
+      type: object
+      description: 'SendList is a way for Applications to send messages through email or phone.'
+      required:
+        - name
+      properties:
+        name:
+          description: 'The name of this SendList.'
+          type: string
+        description:
+          description: 'The description of this SendList.'
+          type: string
+          nullable: true
+        mail:
+          description: 'True if this is an mailing list.'
+          type: boolean
+        phone:
+          description: 'True if this is an phone list.'
+          type: boolean
+        application:
+          $ref: '#/components/schemas/Application-write'
+    'SendList:jsonld-read':
+      type: object
+      description: 'SendList is a way for Applications to send messages through email or phone.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'The name of this SendList.'
+          type: string
+        description:
+          description: 'The description of this SendList.'
+          type: string
+          nullable: true
+        mail:
+          description: 'True if this is an mailing list.'
+          type: boolean
+        phone:
+          description: 'True if this is an phone list.'
+          type: boolean
+        application:
+          $ref: '#/components/schemas/Application:jsonld-read'
+        dateCreated:
+          description: 'The moment this proof was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this proof was last Modified'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - name
+    'SendList:jsonld-write':
+      type: object
+      description: 'SendList is a way for Applications to send messages through email or phone.'
+      required:
+        - name
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'The name of this SendList.'
+          type: string
+        description:
+          description: 'The description of this SendList.'
+          type: string
+          nullable: true
+        mail:
+          description: 'True if this is an mailing list.'
+          type: boolean
+        phone:
+          description: 'True if this is an phone list.'
+          type: boolean
+        application:
+          $ref: '#/components/schemas/Application:jsonld-write'
 definitions:
   Application-read:
     properties:
@@ -10001,9 +11031,10 @@ definitions:
         description: 'The moment this request was created by the submitter'
         type: \DateTime
         example: '20190101'
+      proofs: []
+      sendLists: []
     required:
       - name
-      - authorizationUrl
       - organization
       - contact
   Application-write:
@@ -10030,11 +11061,140 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      proofs: []
+      sendLists: []
     required:
       - name
-      - authorizationUrl
       - organization
       - contact
+  Proof-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this proof was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this proof was last Modified'
+        type: \Datetime
+      claim: []
+      application: []
+    required: []
+  Proof-write:
+    properties:
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      claim: []
+      application: []
+    required: []
+  Claim-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this claim was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this claim was last Modified'
+        type: \Datetime
+      authorizations: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
+  Claim-write:
+    properties:
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      authorizations: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
   Authorization-read:
     properties:
       id:
@@ -10112,236 +11272,6 @@ definitions:
     required:
       - goal
       - application
-  AuthorizationLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      status:
-        description: 'status of the authorization log'
-        type: string
-        example: '200'
-      endpoint:
-        description: 'the endpoint used to obtain the information'
-        type: string
-        example: access_tokens
-      dateCreated:
-        description: 'The moment this contract was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this contract was last Modified'
-        type: \Datetime
-      authorization:
-        description: 'The node where this checkin takes place'
-        type: \Authorization
-    required:
-      - status
-      - endpoint
-      - authorization
-  AuthorizationLog-write:
-    properties:
-      status:
-        description: 'status of the authorization log'
-        type: string
-        example: '200'
-      endpoint:
-        description: 'the endpoint used to obtain the information'
-        type: string
-        example: access_tokens
-      authorization:
-        description: 'The node where this checkin takes place'
-        type: \Authorization
-    required:
-      - status
-      - endpoint
-      - authorization
-  Claim-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      person:
-        description: 'The person (Subject) of this Claim.'
-        type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
-        format: url
-        maxLength: 255
-      property:
-        description: 'The property of this Claim.'
-        type: string
-        example: 'Knows (, alumniOf or jobTitle)'
-        maxLength: 255
-      data:
-        description: 'The data (Value) of this Claim.'
-        type: array
-      token:
-        description: 'The jwt token of this Claim.'
-        type: string
-        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this claim was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this claim was last Modified'
-        type: \Datetime
-      authorizations: []
-      proofs: []
-    required:
-      - person
-      - property
-      - data
-  Claim-write:
-    properties:
-      person:
-        description: 'The person (Subject) of this Claim.'
-        type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
-        format: url
-        maxLength: 255
-      property:
-        description: 'The property of this Claim.'
-        type: string
-        example: 'Knows (, alumniOf or jobTitle)'
-        maxLength: 255
-      data:
-        description: 'The data (Value) of this Claim.'
-        type: array
-      token:
-        description: 'The jwt token of this Claim.'
-        type: string
-        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
-      authorizations: []
-      proofs: []
-    required:
-      - person
-      - property
-      - data
-  Dossier-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
-        type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
-        description: 'The end date of this dossier.'
-        type: \Datetime
-        example: '27-10-2020 10:47:00'
-      url:
-        description: 'A URL with which the user can view this Dossier.'
-        type: string
-        example: 'https://dev.id-vault.com/dossiers/x (?)'
-        format: url
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this Dossier was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this Dossier was last Modified'
-        type: \Datetime
-      legal:
-        description: 'wheter or not to this Dossier is on legal basis.'
-        type: bool
-        example: 'true'
-      authorization: []
-    required:
-      - basis
-  Dossier-write:
-    properties:
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
-        type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
-        description: 'The end date of this dossier.'
-        type: \Datetime
-        example: '27-10-2020 10:47:00'
-      url:
-        description: 'A URL with which the user can view this Dossier.'
-        type: string
-        example: 'https://dev.id-vault.com/dossiers/x (?)'
-        format: url
-        maxLength: 255
-      legal:
-        description: 'wheter or not to this Dossier is on legal basis.'
-        type: bool
-        example: 'true'
-      authorization: []
-    required:
-      - basis
-  Proof-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this proof was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this proof was last Modified'
-        type: \Datetime
-      claim: []
-    required: []
-  Proof-write:
-    properties:
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      claim: []
-    required: []
   PurposeLimitation-read:
     properties:
       id:
@@ -10405,6 +11335,220 @@ definitions:
       authorization: []
     required:
       - name
+  Dossier-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      basis:
+        description: 'The basis of this Dossier (reason for keeping an authorization).'
+        type: string
+        example: 'an order with amazon'
+        maxLength: 255
+      endDate:
+        description: 'The end date of this dossier.'
+        type: \Datetime
+        example: '27-10-2020 10:47:00'
+      url:
+        description: 'A URL with which the user can view this Dossier.'
+        type: string
+        example: 'https://dev.id-vault.com/dossiers/x (?)'
+        format: url
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this Dossier was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this Dossier was last Modified'
+        type: \Datetime
+      legal:
+        description: 'wheter or not to this Dossier is on legal basis.'
+        type: bool
+        example: 'true'
+      authorization: []
+    required:
+      - basis
+  Dossier-write:
+    properties:
+      basis:
+        description: 'The basis of this Dossier (reason for keeping an authorization).'
+        type: string
+        example: 'an order with amazon'
+        maxLength: 255
+      endDate:
+        description: 'The end date of this dossier.'
+        type: \Datetime
+        example: '27-10-2020 10:47:00'
+      url:
+        description: 'A URL with which the user can view this Dossier.'
+        type: string
+        example: 'https://dev.id-vault.com/dossiers/x (?)'
+        format: url
+        maxLength: 255
+      legal:
+        description: 'wheter or not to this Dossier is on legal basis.'
+        type: bool
+        example: 'true'
+      authorization: []
+    required:
+      - basis
+  SendList-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'The name of this SendList.'
+        type: string
+        example: 'News email'
+        maxLength: 255
+      description:
+        description: 'The description of this SendList.'
+        type: string
+        example: 'Mailing list for sending news'
+        maxLength: 255
+      mail:
+        description: 'True if this is an mailing list.'
+        type: bool
+        example: 'true'
+      phone:
+        description: 'True if this is an phone list.'
+        type: bool
+        example: 'true'
+      dateCreated:
+        description: 'The moment this proof was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this proof was last Modified'
+        type: \Datetime
+      application: []
+    required:
+      - name
+  SendList-write:
+    properties:
+      name:
+        description: 'The name of this SendList.'
+        type: string
+        example: 'News email'
+        maxLength: 255
+      description:
+        description: 'The description of this SendList.'
+        type: string
+        example: 'Mailing list for sending news'
+        maxLength: 255
+      mail:
+        description: 'True if this is an mailing list.'
+        type: bool
+        example: 'true'
+      phone:
+        description: 'True if this is an phone list.'
+        type: bool
+        example: 'true'
+      application: []
+    required:
+      - name
+  AuthorizationLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      status:
+        description: 'status of the authorization log'
+        type: string
+        example: '200'
+      endpoint:
+        description: 'the endpoint used to obtain the information'
+        type: string
+        example: access_tokens
+      dateCreated:
+        description: 'The moment this contract was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this contract was last Modified'
+        type: \Datetime
+      authorization:
+        description: 'The node where this checkin takes place'
+        type: \Authorization
+    required:
+      - status
+      - endpoint
+      - authorization
+  AuthorizationLog-write:
+    properties:
+      status:
+        description: 'status of the authorization log'
+        type: string
+        example: '200'
+      endpoint:
+        description: 'the endpoint used to obtain the information'
+        type: string
+        example: access_tokens
+      authorization:
+        description: 'The node where this checkin takes place'
+        type: \Authorization
+    required:
+      - status
+      - endpoint
+      - authorization
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-11-06 11:04:51'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-11-06 11:04:51'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -10509,12 +11653,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-03 10:37:56'
+        example: '2020-11-06 11:04:51'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-03 10:37:56'
+        example: '2020-11-06 11:04:51'
     required: []
   AuditTrail-write:
     properties:
@@ -10522,59 +11666,6 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-11-03 10:37:56'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-11-03 10:37:56'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -10585,17 +11676,11 @@ tags:
       
       entity that holds the application object for wallet component
   -
-    name: Authorization
+    name: Proof
     description: |
-      Authorization gives an application access to data in claims.
+      Proof is a way to prove that claims are correct.
       
       
-  -
-    name: AuthorizationLog
-    description: |
-      An entity representing an node.
-      
-      entity to log the uses of authorizations
   -
     name: Claim
     description: |
@@ -10603,15 +11688,9 @@ tags:
       
       Built on the basis of the subject-property-value relationship (https://w3c.github.io/vc-data-model/#claims).
   -
-    name: Dossier
+    name: Authorization
     description: |
-      Dossier is a external data set that is blocking the cancellation of an authorization.
-      
-      
-  -
-    name: Proof
-    description: |
-      Proof is a way to prove that claims are correct.
+      Authorization gives an application access to data in claims.
       
       
   -
@@ -10621,13 +11700,31 @@ tags:
       
       
   -
-    name: AuditTrail
+    name: Dossier
+    description: |
+      Dossier is a external data set that is blocking the cancellation of an authorization.
+      
+      
+  -
+    name: SendList
+    description: |
+      SendList is a way for Applications to send messages through email or phone.
+      
+      
+  -
+    name: AuthorizationLog
+    description: |
+      An entity representing an node.
+      
+      entity to log the uses of authorizations
+  -
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -10638,15 +11735,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -
