@@ -233,9 +233,10 @@ class IdVaultFixtures extends Fixture
         $manager->getRepository('App:Dossier')->findOneBy(['id'=> $id]);
 
         // Commonground
-        $id = Uuid::fromString('2e7fe548-9a69-4536-b744-c82374f929c1');
+        $id = Uuid::fromString('593867bc-9dfc-4f53-9ee9-abfb278bc42c');
         $application = new Application();
         $application->setName('Commonground.nu');
+        $application->setSecret('kjdIDA9al3283hasdnbdDASD84Os2Q');
         $application->setDescription('Commonground.nu application');
         $application->setAuthorizationUrl('https://dev.commongroud.nu/auth/idvault');
         $application->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '073741b3-f756-4767-aa5d-240f167ca89d'])); //Conduction
