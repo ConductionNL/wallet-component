@@ -231,7 +231,7 @@ class Claim
     /**
      * @return Collection|Authorization[]
      */
-    public function getAuthorization(): Collection
+    public function getAuthorizations(): Collection
     {
         return $this->authorizations;
     }

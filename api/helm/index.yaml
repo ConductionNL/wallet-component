@@ -3,14 +3,14 @@ entries:
   wac:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-10-29T11:22:06.4344994Z"
+    created: "2020-11-06T12:38:08.1506917Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 14b6892041772c1265534f582f0f03b8fcde1cb45feca78522625784b4ef55ca
+    digest: e6cb44b4fc4431f4b40edf60a8b1b8a309f672bfa0df0570c8b29b96dd262ad4
     home: wac.zaakonline.nl
     icon: wac.zaakonline.nl
     name: wac
     urls:
     - wac-0.1.0.tgz
     version: 0.1.0
-generated: "2020-10-29T11:22:06.4208055Z"
+generated: "2020-11-06T12:38:08.1323022Z"
