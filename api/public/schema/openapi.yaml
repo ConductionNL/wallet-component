@@ -138,6 +138,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[testSecret]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[description]'
           in: query
           required: false
@@ -8394,6 +8403,10 @@ components:
           description: 'Random generated secret for the application'
           type: string
           nullable: true
+        testSecret:
+          description: 'Random generated secret for the application'
+          type: string
+          nullable: true
         description:
           description: 'description of this application'
           type: string
@@ -8487,6 +8500,10 @@ components:
           type: string
           nullable: true
         secret:
+          description: 'Random generated secret for the application'
+          type: string
+          nullable: true
+        testSecret:
           description: 'Random generated secret for the application'
           type: string
           nullable: true
@@ -10001,7 +10018,12 @@ definitions:
       secret:
         description: 'Random generated secret for the application'
         type: string
-        example: 4Ad9sdDJA4123AS4Ad9sdDJA4123AS
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        maxLength: 255
+      testSecret:
+        description: 'Random generated secret for the application'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
         maxLength: 255
       description:
         description: 'description of this application'
@@ -10535,12 +10557,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-06 12:39:49'
+        example: '2020-11-09 15:46:06'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-06 12:39:49'
+        example: '2020-11-09 15:46:06'
     required: []
   AuditTrail-write:
     properties:
@@ -10588,12 +10610,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-06 12:39:49'
+        example: '2020-11-09 15:46:06'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-06 12:39:49'
+        example: '2020-11-09 15:46:06'
     required: []
   ChangeLog-write:
     properties:
