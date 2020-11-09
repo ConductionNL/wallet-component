@@ -238,7 +238,7 @@ class IdVaultFixtures extends Fixture
         $application->setName('Commonground.nu');
         $application->setSecret('kjdIDA9al3283hasdnbdDASD84Os2Q');
         $application->setDescription('Commonground.nu application');
-        $application->setAuthorizationUrl('https://dev.commongroud.nu/auth/idvault');
+        $application->setAuthorizationUrl('https://dev.commonground.nu/auth/idvault');
         $application->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '073741b3-f756-4767-aa5d-240f167ca89d'])); //Conduction
         $application->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => '7d19fbc6-6c35-4087-ab10-9778277cefe1'])); //Commonground.nu
         $manager->persist($application);
