@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
@@ -111,14 +112,28 @@ class Application
      *
      * @Gedmo\Versioned
      *
-     * @example 4Ad9sdDJA4123AS4Ad9sdDJA4123AS
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      * @Groups({"read"})
      * @Assert\Length(
      *     max=255
      * )
-     * @ORM\Column(type="string", length=30, nullable=true, unique=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      */
     private $secret;
+
+    /**
+     * @var string Random generated secret for the application
+     *
+     * @Gedmo\Versioned
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
+     * @Groups({"read"})
+     * @Assert\Length(
+     *     max=255
+     * )
+     * @ORM\Column(type="string", nullable=true, unique=true)
+     */
+    private $testSecret;
 
     /**
      * @var string description of this application
@@ -196,10 +211,13 @@ class Application
     public function prePersist()
     {
         if (!$this->getSecret()) {
-            $validChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-
-            $secret = substr(str_shuffle(str_repeat($validChars, ceil(30 / strlen($validChars)))), 1, 30);
+            $secret = Uuid::uuid4();
             $this->setSecret($secret);
+        }
+
+        if (!$this->getTestSecret()) {
+            $secret = 'test_'.Uuid::uuid4()->toString();
+            $this->setTestSecret($secret);
         }
     }
 
@@ -253,6 +271,18 @@ class Application
     public function setSecret(string $secret): self
     {
         $this->secret = $secret;
+
+        return $this;
+    }
+
+    public function getTestSecret(): ?string
+    {
+        return $this->testSecret;
+    }
+
+    public function setTestSecret(string $testSecret): self
+    {
+        $this->testSecret = $testSecret;
 
         return $this;
     }
