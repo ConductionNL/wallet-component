@@ -73,7 +73,7 @@ class AuthorizationLog
      * @example log in to commonground
      *
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=3, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $goal;
 
