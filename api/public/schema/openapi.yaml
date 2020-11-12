@@ -5906,6 +5906,22 @@ paths:
           schema:
             type: string
         -
+          name: authorization.userUrl
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'authorization.userUrl[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -10557,12 +10573,20 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
+<<<<<<< HEAD
+        example: '2020-11-10 13:17:16'
+=======
         example: '2020-11-09 15:46:06'
+>>>>>>> development
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
+<<<<<<< HEAD
+        example: '2020-11-10 13:17:16'
+=======
         example: '2020-11-09 15:46:06'
+>>>>>>> development
     required: []
   AuditTrail-write:
     properties:
@@ -10610,12 +10634,20 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
+<<<<<<< HEAD
+        example: '2020-11-10 13:17:16'
+=======
         example: '2020-11-09 15:46:06'
+>>>>>>> development
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
+<<<<<<< HEAD
+        example: '2020-11-10 13:17:16'
+=======
         example: '2020-11-09 15:46:06'
+>>>>>>> development
     required: []
   ChangeLog-write:
     properties:
