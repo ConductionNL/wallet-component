@@ -456,7 +456,7 @@ class Application
 
         return $this;
     }
-6
+
     public function getDateCreated(): ?\DateTimeInterface
     {
         return $this->dateCreated;
