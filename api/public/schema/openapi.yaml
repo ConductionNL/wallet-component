@@ -8930,6 +8930,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dossier-read'
+        authorizationLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationLog-read'
       required:
         - goal
         - application
@@ -8976,6 +8980,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dossier-write'
+        authorizationLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationLog-write'
       required:
         - goal
         - application
@@ -9048,6 +9056,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dossier:jsonld-read'
+        authorizationLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationLog:jsonld-read'
       required:
         - goal
         - application
@@ -9103,6 +9115,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dossier:jsonld-write'
+        authorizationLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationLog:jsonld-write'
       required:
         - goal
         - application
@@ -10138,6 +10154,7 @@ definitions:
       claims: []
       purposeLimitation: []
       dossiers: []
+      authorizationLogs: []
     required:
       - goal
       - application
@@ -10171,6 +10188,7 @@ definitions:
       claims: []
       purposeLimitation: []
       dossiers: []
+      authorizationLogs: []
     required:
       - goal
       - application
@@ -10573,20 +10591,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-11-10 13:17:16'
-=======
-        example: '2020-11-09 15:46:06'
->>>>>>> development
+        example: '2020-11-12 08:27:55'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-11-10 13:17:16'
-=======
-        example: '2020-11-09 15:46:06'
->>>>>>> development
+        example: '2020-11-12 08:27:55'
     required: []
   AuditTrail-write:
     properties:
@@ -10634,20 +10644,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-11-10 13:17:16'
-=======
-        example: '2020-11-09 15:46:06'
->>>>>>> development
+        example: '2020-11-12 08:27:55'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-<<<<<<< HEAD
-        example: '2020-11-10 13:17:16'
-=======
-        example: '2020-11-09 15:46:06'
->>>>>>> development
+        example: '2020-11-12 08:27:55'
     required: []
   ChangeLog-write:
     properties:
