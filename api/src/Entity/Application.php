@@ -108,6 +108,26 @@ class Application
     private $authorizationUrl;
 
     /**
+     * @var string webhook url of the application
+     *
+     * @example stage platform
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $webhookUrl;
+
+    /**
+     * @var string single sign on url of the application
+     *
+     * @example stage platform
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $singleSignOnUrl;
+
+    /**
      * @var string Random generated secret for the application
      *
      * @Gedmo\Versioned
@@ -168,6 +188,13 @@ class Application
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $contact;
+
+    /**
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json")
+     */
+    private $scopes = [];
 
     /**
      * @ORM\OneToMany(targetEntity=Authorization::class, mappedBy="application", orphanRemoval=true)
@@ -259,6 +286,30 @@ class Application
     public function setAuthorizationUrl(string $authorizationUrl): self
     {
         $this->authorizationUrl = $authorizationUrl;
+
+        return $this;
+    }
+
+    public function getSingleSignOnUrl(): ?string
+    {
+        return $this->singleSignOnUrl;
+    }
+
+    public function setSingleSignOnUrl(string $singleSignOnUrl): self
+    {
+        $this->singleSignOnUrl = $singleSignOnUrl;
+
+        return $this;
+    }
+
+    public function getWebhookUrl(): ?string
+    {
+        return $this->webhookUrl;
+    }
+
+    public function setWebhookUrl(string $webhookUrl): self
+    {
+        $this->webhookUrl = $webhookUrl;
 
         return $this;
     }
@@ -394,6 +445,18 @@ class Application
         return $this;
     }
 
+    public function getScopes(): ?array
+    {
+        return $this->scopes;
+    }
+
+    public function setScopes(array $scopes): self
+    {
+        $this->scopes = $scopes;
+
+        return $this;
+    }
+6
     public function getDateCreated(): ?\DateTimeInterface
     {
         return $this->dateCreated;
