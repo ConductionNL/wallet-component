@@ -6,11 +6,7 @@ url: "https://github.com/ConductionNL/wallet-component"
 landingURL: "wac.zuid-drecht.nl" 
 isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git" 
 softwareVersion: "V1.0"
-<<<<<<< HEAD
-releaseDate: "2020-10-11"
-=======
-releaseDate: "2020-09-11"
->>>>>>> development
+releaseDate: "2020-12-11"
 logo: wac.zaakonline.nl 
 monochromeLogo: img/logo-mono.svg
 
