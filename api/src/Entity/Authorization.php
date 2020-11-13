@@ -163,6 +163,8 @@ class Authorization
     private $dossiers;
 
     /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=AuthorizationLog::class, mappedBy="authorization", orphanRemoval=true)
      */
     private $authorizationLogs;

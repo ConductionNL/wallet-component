@@ -68,6 +68,16 @@ class AuthorizationLog
     private $status;
 
     /**
+     * @var string goal of the request
+     *
+     * @example log in to commonground
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $goal;
+
+    /**
      * @var string the endpoint used to obtain the information
      *
      * @example access_tokens
@@ -126,6 +136,18 @@ class AuthorizationLog
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getGoal(): ?string
+    {
+        return $this->goal;
+    }
+
+    public function setGoal(string $goal): self
+    {
+        $this->goal = $goal;
 
         return $this;
     }
