@@ -33,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"person": "partial"})
  */
 class Claim
 {
@@ -127,26 +127,33 @@ class Claim
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\ManyToMany(targetEntity=Contract::class, inversedBy="claims")
+     * @ORM\ManyToMany(targetEntity=Authorization::class, inversedBy="claims")
      */
-    private $contracts;
+    private $authorizations;
 
     /**
      * @Groups({"read","write"})
      * @MaxDepth(1)
-     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="claim", orphanRemoval=true)
      */
     private $proofs;
 
     public function __construct()
     {
-        $this->contracts = new ArrayCollection();
+        $this->authorizations = new ArrayCollection();
         $this->proofs = new ArrayCollection();
     }
 
     public function getId(): Uuid
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getPerson(): ?string
@@ -222,26 +229,26 @@ class Claim
     }
 
     /**
-     * @return Collection|Contract[]
+     * @return Collection|Authorization[]
      */
-    public function getContracts(): Collection
+    public function getAuthorizations(): Collection
     {
-        return $this->contracts;
+        return $this->authorizations;
     }
 
-    public function addContract(Contract $contract): self
+    public function addAuthorization(Authorization $authorization): self
     {
-        if (!$this->contracts->contains($contract)) {
-            $this->contracts[] = $contract;
+        if (!$this->authorizations->contains($authorization)) {
+            $this->authorizations[] = $authorization;
         }
 
         return $this;
     }
 
-    public function removeContract(Contract $contract): self
+    public function removeAuthorization(Authorization $authorization): self
     {
-        if ($this->contracts->contains($contract)) {
-            $this->contracts->removeElement($contract);
+        if ($this->authorizations->contains($authorization)) {
+            $this->authorizations->removeElement($authorization);
         }
 
         return $this;

@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"claim.id": "exact"})
  */
 class Proof
 {
@@ -135,9 +135,24 @@ class Proof
      */
     private $claim;
 
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="proofs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $application;
+
     public function getId(): Uuid
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getType(): ?string
@@ -220,6 +235,18 @@ class Proof
     public function setClaim(?Claim $claim): self
     {
         $this->claim = $claim;
+
+        return $this;
+    }
+
+    public function getApplication(): ?Application
+    {
+        return $this->application;
+    }
+
+    public function setApplication(?Application $application): self
+    {
+        $this->application = $application;
 
         return $this;
     }
