@@ -1,22 +1,9 @@
 apiVersion: v1
 entries:
-  pc:
-  - apiVersion: v1
-    appVersion: V1.0
-    created: "2020-11-13T10:19:56.5334013Z"
-    description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql)
-      interface beschikbaar.&#039;'
-    digest: c860b1af96831908a11d8bcdcf01479cd2061a4aecaf26b5f9e23aa90f8a42c6
-    home: pc.zaakonline.nl
-    icon: pc.zaakonline.nl
-    name: pc
-    urls:
-    - pc-0.1.0.tgz
-    version: 0.1.0
   postgresql:
   - apiVersion: v1
     appVersion: 11.7.0
-    created: "2020-11-13T10:19:56.5628534Z"
+    created: "2020-11-13T10:36:55.3474795Z"
     deprecated: true
     description: DEPRECATED Chart for PostgreSQL, an object-relational database management
       system (ORDBMS) with an emphasis on extensibility and on standards-compliance.
@@ -39,14 +26,14 @@ entries:
   wac:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-11-13T10:19:56.550438Z"
+    created: "2020-11-13T10:36:55.3305301Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 2186c186b13fef650180470b0265a584d340315ca3e9aff6c8cb140458ea51e3
+    digest: 8c36413a6afd3c6524e87ca3c4a711f06d1123bb08e288ab49e55a62c4889279
     home: wac.zaakonline.nl
     icon: wac.zaakonline.nl
     name: wac
     urls:
     - wac-0.1.0.tgz
     version: 0.1.0
-generated: "2020-11-13T10:19:56.5227112Z"
+generated: "2020-11-13T10:36:55.3196345Z"
