@@ -129,6 +129,24 @@ paths:
               - asc
               - desc
         -
+          name: 'order[webhookUrl]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[singleSignOnUrl]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[secret]'
           in: query
           required: false
@@ -166,6 +184,15 @@ paths:
               - desc
         -
           name: 'order[contact]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[scopes]'
           in: query
           required: false
           schema:
@@ -2210,6 +2237,15 @@ paths:
               - desc
         -
           name: 'order[status]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[goal]'
           in: query
           required: false
           schema:
@@ -8415,6 +8451,14 @@ components:
           description: 'authorization url of the application'
           type: string
           nullable: true
+        webhookUrl:
+          description: 'webhook url of the application'
+          type: string
+          nullable: true
+        singleSignOnUrl:
+          description: 'single sign on url of the application'
+          type: string
+          nullable: true
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -8437,6 +8481,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        scopes:
+          type: array
+          items:
+            type: string
         proofs:
           type: array
           items:
@@ -8470,6 +8518,14 @@ components:
           description: 'authorization url of the application'
           type: string
           nullable: true
+        webhookUrl:
+          description: 'webhook url of the application'
+          type: string
+          nullable: true
+        singleSignOnUrl:
+          description: 'single sign on url of the application'
+          type: string
+          nullable: true
         description:
           description: 'description of this application'
           type: string
@@ -8484,6 +8540,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        scopes:
+          type: array
+          items:
+            type: string
         proofs:
           type: array
           items:
@@ -8515,6 +8575,14 @@ components:
           description: 'authorization url of the application'
           type: string
           nullable: true
+        webhookUrl:
+          description: 'webhook url of the application'
+          type: string
+          nullable: true
+        singleSignOnUrl:
+          description: 'single sign on url of the application'
+          type: string
+          nullable: true
         secret:
           description: 'Random generated secret for the application'
           type: string
@@ -8537,6 +8605,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        scopes:
+          type: array
+          items:
+            type: string
         proofs:
           type: array
           items:
@@ -8579,6 +8651,14 @@ components:
           description: 'authorization url of the application'
           type: string
           nullable: true
+        webhookUrl:
+          description: 'webhook url of the application'
+          type: string
+          nullable: true
+        singleSignOnUrl:
+          description: 'single sign on url of the application'
+          type: string
+          nullable: true
         description:
           description: 'description of this application'
           type: string
@@ -8593,6 +8673,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        scopes:
+          type: array
+          items:
+            type: string
         proofs:
           type: array
           items:
@@ -9136,6 +9220,10 @@ components:
         status:
           description: 'status of the authorization log'
           type: string
+        goal:
+          description: 'goal of the request'
+          type: string
+          nullable: true
         endpoint:
           description: 'the endpoint used to obtain the information'
           type: string
@@ -9167,6 +9255,10 @@ components:
         status:
           description: 'status of the authorization log'
           type: string
+        goal:
+          description: 'goal of the request'
+          type: string
+          nullable: true
         endpoint:
           description: 'the endpoint used to obtain the information'
           type: string
@@ -9196,6 +9288,10 @@ components:
         status:
           description: 'status of the authorization log'
           type: string
+        goal:
+          description: 'goal of the request'
+          type: string
+          nullable: true
         endpoint:
           description: 'the endpoint used to obtain the information'
           type: string
@@ -9236,6 +9332,10 @@ components:
         status:
           description: 'status of the authorization log'
           type: string
+        goal:
+          description: 'goal of the request'
+          type: string
+          nullable: true
         endpoint:
           description: 'the endpoint used to obtain the information'
           type: string
@@ -10047,6 +10147,14 @@ definitions:
         description: 'authorization url of the application'
         type: string
         example: 'stage platform'
+      webhookUrl:
+        description: 'webhook url of the application'
+        type: string
+        example: 'stage platform'
+      singleSignOnUrl:
+        description: 'single sign on url of the application'
+        type: string
+        example: 'stage platform'
       secret:
         description: 'Random generated secret for the application'
         type: string
@@ -10071,6 +10179,7 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      scopes: []
       dateCreated:
         description: 'The moment this request was created by the submitter'
         type: \DateTime
@@ -10094,6 +10203,14 @@ definitions:
         description: 'authorization url of the application'
         type: string
         example: 'stage platform'
+      webhookUrl:
+        description: 'webhook url of the application'
+        type: string
+        example: 'stage platform'
+      singleSignOnUrl:
+        description: 'single sign on url of the application'
+        type: string
+        example: 'stage platform'
       description:
         description: 'description of this application'
         type: string
@@ -10108,6 +10225,7 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      scopes: []
       proofs: []
     required:
       - name
@@ -10203,6 +10321,10 @@ definitions:
         description: 'status of the authorization log'
         type: string
         example: '200'
+      goal:
+        description: 'goal of the request'
+        type: string
+        example: 'log in to commonground'
       endpoint:
         description: 'the endpoint used to obtain the information'
         type: string
@@ -10226,6 +10348,10 @@ definitions:
         description: 'status of the authorization log'
         type: string
         example: '200'
+      goal:
+        description: 'goal of the request'
+        type: string
+        example: 'log in to commonground'
       endpoint:
         description: 'the endpoint used to obtain the information'
         type: string
@@ -10591,12 +10717,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-12 08:27:55'
+        example: '2020-11-13 10:38:37'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-12 08:27:55'
+        example: '2020-11-13 10:38:37'
     required: []
   AuditTrail-write:
     properties:
@@ -10644,12 +10770,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-12 08:27:55'
+        example: '2020-11-13 10:38:37'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-12 08:27:55'
+        example: '2020-11-13 10:38:37'
     required: []
   ChangeLog-write:
     properties:
