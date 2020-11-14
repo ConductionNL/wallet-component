@@ -45,7 +45,7 @@ class Signee
      * @Assert\NotNull
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string E-mail address of this Signee
@@ -76,7 +76,7 @@ class Signee
      * @Assert\NotNull()
      * @ORM\Column(type="boolean")
      */
-    private bool $signed;
+    private bool $signed = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="signees")

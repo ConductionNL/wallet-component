@@ -108,7 +108,7 @@ class Contract
      * @Assert\NotNull()
      * @ORM\Column(type="boolean")
      */
-    private bool $signed;
+    private bool $signed = false;
 
     /**
      * @var DateTime The expiration date of the contract. Has to be set if noticePeriod is not.
@@ -138,7 +138,7 @@ class Contract
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $dateCreated;
+    private ?DateTime $dateCreated;
 
     /**
      * @var DateTime The moment this request was created by the submitter
@@ -149,7 +149,7 @@ class Contract
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $dateModified;
+    private ?DateTime $dateModified;
 
     /**
      * @var Collection|Signee[] The signees of the contract
