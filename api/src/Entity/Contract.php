@@ -196,21 +196,23 @@ class Contract
 
     public function getSigned(): ?bool
     {
-        foreach($this->signees as $signee){
-            if(!$signee->getSigned()){
+        foreach ($this->signees as $signee) {
+            if (!$signee->getSigned()) {
                 return false;
             }
         }
         $this->setSigned(true);
+
         return $this->signed;
     }
 
     public function setSigned(bool $signed): self
     {
         $this->signed = $signed;
-        foreach($this->signees as $signee){
+        foreach ($this->signees as $signee) {
             $signee->setSigned($signed);
         }
+
         return $this;
     }
 
