@@ -397,7 +397,6 @@ class Application
         return $this;
     }
 
-
     /**
      * @return string
      */
