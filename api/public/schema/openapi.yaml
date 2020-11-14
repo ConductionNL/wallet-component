@@ -192,6 +192,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[notificationEndpoint]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[scopes]'
           in: query
           required: false
@@ -8481,6 +8490,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -8540,6 +8555,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -8605,6 +8626,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -8673,6 +8700,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -10179,6 +10212,12 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      notificationEndpoint:
+        description: 'The endpoint of this application.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/notification'
+        format: url
+        maxLength: 255
       scopes: []
       dateCreated:
         description: 'The moment this request was created by the submitter'
@@ -10225,12 +10264,146 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      notificationEndpoint:
+        description: 'The endpoint of this application.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/notification'
+        format: url
+        maxLength: 255
       scopes: []
       proofs: []
     required:
       - name
       - organization
       - contact
+  Proof-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this proof was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this proof was last Modified'
+        type: \Datetime
+      claim: []
+      application: []
+    required: []
+  Proof-write:
+    properties:
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      claim: []
+      application: []
+    required: []
+  Claim-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this claim was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this claim was last Modified'
+        type: \Datetime
+      authorizations: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
+  Claim-write:
+    properties:
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      authorizations: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
   Authorization-read:
     properties:
       id:
@@ -10310,246 +10483,6 @@ definitions:
     required:
       - goal
       - application
-  AuthorizationLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      status:
-        description: 'status of the authorization log'
-        type: string
-        example: '200'
-      goal:
-        description: 'goal of the request'
-        type: string
-        example: 'log in to commonground'
-      endpoint:
-        description: 'the endpoint used to obtain the information'
-        type: string
-        example: access_tokens
-      dateCreated:
-        description: 'The moment this contract was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this contract was last Modified'
-        type: \Datetime
-      authorization:
-        description: 'The node where this checkin takes place'
-        type: \Authorization
-    required:
-      - status
-      - endpoint
-      - authorization
-  AuthorizationLog-write:
-    properties:
-      status:
-        description: 'status of the authorization log'
-        type: string
-        example: '200'
-      goal:
-        description: 'goal of the request'
-        type: string
-        example: 'log in to commonground'
-      endpoint:
-        description: 'the endpoint used to obtain the information'
-        type: string
-        example: access_tokens
-      authorization:
-        description: 'The node where this checkin takes place'
-        type: \Authorization
-    required:
-      - status
-      - endpoint
-      - authorization
-  Claim-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      person:
-        description: 'The person (Subject) of this Claim.'
-        type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
-        format: url
-        maxLength: 255
-      property:
-        description: 'The property of this Claim.'
-        type: string
-        example: 'Knows (, alumniOf or jobTitle)'
-        maxLength: 255
-      data:
-        description: 'The data (Value) of this Claim.'
-        type: array
-      token:
-        description: 'The jwt token of this Claim.'
-        type: string
-        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this claim was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this claim was last Modified'
-        type: \Datetime
-      authorizations: []
-      proofs: []
-    required:
-      - person
-      - property
-      - data
-  Claim-write:
-    properties:
-      person:
-        description: 'The person (Subject) of this Claim.'
-        type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
-        format: url
-        maxLength: 255
-      property:
-        description: 'The property of this Claim.'
-        type: string
-        example: 'Knows (, alumniOf or jobTitle)'
-        maxLength: 255
-      data:
-        description: 'The data (Value) of this Claim.'
-        type: array
-      token:
-        description: 'The jwt token of this Claim.'
-        type: string
-        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
-      authorizations: []
-      proofs: []
-    required:
-      - person
-      - property
-      - data
-  Dossier-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
-        type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
-        description: 'The end date of this dossier.'
-        type: \Datetime
-        example: '27-10-2020 10:47:00'
-      url:
-        description: 'A URL with which the user can view this Dossier.'
-        type: string
-        example: 'https://dev.id-vault.com/dossiers/x (?)'
-        format: url
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this Dossier was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this Dossier was last Modified'
-        type: \Datetime
-      legal:
-        description: 'wheter or not to this Dossier is on legal basis.'
-        type: bool
-        example: 'true'
-      authorization: []
-    required:
-      - basis
-  Dossier-write:
-    properties:
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
-        type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
-        description: 'The end date of this dossier.'
-        type: \Datetime
-        example: '27-10-2020 10:47:00'
-      url:
-        description: 'A URL with which the user can view this Dossier.'
-        type: string
-        example: 'https://dev.id-vault.com/dossiers/x (?)'
-        format: url
-        maxLength: 255
-      legal:
-        description: 'wheter or not to this Dossier is on legal basis.'
-        type: bool
-        example: 'true'
-      authorization: []
-    required:
-      - basis
-  Proof-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this proof was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this proof was last Modified'
-        type: \Datetime
-      claim: []
-      application: []
-    required: []
-  Proof-write:
-    properties:
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      claim: []
-      application: []
-    required: []
   PurposeLimitation-read:
     properties:
       id:
@@ -10613,6 +10546,171 @@ definitions:
       authorization: []
     required:
       - name
+  Dossier-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      basis:
+        description: 'The basis of this Dossier (reason for keeping an authorization).'
+        type: string
+        example: 'an order with amazon'
+        maxLength: 255
+      endDate:
+        description: 'The end date of this dossier.'
+        type: \Datetime
+        example: '27-10-2020 10:47:00'
+      url:
+        description: 'A URL with which the user can view this Dossier.'
+        type: string
+        example: 'https://dev.id-vault.com/dossiers/x (?)'
+        format: url
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this Dossier was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this Dossier was last Modified'
+        type: \Datetime
+      legal:
+        description: 'wheter or not to this Dossier is on legal basis.'
+        type: bool
+        example: 'true'
+      authorization: []
+    required:
+      - basis
+  Dossier-write:
+    properties:
+      basis:
+        description: 'The basis of this Dossier (reason for keeping an authorization).'
+        type: string
+        example: 'an order with amazon'
+        maxLength: 255
+      endDate:
+        description: 'The end date of this dossier.'
+        type: \Datetime
+        example: '27-10-2020 10:47:00'
+      url:
+        description: 'A URL with which the user can view this Dossier.'
+        type: string
+        example: 'https://dev.id-vault.com/dossiers/x (?)'
+        format: url
+        maxLength: 255
+      legal:
+        description: 'wheter or not to this Dossier is on legal basis.'
+        type: bool
+        example: 'true'
+      authorization: []
+    required:
+      - basis
+  AuthorizationLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      status:
+        description: 'status of the authorization log'
+        type: string
+        example: '200'
+      goal:
+        description: 'goal of the request'
+        type: string
+        example: 'log in to commonground'
+      endpoint:
+        description: 'the endpoint used to obtain the information'
+        type: string
+        example: access_tokens
+      dateCreated:
+        description: 'The moment this contract was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this contract was last Modified'
+        type: \Datetime
+      authorization:
+        description: 'The node where this checkin takes place'
+        type: \Authorization
+    required:
+      - status
+      - endpoint
+      - authorization
+  AuthorizationLog-write:
+    properties:
+      status:
+        description: 'status of the authorization log'
+        type: string
+        example: '200'
+      goal:
+        description: 'goal of the request'
+        type: string
+        example: 'log in to commonground'
+      endpoint:
+        description: 'the endpoint used to obtain the information'
+        type: string
+        example: access_tokens
+      authorization:
+        description: 'The node where this checkin takes place'
+        type: \Authorization
+    required:
+      - status
+      - endpoint
+      - authorization
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-11-14 12:18:09'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-11-14 12:18:09'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -10717,12 +10815,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-13 10:38:37'
+        example: '2020-11-14 12:18:09'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-13 10:38:37'
+        example: '2020-11-14 12:18:09'
     required: []
   AuditTrail-write:
     properties:
@@ -10730,59 +10828,6 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-11-13 10:38:37'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-11-13 10:38:37'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -10793,17 +10838,11 @@ tags:
       
       entity that holds the application object for wallet component
   -
-    name: Authorization
+    name: Proof
     description: |
-      Authorization gives an application access to data in claims.
+      Proof is a way to prove that claims are correct.
       
       
-  -
-    name: AuthorizationLog
-    description: |
-      An entity representing an node.
-      
-      entity to log the uses of authorizations
   -
     name: Claim
     description: |
@@ -10811,15 +10850,9 @@ tags:
       
       Built on the basis of the subject-property-value relationship (https://w3c.github.io/vc-data-model/#claims).
   -
-    name: Dossier
+    name: Authorization
     description: |
-      Dossier is a external data set that is blocking the cancellation of an authorization.
-      
-      
-  -
-    name: Proof
-    description: |
-      Proof is a way to prove that claims are correct.
+      Authorization gives an application access to data in claims.
       
       
   -
@@ -10829,13 +10862,25 @@ tags:
       
       
   -
-    name: AuditTrail
+    name: Dossier
+    description: |
+      Dossier is a external data set that is blocking the cancellation of an authorization.
+      
+      
+  -
+    name: AuthorizationLog
+    description: |
+      An entity representing an node.
+      
+      entity to log the uses of authorizations
+  -
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -10846,15 +10891,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -

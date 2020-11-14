@@ -190,6 +190,20 @@ class Application
     private $contact;
 
     /**
+     * @var string The endpoint of this application.
+     *
+     * @example https://dev.zuid-drecht.nl/notification
+     *
+     * @Assert\Url
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $notificationEndpoint;
+
+    /**
      * @Gedmo\Versioned
      * @Groups({"read","write"})
      * @ORM\Column(type="json")
@@ -379,6 +393,21 @@ class Application
     public function setContact(string $contact): self
     {
         $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotificationEndpoint(): ?string
+    {
+        return $this->notificationEndpoint;
+    }
+
+    public function setNotificationEndpoint(string $notificationEndpoint): self
+    {
+        $this->notificationEndpoint = $notificationEndpoint;
 
         return $this;
     }
