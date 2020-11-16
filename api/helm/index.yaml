@@ -1,16 +1,39 @@
 apiVersion: v1
 entries:
+  postgresql:
+  - apiVersion: v1
+    appVersion: 11.7.0
+    created: "2020-11-14T21:03:45.930187Z"
+    deprecated: true
+    description: DEPRECATED Chart for PostgreSQL, an object-relational database management
+      system (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    digest: 00745b88e84403be696b7514c6e8c02710d81eb6074876b0700fa28fd47a9b43
+    home: https://www.postgresql.org/
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-110x117.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-postgresql
+    urls:
+    - charts/postgresql-8.6.4.tgz
+    version: 8.6.4
   wac:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-11-12T08:26:02.8709535Z"
-    description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
-      beschikbaar.
-    digest: 2186c186b13fef650180470b0265a584d340315ca3e9aff6c8cb140458ea51e3
+    created: "2020-11-14T21:03:45.918967Z"
+    description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql)
+      interface beschikbaar.&#039;'
+    digest: 385ba989e110a1d82baf5453a8e383b1735a0b9bc17f66191eecab830829fabf
     home: wac.zaakonline.nl
     icon: wac.zaakonline.nl
     name: wac
     urls:
     - wac-0.1.0.tgz
     version: 0.1.0
-generated: "2020-11-12T08:26:02.8612456Z"
+generated: "2020-11-14T21:03:45.9122819Z"
