@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Application;
 use App\Entity\Authorization;
 use App\Entity\Claim;
-use App\Entity\Dossier;
 use App\Entity\Proof;
 use App\Entity\PurposeLimitation;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
@@ -165,6 +164,7 @@ class IdVaultFixtures extends Fixture
         $application->setSecret('kjdIDAkj49283hasdnbdDASD84Os2Q');
         $application->setDescription('stage platform application');
         $application->setAuthorizationUrl('https://dev.conduction.academy/users/auth/idvault');
+        $application->setSingleSignOnUrl('https://dev.conduction.academy/users/auth/idvault');
         $application->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '4d1eded3-fbdf-438f-9536-8747dd8ab591']));
         $application->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => 'c1f6b98b-9e37-42c0-9b22-17a738a52f8e']));
         $manager->persist($application);
@@ -216,22 +216,6 @@ class IdVaultFixtures extends Fixture
         $manager->flush();
         $manager->getRepository('App:PurposeLimitation')->findOneBy(['id'=> $id]);
 
-        // Test Dossier
-        $id = Uuid::fromString('e428ac4b-d90c-4af7-bc5d-2ebc9569a31e');
-        $dossier = new Dossier();
-        $dossier->setBasis('An ongoing internship authorization');
-        $date = new \DateTime();
-        $date->add(new \DateInterval('P5M'));
-        $dossier->setEndDate($date);
-        $dossier->setUrl('https://dev.conduction.academy/');
-        $dossier->setLegal(true);
-        $dossier->setAuthorization($authorization);
-        $manager->persist($dossier);
-        $dossier->setId($id);
-        $manager->persist($dossier);
-        $manager->flush();
-        $manager->getRepository('App:Dossier')->findOneBy(['id'=> $id]);
-
         // Commonground
         $id = Uuid::fromString('593867bc-9dfc-4f53-9ee9-abfb278bc42c');
         $application = new Application();
@@ -239,6 +223,7 @@ class IdVaultFixtures extends Fixture
         $application->setSecret('kjdIDA9al3283hasdnbdDASD84Os2Q');
         $application->setDescription('Commonground.nu application');
         $application->setAuthorizationUrl('https://dev.commonground.nu/auth/idvault');
+        $application->setSingleSignOnUrl('https://dev.commonground.nu/auth/idvault');
         $application->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '073741b3-f756-4767-aa5d-240f167ca89d'])); //Conduction
         $application->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => '7d19fbc6-6c35-4087-ab10-9778277cefe1'])); //Commonground.nu
         $manager->persist($application);

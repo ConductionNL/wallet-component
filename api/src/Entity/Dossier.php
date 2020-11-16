@@ -49,20 +49,25 @@ class Dossier
     private $id;
 
     /**
-     * @var string The basis of this Dossier (reason for keeping an authorization).
+     * @var string Name of this application
      *
-     * @example an order with amazon
+     * @example stage platform
      *
-     * @Gedmo\Versioned
-     * @Assert\NotNull
-     * @Assert\Length(
-     *      max = 255
-     * )
-     * @Gedmo\Versioned
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $basis;
+    private $name;
+
+    /**
+     * @var string description of this application
+     *
+     * @example stage platform description
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $description;
 
     /**
      * @var Datetime The end date of this dossier.
@@ -72,7 +77,7 @@ class Dossier
      * @Groups({"read","write"})
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $endDate;
+    private $expiryDate;
 
     /**
      * @var string A URL with which the user can view this Dossier.
@@ -84,9 +89,9 @@ class Dossier
      *     max = 255
      * )
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $url;
+    private $sso;
 
     /**
      * @var Datetime The moment this Dossier was created
@@ -137,38 +142,50 @@ class Dossier
         return $this;
     }
 
-    public function getBasis(): ?string
+    public function getName(): ?string
     {
-        return $this->basis;
+        return $this->name;
     }
 
-    public function setBasis(string $basis): self
+    public function setName(string $name): self
     {
-        $this->basis = $basis;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getDescription(): ?string
     {
-        return $this->endDate;
+        return $this->description;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): self
+    public function setDescription(string $description): self
     {
-        $this->endDate = $endDate;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getExpiryDate(): ?\DateTimeInterface
     {
-        return $this->url;
+        return $this->expiryDate;
     }
 
-    public function setUrl(?string $url): self
+    public function setExpiryDate(?\DateTimeInterface $expiryDate): self
     {
-        $this->url = $url;
+        $this->expiryDate = $expiryDate;
+
+        return $this;
+    }
+
+    public function getSso(): ?string
+    {
+        return $this->sso;
+    }
+
+    public function setSso(?string $sso): self
+    {
+        $this->sso = $sso;
 
         return $this;
     }
