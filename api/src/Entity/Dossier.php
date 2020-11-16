@@ -130,6 +130,15 @@ class Dossier
      */
     private $legal = false;
 
+    /**
+     * @var array scopes this authorization has access to
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json")
+     */
+    private $scopes = [];
+
     public function getId(): Uuid
     {
         return $this->id;
@@ -234,6 +243,18 @@ class Dossier
     public function setLegal(?bool $legal): self
     {
         $this->legal = $legal;
+
+        return $this;
+    }
+
+    public function getScopes(): ?array
+    {
+        return $this->scopes;
+    }
+
+    public function setScopes(?array $scopes): self
+    {
+        $this->scopes = $scopes;
 
         return $this;
     }
