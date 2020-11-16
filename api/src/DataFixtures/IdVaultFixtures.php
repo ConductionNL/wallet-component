@@ -254,7 +254,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '499aedcd-5bfe-4718-a785-7d0a1764eb0b']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'jan@zwarteraaf.nl'
+            'email' => 'jan@zwarteraaf.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -263,7 +263,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '499aedcd-5bfe-4718-a785-7d0a1764eb0b']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'willem'
+            'family_name' => 'willem',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -272,7 +272,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '499aedcd-5bfe-4718-a785-7d0a1764eb0b']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'jan'
+            'given_name' => 'jan',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -282,7 +282,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '543d52ea-86dc-429b-bb96-2a9e7b90ada3']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'gino@conduction.nl'
+            'email' => 'gino@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -291,7 +291,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '543d52ea-86dc-429b-bb96-2a9e7b90ada3']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'kok'
+            'family_name' => 'kok',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -300,7 +300,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '543d52ea-86dc-429b-bb96-2a9e7b90ada3']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'gino'
+            'given_name' => 'gino',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -310,7 +310,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'ce49a652-4b0b-4aa7-98a7-ff4a0cc9e33d']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'ruben@conduction.nl'
+            'email' => 'ruben@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -319,7 +319,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'ce49a652-4b0b-4aa7-98a7-ff4a0cc9e33d']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'linde'
+            'family_name' => 'linde',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -328,7 +328,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'ce49a652-4b0b-4aa7-98a7-ff4a0cc9e33d']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'ruben'
+            'given_name' => 'ruben',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -338,7 +338,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '8b97830b-b119-4b58-afcc-f4fe37a1abf8']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'matthias@conduction.nl'
+            'email' => 'matthias@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -347,7 +347,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '8b97830b-b119-4b58-afcc-f4fe37a1abf8']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'oliveiro'
+            'family_name' => 'oliveiro',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -356,7 +356,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '8b97830b-b119-4b58-afcc-f4fe37a1abf8']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'matthias'
+            'given_name' => 'matthias',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -366,7 +366,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'd1ad5cec-5cb1-4d0a-ba44-b5363fb7f2f7']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'marleen@conduction.nl'
+            'email' => 'marleen@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -375,7 +375,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'd1ad5cec-5cb1-4d0a-ba44-b5363fb7f2f7']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'romijn'
+            'family_name' => 'romijn',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -384,7 +384,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'd1ad5cec-5cb1-4d0a-ba44-b5363fb7f2f7']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'marleen'
+            'given_name' => 'marleen',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -394,7 +394,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '1f0bc496-aee3-42f5-8b36-29b119944918']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'barry@conduction.nl'
+            'email' => 'barry@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -403,7 +403,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '1f0bc496-aee3-42f5-8b36-29b119944918']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'brands'
+            'family_name' => 'brands',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -412,7 +412,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '1f0bc496-aee3-42f5-8b36-29b119944918']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'barry'
+            'given_name' => 'barry',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -422,7 +422,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '0f8883ca-9990-4279-9392-50275398adcf']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'robert@conduction.nl'
+            'email' => 'robert@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -431,7 +431,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '0f8883ca-9990-4279-9392-50275398adcf']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'zondervan'
+            'family_name' => 'zondervan',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -440,7 +440,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '0f8883ca-9990-4279-9392-50275398adcf']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'robert'
+            'given_name' => 'robert',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -450,7 +450,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'b2d913f1-9949-4a91-8f6c-e130fc8b243f']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'wilco@conduction.nl'
+            'email' => 'wilco@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -459,7 +459,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'b2d913f1-9949-4a91-8f6c-e130fc8b243f']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'louwerse'
+            'family_name' => 'louwerse',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -468,7 +468,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => 'b2d913f1-9949-4a91-8f6c-e130fc8b243f']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'wilco'
+            'given_name' => 'wilco',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -478,7 +478,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '5e619ed6-3c44-45af-928b-660a3f75be6b']));
         $claim->setProperty('schema.person.email');
         $claim->setData([
-            'email' => 'yorick@conduction.nl'
+            'email' => 'yorick@conduction.nl',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -487,7 +487,7 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '5e619ed6-3c44-45af-928b-660a3f75be6b']));
         $claim->setProperty('schema.person.family_name');
         $claim->setData([
-            'family_name' => 'groeneveld'
+            'family_name' => 'groeneveld',
         ]);
         $manager->persist($claim);
         $manager->flush();
@@ -496,10 +496,9 @@ class IdVaultFixtures extends Fixture
         $claim->setPerson($this->commonGroundService->cleanUrl(['component' => 'cc', 'type' => 'people', 'id' => '5e619ed6-3c44-45af-928b-660a3f75be6b']));
         $claim->setProperty('schema.person.given_name');
         $claim->setData([
-            'given_name' => 'yorick'
+            'given_name' => 'yorick',
         ]);
         $manager->persist($claim);
         $manager->flush();
-
     }
 }
