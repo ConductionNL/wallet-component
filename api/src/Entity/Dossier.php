@@ -60,7 +60,7 @@ class Dossier
     private $name;
 
     /**
-     * @var string description of this application
+     * @var string description of this dossier
      *
      * @example stage platform description
      *
@@ -68,6 +68,16 @@ class Dossier
      * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $description;
+
+    /**
+     * @var string goal of this dossier
+     *
+     * @example stage platform description
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $goal;
 
     /**
      * @var Datetime The end date of this dossier.
@@ -130,6 +140,15 @@ class Dossier
      */
     private $legal = false;
 
+    /**
+     * @var array scopes this authorization has access to
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json")
+     */
+    private $scopes = [];
+
     public function getId(): Uuid
     {
         return $this->id;
@@ -162,6 +181,18 @@ class Dossier
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getGoal(): ?string
+    {
+        return $this->goal;
+    }
+
+    public function setGoal(string $goal): self
+    {
+        $this->goal = $goal;
 
         return $this;
     }
@@ -234,6 +265,18 @@ class Dossier
     public function setLegal(?bool $legal): self
     {
         $this->legal = $legal;
+
+        return $this;
+    }
+
+    public function getScopes(): ?array
+    {
+        return $this->scopes;
+    }
+
+    public function setScopes(?array $scopes): self
+    {
+        $this->scopes = $scopes;
 
         return $this;
     }
