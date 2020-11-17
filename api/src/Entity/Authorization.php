@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact", "id": "exact"})
  */
 class Authorization
 {
