@@ -12,7 +12,7 @@ info:
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/wac-php) 
     - Datamodel: [postman](/schema/wac.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
 paths:
   /applications:
@@ -3316,6 +3316,22 @@ paths:
             type: string
         -
           name: 'code[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
           in: query
           required: false
           schema:
@@ -6668,7 +6684,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[basis]'
+          name: 'order[name]'
           in: query
           required: false
           schema:
@@ -6677,7 +6693,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[endDate]'
+          name: 'order[description]'
           in: query
           required: false
           schema:
@@ -6686,7 +6702,25 @@ paths:
               - asc
               - desc
         -
-          name: 'order[url]'
+          name: 'order[goal]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[expiryDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[sso]'
           in: query
           required: false
           schema:
@@ -6722,25 +6756,34 @@ paths:
               - asc
               - desc
         -
-          name: 'endDate[before]'
+          name: 'order[scopes]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'expiryDate[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'endDate[strictly_before]'
+          name: 'expiryDate[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'endDate[after]'
+          name: 'expiryDate[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'endDate[strictly_after]'
+          name: 'expiryDate[strictly_after]'
           in: query
           required: false
           schema:
@@ -10710,20 +10753,27 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         dateCreated:
           description: 'The moment this Dossier was created'
           type: string
@@ -10740,34 +10790,51 @@ components:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
       required:
-        - basis
+        - name
     Dossier-write:
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       required:
-        - basis
+        - name
       properties:
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         authorization:
           $ref: '#/components/schemas/Authorization-write'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
     'Dossier:jsonld-read':
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
@@ -10788,20 +10855,27 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         dateCreated:
           description: 'The moment this Dossier was created'
           type: string
@@ -10818,13 +10892,18 @@ components:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
       required:
-        - basis
+        - name
     'Dossier:jsonld-write':
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       required:
-        - basis
+        - name
       properties:
         '@context':
           readOnly: true
@@ -10835,26 +10914,38 @@ components:
         '@type':
           readOnly: true
           type: string
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         authorization:
           $ref: '#/components/schemas/Authorization:jsonld-write'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
     Proof-read:
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -11682,16 +11773,23 @@ definitions:
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
+      name:
+        description: 'Name of this application'
         type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
+        example: 'stage platform'
+      description:
+        description: 'description of this dossier'
+        type: string
+        example: 'stage platform description'
+      goal:
+        description: 'goal of this dossier'
+        type: string
+        example: 'stage platform description'
+      expiryDate:
         description: 'The end date of this dossier.'
         type: \Datetime
         example: '27-10-2020 10:47:00'
-      url:
+      sso:
         description: 'A URL with which the user can view this Dossier.'
         type: string
         example: 'https://dev.id-vault.com/dossiers/x (?)'
@@ -11707,21 +11805,31 @@ definitions:
         description: 'wheter or not to this Dossier is on legal basis.'
         type: bool
         example: 'true'
+      scopes:
+        description: 'scopes this authorization has access to'
+        type: array
       authorization: []
     required:
-      - basis
+      - name
   Dossier-write:
     properties:
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
+      name:
+        description: 'Name of this application'
         type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
+        example: 'stage platform'
+      description:
+        description: 'description of this dossier'
+        type: string
+        example: 'stage platform description'
+      goal:
+        description: 'goal of this dossier'
+        type: string
+        example: 'stage platform description'
+      expiryDate:
         description: 'The end date of this dossier.'
         type: \Datetime
         example: '27-10-2020 10:47:00'
-      url:
+      sso:
         description: 'A URL with which the user can view this Dossier.'
         type: string
         example: 'https://dev.id-vault.com/dossiers/x (?)'
@@ -11731,9 +11839,12 @@ definitions:
         description: 'wheter or not to this Dossier is on legal basis.'
         type: bool
         example: 'true'
+      scopes:
+        description: 'scopes this authorization has access to'
+        type: array
       authorization: []
     required:
-      - basis
+      - name
   Proof-read:
     properties:
       id:
@@ -11964,12 +12075,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-14 21:05:53'
+        example: '2020-11-17 13:42:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-14 21:05:53'
+        example: '2020-11-17 13:42:56'
     required: []
   AuditTrail-write:
     properties:
@@ -12017,12 +12128,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-14 21:05:53'
+        example: '2020-11-17 13:42:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-14 21:05:53'
+        example: '2020-11-17 13:42:56'
     required: []
   ChangeLog-write:
     properties:
