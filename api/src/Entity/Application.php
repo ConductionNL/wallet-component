@@ -211,6 +211,50 @@ class Application
     private $scopes = [];
 
     /**
+     * @var string The gdprContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $gdprContact;
+
+    /**
+     * @var string The technicalContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $technicalContact;
+
+    /**
+     * @var string The privacyContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $privacyContact;
+
+    /**
+     * @var string The billingContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $billingContact;
+
+    /**
      * @ORM\OneToMany(targetEntity=Authorization::class, mappedBy="application", orphanRemoval=true)
      */
     private $authorizations;
@@ -408,6 +452,66 @@ class Application
     public function setNotificationEndpoint(string $notificationEndpoint): self
     {
         $this->notificationEndpoint = $notificationEndpoint;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGdprContact(): ?string
+    {
+        return $this->gdprContact;
+    }
+
+    public function setGdprContact(string $gdprContact): self
+    {
+        $this->gdprContact = $gdprContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTechnicalContact(): ?string
+    {
+        return $this->technicalContact;
+    }
+
+    public function setTechnicalContact(string $technicalContact): self
+    {
+        $this->technicalContact = $technicalContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrivacyContact(): ?string
+    {
+        return $this->privacyContact;
+    }
+
+    public function setPrivacyContact(string $privacyContact): self
+    {
+        $this->privacyContact = $privacyContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBillingContact(): ?string
+    {
+        return $this->billingContact;
+    }
+
+    public function setBillingContact(string $billingContact): self
+    {
+        $this->billingContact = $billingContact;
 
         return $this;
     }
