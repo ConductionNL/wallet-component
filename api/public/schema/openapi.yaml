@@ -192,6 +192,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[notificationEndpoint]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[scopes]'
           in: query
           required: false
@@ -3316,6 +3325,22 @@ paths:
           style: form
           explode: true
         -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -5714,6 +5739,849 @@ paths:
             schema:
               $ref: '#/components/schemas/Claim-write'
         description: 'The updated Claim resource'
+  /contracts:
+    get:
+      tags:
+        - Contract
+      operationId: getContractCollection
+      summary: 'Retrieves the collection of Contract resources.'
+      responses:
+        200:
+          description: 'Contract collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[signed]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[expiryDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[noticePeriod]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'expiryDate[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryDate[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryDate[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'expiryDate[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Contract
+      operationId: postContractCollection
+      summary: 'Creates a Contract resource.'
+      responses:
+        201:
+          description: 'Contract resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+          links:
+            GetContractItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getContractItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /contracts/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Contract:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Contract:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Contract-write'
+        description: 'The new Contract resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/contracts/{id}':
+    get:
+      tags:
+        - Contract
+      operationId: getContractItem
+      summary: 'Retrieves a Contract resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Contract resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  '/contracts/{id}/audit_trail':
+    get:
+      tags:
+        - Contract
+      operationId: get_audit_trailContractItem
+      summary: 'Retrieves a Contract resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Contract resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  '/contracts/{id}/change_log':
+    get:
+      tags:
+        - Contract
+      operationId: get_change_logsContractItem
+      summary: 'Retrieves a Contract resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Contract resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Contract:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Contract-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
   /dossiers:
     get:
       tags:
@@ -5816,7 +6684,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[basis]'
+          name: 'order[name]'
           in: query
           required: false
           schema:
@@ -5825,7 +6693,7 @@ paths:
               - asc
               - desc
         -
-          name: 'order[endDate]'
+          name: 'order[description]'
           in: query
           required: false
           schema:
@@ -5834,7 +6702,25 @@ paths:
               - asc
               - desc
         -
-          name: 'order[url]'
+          name: 'order[goal]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[expiryDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[sso]'
           in: query
           required: false
           schema:
@@ -5870,25 +6756,34 @@ paths:
               - asc
               - desc
         -
-          name: 'endDate[before]'
+          name: 'order[scopes]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'expiryDate[before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'endDate[strictly_before]'
+          name: 'expiryDate[strictly_before]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'endDate[after]'
+          name: 'expiryDate[after]'
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'endDate[strictly_after]'
+          name: 'expiryDate[strictly_after]'
           in: query
           required: false
           schema:
@@ -8481,6 +9376,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -8540,6 +9441,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -8605,6 +9512,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -8673,6 +9586,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        notificationEndpoint:
+          description: 'The endpoint of this application.'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+          nullable: true
         scopes:
           type: array
           items:
@@ -9643,6 +10562,186 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Proof:jsonld-write'
+    Contract-read:
+      type: object
+      description: 'An entity representing an node.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of this contract'
+          type: string
+        description:
+          description: 'The description of the contract'
+          type: string
+          nullable: true
+        signed:
+          description: 'Denotes if the contract is signed'
+          type: boolean
+        expiryDate:
+          description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+          type: string
+          format: date-time
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+          type: string
+          format: duration
+          nullable: true
+        dateCreated:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        signees:
+          description: 'The signees of the contract'
+          type: array
+          items:
+            $ref: '#/components/schemas/Signee-read'
+      required:
+        - name
+        - signed
+    Contract-write:
+      type: object
+      description: 'An entity representing an node.'
+      required:
+        - name
+        - signed
+      properties:
+        name:
+          description: 'Name of this contract'
+          type: string
+        description:
+          description: 'The description of the contract'
+          type: string
+          nullable: true
+        signed:
+          description: 'Denotes if the contract is signed'
+          type: boolean
+        expiryDate:
+          description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+          type: string
+          format: date-time
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+          type: string
+          format: duration
+          nullable: true
+        signees:
+          description: 'The signees of the contract'
+          type: array
+          items:
+            $ref: '#/components/schemas/Signee-write'
+    'Contract:jsonld-read':
+      type: object
+      description: 'An entity representing an node.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of this contract'
+          type: string
+        description:
+          description: 'The description of the contract'
+          type: string
+          nullable: true
+        signed:
+          description: 'Denotes if the contract is signed'
+          type: boolean
+        expiryDate:
+          description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+          type: string
+          format: date-time
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+          type: string
+          format: duration
+          nullable: true
+        dateCreated:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        signees:
+          description: 'The signees of the contract'
+          type: array
+          items:
+            $ref: '#/components/schemas/Signee:jsonld-read'
+      required:
+        - name
+        - signed
+    'Contract:jsonld-write':
+      type: object
+      description: 'An entity representing an node.'
+      required:
+        - name
+        - signed
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'Name of this contract'
+          type: string
+        description:
+          description: 'The description of the contract'
+          type: string
+          nullable: true
+        signed:
+          description: 'Denotes if the contract is signed'
+          type: boolean
+        expiryDate:
+          description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+          type: string
+          format: date-time
+          nullable: true
+        noticePeriod:
+          description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+          type: string
+          format: duration
+          nullable: true
+        signees:
+          description: 'The signees of the contract'
+          type: array
+          items:
+            $ref: '#/components/schemas/Signee:jsonld-write'
     Dossier-read:
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
@@ -9654,20 +10753,27 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         dateCreated:
           description: 'The moment this Dossier was created'
           type: string
@@ -9684,34 +10790,51 @@ components:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
       required:
-        - basis
+        - name
     Dossier-write:
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       required:
-        - basis
+        - name
       properties:
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         authorization:
           $ref: '#/components/schemas/Authorization-write'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
     'Dossier:jsonld-read':
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
@@ -9732,20 +10855,27 @@ components:
             url: 'http://schema.org/identifier'
           type: string
           format: uuid
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         dateCreated:
           description: 'The moment this Dossier was created'
           type: string
@@ -9762,13 +10892,18 @@ components:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
       required:
-        - basis
+        - name
     'Dossier:jsonld-write':
       type: object
       description: 'Dossier is a external data set that is blocking the cancellation of an authorization.'
       required:
-        - basis
+        - name
       properties:
         '@context':
           readOnly: true
@@ -9779,26 +10914,38 @@ components:
         '@type':
           readOnly: true
           type: string
-        basis:
-          description: 'The basis of this Dossier (reason for keeping an authorization).'
+        name:
+          description: 'Name of this application'
           type: string
-        endDate:
+        description:
+          description: 'description of this dossier'
+          type: string
+          nullable: true
+        goal:
+          description: 'goal of this dossier'
+          type: string
+          nullable: true
+        expiryDate:
           description: 'The end date of this dossier.'
           type: string
           format: date-time
           nullable: true
-        url:
+        sso:
           description: 'A URL with which the user can view this Dossier.'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
-          nullable: true
         authorization:
           $ref: '#/components/schemas/Authorization:jsonld-write'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
           nullable: true
+        scopes:
+          description: 'scopes this authorization has access to'
+          type: array
+          items:
+            type: string
     Proof-read:
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -10131,6 +11278,118 @@ components:
           nullable: true
         authorization:
           $ref: '#/components/schemas/Authorization:jsonld-write'
+    Signee-read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of this Signee'
+          type: string
+        email:
+          description: 'E-mail address of this Signee'
+          type: string
+        phone:
+          description: 'Phone number of this Signee'
+          type: string
+        signed:
+          description: 'Denotes if the signee has signed the contract'
+          type: boolean
+      required:
+        - name
+        - email
+        - phone
+        - signed
+    Signee-write:
+      type: object
+      required:
+        - name
+        - email
+        - phone
+        - signed
+      properties:
+        name:
+          description: 'Name of this Signee'
+          type: string
+        email:
+          description: 'E-mail address of this Signee'
+          type: string
+        phone:
+          description: 'Phone number of this Signee'
+          type: string
+        signed:
+          description: 'Denotes if the signee has signed the contract'
+          type: boolean
+    'Signee:jsonld-read':
+      type: object
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this resource'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of this Signee'
+          type: string
+        email:
+          description: 'E-mail address of this Signee'
+          type: string
+        phone:
+          description: 'Phone number of this Signee'
+          type: string
+        signed:
+          description: 'Denotes if the signee has signed the contract'
+          type: boolean
+      required:
+        - name
+        - email
+        - phone
+        - signed
+    'Signee:jsonld-write':
+      type: object
+      required:
+        - name
+        - email
+        - phone
+        - signed
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'Name of this Signee'
+          type: string
+        email:
+          description: 'E-mail address of this Signee'
+          type: string
+        phone:
+          description: 'Phone number of this Signee'
+          type: string
+        signed:
+          description: 'Denotes if the signee has signed the contract'
+          type: boolean
 definitions:
   Application-read:
     properties:
@@ -10179,6 +11438,12 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      notificationEndpoint:
+        description: 'The endpoint of this application.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/notification'
+        format: url
+        maxLength: 255
       scopes: []
       dateCreated:
         description: 'The moment this request was created by the submitter'
@@ -10225,6 +11490,12 @@ definitions:
         type: string
         example: 'https://example.org/organizations/1'
         format: url
+      notificationEndpoint:
+        description: 'The endpoint of this application.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/notification'
+        format: url
+        maxLength: 255
       scopes: []
       proofs: []
     required:
@@ -10428,6 +11699,73 @@ definitions:
       - person
       - property
       - data
+  Contract-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of this contract'
+        type: string
+        example: 'internship contract'
+      description:
+        description: 'The description of the contract'
+        type: string
+        example: 'this is the best contract ever'
+      signed:
+        description: 'Denotes if the contract is signed'
+        type: bool
+      expiryDate:
+        description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+        type: \DateTime
+        example: '2020-11-14'
+      noticePeriod:
+        description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+        type: \DateInterval
+        example: P1M
+      dateCreated:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      dateModified:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      signees:
+        description: 'The signees of the contract'
+        type: '\Collection|\Signee[]'
+    required:
+      - name
+      - signed
+  Contract-write:
+    properties:
+      name:
+        description: 'Name of this contract'
+        type: string
+        example: 'internship contract'
+      description:
+        description: 'The description of the contract'
+        type: string
+        example: 'this is the best contract ever'
+      signed:
+        description: 'Denotes if the contract is signed'
+        type: bool
+      expiryDate:
+        description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+        type: \DateTime
+        example: '2020-11-14'
+      noticePeriod:
+        description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+        type: \DateInterval
+        example: P1M
+      signees:
+        description: 'The signees of the contract'
+        type: '\Collection|\Signee[]'
+    required:
+      - name
+      - signed
   Dossier-read:
     properties:
       id:
@@ -10435,16 +11773,23 @@ definitions:
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
+      name:
+        description: 'Name of this application'
         type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
+        example: 'stage platform'
+      description:
+        description: 'description of this dossier'
+        type: string
+        example: 'stage platform description'
+      goal:
+        description: 'goal of this dossier'
+        type: string
+        example: 'stage platform description'
+      expiryDate:
         description: 'The end date of this dossier.'
         type: \Datetime
         example: '27-10-2020 10:47:00'
-      url:
+      sso:
         description: 'A URL with which the user can view this Dossier.'
         type: string
         example: 'https://dev.id-vault.com/dossiers/x (?)'
@@ -10460,21 +11805,31 @@ definitions:
         description: 'wheter or not to this Dossier is on legal basis.'
         type: bool
         example: 'true'
+      scopes:
+        description: 'scopes this authorization has access to'
+        type: array
       authorization: []
     required:
-      - basis
+      - name
   Dossier-write:
     properties:
-      basis:
-        description: 'The basis of this Dossier (reason for keeping an authorization).'
+      name:
+        description: 'Name of this application'
         type: string
-        example: 'an order with amazon'
-        maxLength: 255
-      endDate:
+        example: 'stage platform'
+      description:
+        description: 'description of this dossier'
+        type: string
+        example: 'stage platform description'
+      goal:
+        description: 'goal of this dossier'
+        type: string
+        example: 'stage platform description'
+      expiryDate:
         description: 'The end date of this dossier.'
         type: \Datetime
         example: '27-10-2020 10:47:00'
-      url:
+      sso:
         description: 'A URL with which the user can view this Dossier.'
         type: string
         example: 'https://dev.id-vault.com/dossiers/x (?)'
@@ -10484,9 +11839,12 @@ definitions:
         description: 'wheter or not to this Dossier is on legal basis.'
         type: bool
         example: 'true'
+      scopes:
+        description: 'scopes this authorization has access to'
+        type: array
       authorization: []
     required:
-      - basis
+      - name
   Proof-read:
     properties:
       id:
@@ -10717,12 +12075,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-13 10:38:37'
+        example: '2020-11-17 13:42:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-13 10:38:37'
+        example: '2020-11-17 13:42:56'
     required: []
   AuditTrail-write:
     properties:
@@ -10770,12 +12128,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-13 10:38:37'
+        example: '2020-11-17 13:42:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-13 10:38:37'
+        example: '2020-11-17 13:42:56'
     required: []
   ChangeLog-write:
     properties:
@@ -10810,6 +12168,12 @@ tags:
       Claim is a statement about a Subject (person).
       
       Built on the basis of the subject-property-value relationship (https://w3c.github.io/vc-data-model/#claims).
+  -
+    name: Contract
+    description: |
+      An entity representing an node.
+      
+      entity that holds the contract object for the wallet component
   -
     name: Dossier
     description: |
