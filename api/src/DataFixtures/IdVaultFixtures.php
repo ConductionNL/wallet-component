@@ -232,6 +232,22 @@ class IdVaultFixtures extends Fixture
         $manager->flush();
         $application = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
 
+        // Commonground
+        $id = Uuid::fromString('5aa25d0e-be7b-442a-8b4c-9e32aa3c8249');
+        $application = new Application();
+        $application->setName('Checking');
+        $application->setSecret('4445e7aa-e385-46dc-be32-5a6af625ae1b');
+        $application->setDescription('checking application');
+        $application->setAuthorizationUrl('https://dev.checking.nu/auth/idvault');
+        $application->setSingleSignOnUrl('https://dev.checking.nu/auth/idvault');
+        $application->setOrganization($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => '073741b3-f756-4767-aa5d-240f167ca89d'])); //Conduction
+        $application->setContact($this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'applications', 'id' => '81ae7b3f-5383-46db-b66f-b08da9f703d9'])); //Commonground.nu
+        $manager->persist($application);
+        $application->setId($id);
+        $manager->persist($application);
+        $manager->flush();
+        $application = $manager->getRepository('App:Application')->findOneBy(['id'=> $id]);
+
         //claims for excisting users
 
         //jan@zwarteraaf.nl
