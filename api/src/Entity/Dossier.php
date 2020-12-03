@@ -99,7 +99,7 @@ class Dossier
      *     max = 255
      * )
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $sso;
 
