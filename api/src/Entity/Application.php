@@ -255,6 +255,36 @@ class Application
     private $billingContact;
 
     /**
+     * @var string The mailgun api key of this application
+     *
+     * @example 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mailgunApiKey;
+
+    /**
+     * @var string The mailgun domain of this application
+     *
+     * @example mail.zuid-drecht.nl
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mailgunDomain;
+
+    /**
+     * @var string The messageBird api key of this application
+     *
+     * @example 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $messageBirdApiKey;
+
+    /**
      * @ORM\OneToMany(targetEntity=Authorization::class, mappedBy="application", orphanRemoval=true)
      */
     private $authorizations;
@@ -512,6 +542,51 @@ class Application
     public function setBillingContact(string $billingContact): self
     {
         $this->billingContact = $billingContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMailgunApiKey(): ?string
+    {
+        return $this->mailgunApiKey;
+    }
+
+    public function setMailgunApiKey(?string $mailgunApiKey): self
+    {
+        $this->mailgunApiKey = $mailgunApiKey;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMailgunDomain(): ?string
+    {
+        return $this->mailgunDomain;
+    }
+
+    public function setMailgunDomain(?string $mailgunDomain): self
+    {
+        $this->mailgunDomain = $mailgunDomain;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageBirdApiKey(): ?string
+    {
+        return $this->messageBirdApiKey;
+    }
+
+    public function setMessageBirdApiKey(?string $messageBirdApiKey): self
+    {
+        $this->messageBirdApiKey = $messageBirdApiKey;
 
         return $this;
     }
