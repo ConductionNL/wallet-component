@@ -3,10 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Application;
-use App\Entity\Authorization;
-use App\Entity\Claim;
-use App\Entity\Proof;
-use App\Entity\PurposeLimitation;
 use Conduction\CommonGroundBundle\Service\CommonGroundService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
