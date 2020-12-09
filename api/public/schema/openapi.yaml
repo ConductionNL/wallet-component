@@ -12750,6 +12750,134 @@ definitions:
       - name
       - organization
       - contact
+  Proof-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this proof was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this proof was last Modified'
+        type: \Datetime
+      claim: []
+      application: []
+    required: []
+  Proof-write:
+    properties:
+      type:
+        description: 'The type of this Proof.'
+        type: string
+        example: RsaSignature2018
+        maxLength: 255
+      proofPurpose:
+        description: 'The purpose of this Proof.'
+        type: string
+        example: assertionMethod
+        maxLength: 255
+      verificationMethod:
+        description: 'The identifier of the public key that can verify the signature.'
+        type: string
+        example: 'https://example.edu/issuers/keys/1'
+        format: url
+        maxLength: 255
+      jws:
+        description: 'The digital signature value.'
+        type: string
+        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
+        maxLength: 255
+      claim: []
+      application: []
+    required: []
+  Claim-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this resource'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this claim was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this claim was last Modified'
+        type: \Datetime
+      authorizations: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
+  Claim-write:
+    properties:
+      person:
+        description: 'The person (Subject) of this Claim.'
+        type: string
+        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
+        format: url
+        maxLength: 255
+      property:
+        description: 'The property of this Claim.'
+        type: string
+        example: 'Knows (, alumniOf or jobTitle)'
+        maxLength: 255
+      data:
+        description: 'The data (Value) of this Claim.'
+        type: array
+      token:
+        description: 'The jwt token of this Claim.'
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
+        maxLength: 255
+      authorizations: []
+      proofs: []
+    required:
+      - person
+      - property
+      - data
   Authorization-read:
     properties:
       id:
@@ -12831,191 +12959,69 @@ definitions:
     required:
       - goal
       - application
-  AuthorizationLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      status:
-        description: 'status of the authorization log'
-        type: string
-        example: '200'
-      goal:
-        description: 'goal of the request'
-        type: string
-        example: 'log in to commonground'
-      endpoint:
-        description: 'the endpoint used to obtain the information'
-        type: string
-        example: access_tokens
-      dateCreated:
-        description: 'The moment this contract was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this contract was last Modified'
-        type: \Datetime
-      authorization:
-        description: 'The node where this checkin takes place'
-        type: \Authorization
-    required:
-      - status
-      - endpoint
-      - authorization
-  AuthorizationLog-write:
-    properties:
-      status:
-        description: 'status of the authorization log'
-        type: string
-        example: '200'
-      goal:
-        description: 'goal of the request'
-        type: string
-        example: 'log in to commonground'
-      endpoint:
-        description: 'the endpoint used to obtain the information'
-        type: string
-        example: access_tokens
-      authorization:
-        description: 'The node where this checkin takes place'
-        type: \Authorization
-    required:
-      - status
-      - endpoint
-      - authorization
-  Claim-read:
+  PurposeLimitation-read:
     properties:
       id:
         description: 'The UUID identifier of this resource'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      person:
-        description: 'The person (Subject) of this Claim.'
+      name:
+        description: 'The name of this PurposeLimitation.'
         type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
-        format: url
+        example: PurposeLimitation
         maxLength: 255
-      property:
-        description: 'The property of this Claim.'
+      description:
+        description: 'The description of this application.'
         type: string
-        example: 'Knows (, alumniOf or jobTitle)'
+        example: 'The PurposeLimitation for Authorization x.'
         maxLength: 255
       data:
-        description: 'The data (Value) of this Claim.'
+        description: 'The data of this PurposeLimitation.'
         type: array
-      token:
-        description: 'The jwt token of this Claim.'
-        type: string
-        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
+      noticePeriod:
+        description: 'The notice period for (the Authorization of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      expiryPeriod:
+        description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
       dateCreated:
-        description: 'The moment this claim was created'
+        description: 'The moment this PurposeLimitation was created'
         type: \Datetime
       dateModified:
-        description: 'The moment this claim was last Modified'
+        description: 'The moment this PurposeLimitation was last Modified'
         type: \Datetime
-      authorizations: []
-      proofs: []
+      authorization: []
     required:
-      - person
-      - property
-      - data
-  Claim-write:
+      - name
+  PurposeLimitation-write:
     properties:
-      person:
-        description: 'The person (Subject) of this Claim.'
+      name:
+        description: 'The name of this PurposeLimitation.'
         type: string
-        example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
-        format: url
+        example: PurposeLimitation
         maxLength: 255
-      property:
-        description: 'The property of this Claim.'
+      description:
+        description: 'The description of this application.'
         type: string
-        example: 'Knows (, alumniOf or jobTitle)'
+        example: 'The PurposeLimitation for Authorization x.'
         maxLength: 255
       data:
-        description: 'The data (Value) of this Claim.'
+        description: 'The data of this PurposeLimitation.'
         type: array
-      token:
-        description: 'The jwt token of this Claim.'
-        type: string
-        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
-      authorizations: []
-      proofs: []
-    required:
-      - person
-      - property
-      - data
-  Contract-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of this contract'
-        type: string
-        example: 'internship contract'
-      description:
-        description: 'The description of the contract'
-        type: string
-        example: 'this is the best contract ever'
-      signed:
-        description: 'Denotes if the contract is signed'
-        type: bool
-      expiryDate:
-        description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
-        type: \DateTime
-        example: '2020-11-14'
       noticePeriod:
-        description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+        description: 'The notice period for (the Authorization of) this PurposeLimitation.'
         type: \DateInterval
-        example: P1M
-      dateCreated:
-        description: 'The moment this request was created by the submitter'
-        type: \DateTime
-        example: '20190101'
-      dateModified:
-        description: 'The moment this request was created by the submitter'
-        type: \DateTime
-        example: '20190101'
-      signees:
-        description: 'The signees of the contract'
-        type: '\Collection|\Signee[]'
+        example: P3Y6M4DT12H30M5S
+      expiryPeriod:
+        description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
+        type: \DateInterval
+        example: P3Y6M4DT12H30M5S
+      authorization: []
     required:
       - name
-      - signed
-  Contract-write:
-    properties:
-      name:
-        description: 'Name of this contract'
-        type: string
-        example: 'internship contract'
-      description:
-        description: 'The description of the contract'
-        type: string
-        example: 'this is the best contract ever'
-      signed:
-        description: 'Denotes if the contract is signed'
-        type: bool
-      expiryDate:
-        description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
-        type: \DateTime
-        example: '2020-11-14'
-      noticePeriod:
-        description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
-        type: \DateInterval
-        example: P1M
-      signees:
-        description: 'The signees of the contract'
-        type: '\Collection|\Signee[]'
-    required:
-      - name
-      - signed
   Dossier-read:
     properties:
       id:
@@ -13095,132 +13101,6 @@ definitions:
       authorization: []
     required:
       - name
-  Proof-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this proof was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this proof was last Modified'
-        type: \Datetime
-      claim: []
-      application: []
-    required: []
-  Proof-write:
-    properties:
-      type:
-        description: 'The type of this Proof.'
-        type: string
-        example: RsaSignature2018
-        maxLength: 255
-      proofPurpose:
-        description: 'The purpose of this Proof.'
-        type: string
-        example: assertionMethod
-        maxLength: 255
-      verificationMethod:
-        description: 'The identifier of the public key that can verify the signature.'
-        type: string
-        example: 'https://example.edu/issuers/keys/1'
-        format: url
-        maxLength: 255
-      jws:
-        description: 'The digital signature value.'
-        type: string
-        example: eyJhbGciOiJSUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..TCYt5XsITJX1CxPCT8yAV-TVkIEq_PbChOMqsLfRoPsnsgw5WEuts01mq-pQy7UJiN5mgRxD-WUcX16dUEMGlv50aqzpqh4Qktb3rk-BuQy72IFLOqV0G_zS245-kronKb78cPN25DGlcTwLtjPAYuNzVBAh4vGHSrQyHUdBBPM
-        maxLength: 255
-      claim: []
-      application: []
-    required: []
-  PurposeLimitation-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this resource'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'The name of this PurposeLimitation.'
-        type: string
-        example: PurposeLimitation
-        maxLength: 255
-      description:
-        description: 'The description of this application.'
-        type: string
-        example: 'The PurposeLimitation for Authorization x.'
-        maxLength: 255
-      data:
-        description: 'The data of this PurposeLimitation.'
-        type: array
-      noticePeriod:
-        description: 'The notice period for (the Authorization of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      expiryPeriod:
-        description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      dateCreated:
-        description: 'The moment this PurposeLimitation was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this PurposeLimitation was last Modified'
-        type: \Datetime
-      authorization: []
-    required:
-      - name
-  PurposeLimitation-write:
-    properties:
-      name:
-        description: 'The name of this PurposeLimitation.'
-        type: string
-        example: PurposeLimitation
-        maxLength: 255
-      description:
-        description: 'The description of this application.'
-        type: string
-        example: 'The PurposeLimitation for Authorization x.'
-        maxLength: 255
-      data:
-        description: 'The data of this PurposeLimitation.'
-        type: array
-      noticePeriod:
-        description: 'The notice period for (the Authorization of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      expiryPeriod:
-        description: 'The expiry period for (the Authorization of) this PurposeLimitation.'
-        type: \DateInterval
-        example: P3Y6M4DT12H30M5S
-      authorization: []
-    required:
-      - name
   ScopeRequest-read:
     properties:
       id:
@@ -13253,6 +13133,179 @@ definitions:
         description: 'The moment this request has been authorized'
         type: \Datetime
       authorization: []
+    required: []
+  AuthorizationLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      status:
+        description: 'status of the authorization log'
+        type: string
+        example: '200'
+      goal:
+        description: 'goal of the request'
+        type: string
+        example: 'log in to commonground'
+      endpoint:
+        description: 'the endpoint used to obtain the information'
+        type: string
+        example: access_tokens
+      dateCreated:
+        description: 'The moment this contract was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this contract was last Modified'
+        type: \Datetime
+      authorization:
+        description: 'The node where this checkin takes place'
+        type: \Authorization
+    required:
+      - status
+      - endpoint
+      - authorization
+  AuthorizationLog-write:
+    properties:
+      status:
+        description: 'status of the authorization log'
+        type: string
+        example: '200'
+      goal:
+        description: 'goal of the request'
+        type: string
+        example: 'log in to commonground'
+      endpoint:
+        description: 'the endpoint used to obtain the information'
+        type: string
+        example: access_tokens
+      authorization:
+        description: 'The node where this checkin takes place'
+        type: \Authorization
+    required:
+      - status
+      - endpoint
+      - authorization
+  Contract-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of this contract'
+        type: string
+        example: 'internship contract'
+      description:
+        description: 'The description of the contract'
+        type: string
+        example: 'this is the best contract ever'
+      signed:
+        description: 'Denotes if the contract is signed'
+        type: bool
+      expiryDate:
+        description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+        type: \DateTime
+        example: '2020-11-14'
+      noticePeriod:
+        description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+        type: \DateInterval
+        example: P1M
+      dateCreated:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      dateModified:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      signees:
+        description: 'The signees of the contract'
+        type: '\Collection|\Signee[]'
+    required:
+      - name
+      - signed
+  Contract-write:
+    properties:
+      name:
+        description: 'Name of this contract'
+        type: string
+        example: 'internship contract'
+      description:
+        description: 'The description of the contract'
+        type: string
+        example: 'this is the best contract ever'
+      signed:
+        description: 'Denotes if the contract is signed'
+        type: bool
+      expiryDate:
+        description: 'The expiration date of the contract. Has to be set if noticePeriod is not.'
+        type: \DateTime
+        example: '2020-11-14'
+      noticePeriod:
+        description: 'The notice period for the termination of the contract. Has to be set if expiryDate is not.'
+        type: \DateInterval
+        example: P1M
+      signees:
+        description: 'The signees of the contract'
+        type: '\Collection|\Signee[]'
+    required:
+      - name
+      - signed
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-12-09 15:05:28'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-12-09 15:05:28'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
     required: []
   AuditTrail-read:
     properties:
@@ -13358,12 +13411,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-12-09 14:46:27'
+        example: '2020-12-09 15:05:28'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-12-09 14:46:27'
+        example: '2020-12-09 15:05:28'
     required: []
   AuditTrail-write:
     properties:
@@ -13371,59 +13424,6 @@ definitions:
         description: 'A note conserning this log lin'
         type: string
         example: 'This log line looks suspicius'
-        maxLength: 2555
-    required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-12-09 14:46:27'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-12-09 14:46:27'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
         maxLength: 2555
     required: []
 tags:
@@ -13434,7 +13434,37 @@ tags:
       
       entity that holds the application object for wallet component
   -
+    name: Proof
+    description: |
+      Proof is a way to prove that claims are correct.
+      
+      
+  -
+    name: Claim
+    description: |
+      Claim is a statement about a Subject (person).
+      
+      Built on the basis of the subject-property-value relationship (https://w3c.github.io/vc-data-model/#claims).
+  -
     name: Authorization
+    description: |
+      Authorization gives an application access to data in claims.
+      
+      
+  -
+    name: PurposeLimitation
+    description: |
+      PurposeLimitation is de purpose limitation of a Authorization.
+      
+      
+  -
+    name: Dossier
+    description: |
+      Dossier is a external data set that is blocking the cancellation of an authorization.
+      
+      
+  -
+    name: ScopeRequest
     description: |
       Authorization gives an application access to data in claims.
       
@@ -13446,49 +13476,19 @@ tags:
       
       entity to log the uses of authorizations
   -
-    name: Claim
-    description: |
-      Claim is a statement about a Subject (person).
-      
-      Built on the basis of the subject-property-value relationship (https://w3c.github.io/vc-data-model/#claims).
-  -
     name: Contract
     description: |
       An entity representing an node.
       
       entity that holds the contract object for the wallet component
   -
-    name: Dossier
-    description: |
-      Dossier is a external data set that is blocking the cancellation of an authorization.
-      
-      
-  -
-    name: Proof
-    description: |
-      Proof is a way to prove that claims are correct.
-      
-      
-  -
-    name: PurposeLimitation
-    description: |
-      PurposeLimitation is de purpose limitation of a Authorization.
-      
-      
-  -
-    name: ScopeRequest
-    description: |
-      Authorization gives an application access to data in claims.
-      
-      
-  -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -13499,15 +13499,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -
