@@ -11808,6 +11808,7 @@ components:
         name:
           description: 'Name of this application'
           type: string
+          nullable: true
         description:
           description: 'description of this dossier'
           type: string
@@ -11826,6 +11827,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         dateCreated:
           description: 'The moment this Dossier was created'
           type: string
@@ -11837,7 +11839,10 @@ components:
           format: date-time
           nullable: true
         authorization:
-          $ref: '#/components/schemas/Authorization-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Authorization-read'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
@@ -11858,6 +11863,7 @@ components:
         name:
           description: 'Name of this application'
           type: string
+          nullable: true
         description:
           description: 'description of this dossier'
           type: string
@@ -11876,8 +11882,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         authorization:
-          $ref: '#/components/schemas/Authorization-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Authorization-write'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
@@ -11910,6 +11920,7 @@ components:
         name:
           description: 'Name of this application'
           type: string
+          nullable: true
         description:
           description: 'description of this dossier'
           type: string
@@ -11928,6 +11939,7 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         dateCreated:
           description: 'The moment this Dossier was created'
           type: string
@@ -11939,7 +11951,10 @@ components:
           format: date-time
           nullable: true
         authorization:
-          $ref: '#/components/schemas/Authorization:jsonld-read'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Authorization:jsonld-read'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
@@ -11969,6 +11984,7 @@ components:
         name:
           description: 'Name of this application'
           type: string
+          nullable: true
         description:
           description: 'description of this dossier'
           type: string
@@ -11987,8 +12003,12 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
         authorization:
-          $ref: '#/components/schemas/Authorization:jsonld-write'
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Authorization:jsonld-write'
         legal:
           description: 'wheter or not to this Dossier is on legal basis.'
           type: boolean
@@ -13338,12 +13358,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-09 14:46:27'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-09 14:46:27'
     required: []
   AuditTrail-write:
     properties:
@@ -13391,12 +13411,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-09 14:46:27'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-09 14:46:27'
     required: []
   ChangeLog-write:
     properties:
