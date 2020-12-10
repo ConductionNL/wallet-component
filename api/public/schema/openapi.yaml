@@ -210,6 +210,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[sendLists]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[gdprContact]'
           in: query
           required: false
@@ -10278,6 +10287,10 @@ components:
           type: array
           items:
             type: string
+        sendLists:
+          type: array
+          items:
+            type: string
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -10376,6 +10389,10 @@ components:
           type: string
           nullable: true
         scopes:
+          type: array
+          items:
+            type: string
+        sendLists:
           type: array
           items:
             type: string
@@ -10486,6 +10503,10 @@ components:
           type: array
           items:
             type: string
+        sendLists:
+          type: array
+          items:
+            type: string
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -10593,6 +10614,10 @@ components:
           type: string
           nullable: true
         scopes:
+          type: array
+          items:
+            type: string
+        sendLists:
           type: array
           items:
             type: string
@@ -12609,6 +12634,7 @@ definitions:
         format: url
         maxLength: 255
       scopes: []
+      sendLists: []
       gdprContact:
         description: 'The gdprContact of this application'
         type: string
@@ -12693,6 +12719,7 @@ definitions:
         format: url
         maxLength: 255
       scopes: []
+      sendLists: []
       gdprContact:
         description: 'The gdprContact of this application'
         type: string
@@ -13338,12 +13365,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-10 09:43:59'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-10 09:43:59'
     required: []
   AuditTrail-write:
     properties:
@@ -13391,12 +13418,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-10 09:43:59'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-12-03 13:40:09'
+        example: '2020-12-10 09:43:59'
     required: []
   ChangeLog-write:
     properties:
