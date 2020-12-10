@@ -213,7 +213,7 @@ class Application
     /**
      * @Gedmo\Versioned
      * @Groups({"read","write"})
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $sendLists = [];
 
