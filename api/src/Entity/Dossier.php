@@ -55,7 +55,7 @@ class Dossier
      *
      * @Groups({"read","write"})
      * @Assert\NotNull
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -99,7 +99,7 @@ class Dossier
      *     max = 255
      * )
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $sso;
 
@@ -125,7 +125,7 @@ class Dossier
      * @Groups({"read","write"})
      * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity=Authorization::class, inversedBy="dossiers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $authorization;
 
@@ -145,7 +145,7 @@ class Dossier
      *
      * @Gedmo\Versioned
      * @Groups({"read","write"})
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $scopes = [];
 
