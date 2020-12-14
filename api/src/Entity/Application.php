@@ -211,6 +211,13 @@ class Application
     private $scopes = [];
 
     /**
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $sendLists = [];
+
+    /**
      * @var string The gdprContact of this application
      *
      * @example https://example.org/organizations/1
@@ -661,6 +668,18 @@ class Application
     public function setScopes(array $scopes): self
     {
         $this->scopes = $scopes;
+
+        return $this;
+    }
+
+    public function getSendLists(): ?array
+    {
+        return $this->sendLists;
+    }
+
+    public function setSendLists(array $sendLists): self
+    {
+        $this->sendLists = $sendLists;
 
         return $this;
     }
