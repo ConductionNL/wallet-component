@@ -67,10 +67,7 @@ class Authorization
     private $userUrl;
 
     /**
-     * @var bool Whether the user is new for the application
-     *
-     * @example false
-     *
+     * @var string Indicator whether user is new or not
      * @Groups({"read", "write"})
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -274,7 +271,7 @@ class Authorization
         return $this->newUser;
     }
 
-    public function setNewUser(string $newUser): self
+    public function setNewUser(?bool $newUser): self
     {
         $this->newUser = $newUser;
 
