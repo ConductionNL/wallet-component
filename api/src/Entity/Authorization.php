@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact", "id": "exact"})
  */
 class Authorization
 {
@@ -163,6 +163,15 @@ class Authorization
     private $dossiers;
 
     /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\OneToMany(targetEntity=ScopeRequest::class, mappedBy="authorization")
+     */
+    private $scopeRequests;
+
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=AuthorizationLog::class, mappedBy="authorization", orphanRemoval=true)
      */
     private $authorizationLogs;
@@ -186,6 +195,7 @@ class Authorization
     {
         $this->claims = new ArrayCollection();
         $this->dossiers = new ArrayCollection();
+        $this->scopeRequests = new ArrayCollection();
         $this->authorizationLogs = new ArrayCollection();
     }
 
@@ -395,6 +405,37 @@ class Authorization
             // set the owning side to null (unless already changed)
             if ($authorizationLog->getAuthorization() === $this) {
                 $authorizationLog->setAuthorization(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ScopeRequest[]
+     */
+    public function getScopeRequests(): Collection
+    {
+        return $this->scopeRequests;
+    }
+
+    public function addScopeRequest(ScopeRequest $scopeRequest): self
+    {
+        if (!$this->scopeRequests->contains($scopeRequest)) {
+            $this->scopeRequests[] = $scopeRequest;
+            $scopeRequest->setAuthorization($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScopeRequest(ScopeRequest $scopeRequest): self
+    {
+        if ($this->scopeRequests->contains($scopeRequest)) {
+            $this->scopeRequests->removeElement($scopeRequest);
+            // set the owning side to null (unless already changed)
+            if ($scopeRequest->getAuthorization() === $this) {
+                $scopeRequest->setAuthorization(null);
             }
         }
 

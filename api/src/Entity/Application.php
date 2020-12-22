@@ -14,8 +14,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -101,24 +103,57 @@ class Application
      * @example stage platform
      *
      * @Groups({"read","write"})
-     * @Assert\NotNull
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $authorizationUrl;
+
+    /**
+     * @var string webhook url of the application
+     *
+     * @example stage platform
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $webhookUrl;
+
+    /**
+     * @var string single sign on url of the application
+     *
+     * @example stage platform
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $singleSignOnUrl;
 
     /**
      * @var string Random generated secret for the application
      *
      * @Gedmo\Versioned
      *
-     * @example 4Ad9sdDJA4123AS4Ad9sdDJA4123AS
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
      * @Groups({"read"})
      * @Assert\Length(
      *     max=255
      * )
-     * @ORM\Column(type="string", length=30, nullable=true, unique=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      */
     private $secret;
+
+    /**
+     * @var string Random generated secret for the application
+     *
+     * @Gedmo\Versioned
+     *
+     * @example e2984465-190a-4562-829e-a8cca81aa35d
+     * @Groups({"read"})
+     * @Assert\Length(
+     *     max=255
+     * )
+     * @ORM\Column(type="string", nullable=true, unique=true)
+     */
+    private $testSecret;
 
     /**
      * @var string description of this application
@@ -155,9 +190,118 @@ class Application
     private $contact;
 
     /**
+     * @var string The endpoint of this application.
+     *
+     * @example https://dev.zuid-drecht.nl/notification
+     *
+     * @Assert\Url
+     * @Assert\Length(
+     *     max = 255
+     * )
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $notificationEndpoint;
+
+    /**
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json")
+     */
+    private $scopes = [];
+
+    /**
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $sendLists = [];
+
+    /**
+     * @var string The gdprContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $gdprContact;
+
+    /**
+     * @var string The technicalContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $technicalContact;
+
+    /**
+     * @var string The privacyContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $privacyContact;
+
+    /**
+     * @var string The billingContact of this application
+     *
+     * @example https://example.org/organizations/1
+     *
+     * @Groups({"read","write"})
+     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $billingContact;
+
+    /**
+     * @var string The mailgun api key of this application
+     *
+     * @example 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mailgunApiKey;
+
+    /**
+     * @var string The mailgun domain of this application
+     *
+     * @example mail.zuid-drecht.nl
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mailgunDomain;
+
+    /**
+     * @var string The messageBird api key of this application
+     *
+     * @example 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $messageBirdApiKey;
+
+    /**
      * @ORM\OneToMany(targetEntity=Authorization::class, mappedBy="application", orphanRemoval=true)
      */
     private $authorizations;
+
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\OneToMany(targetEntity=Proof::class, mappedBy="application", orphanRemoval=true)
+     */
+    private $proofs;
 
     /**
      * @var DateTime The moment this request was created by the submitter
@@ -189,16 +333,20 @@ class Application
     public function prePersist()
     {
         if (!$this->getSecret()) {
-            $validChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-
-            $secret = substr(str_shuffle(str_repeat($validChars, ceil(30 / strlen($validChars)))), 1, 30);
+            $secret = Uuid::uuid4();
             $this->setSecret($secret);
+        }
+
+        if (!$this->getTestSecret()) {
+            $secret = 'test_'.Uuid::uuid4()->toString();
+            $this->setTestSecret($secret);
         }
     }
 
     public function __construct()
     {
         $this->authorizations = new ArrayCollection();
+        $this->proofs = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -237,6 +385,30 @@ class Application
         return $this;
     }
 
+    public function getSingleSignOnUrl(): ?string
+    {
+        return $this->singleSignOnUrl;
+    }
+
+    public function setSingleSignOnUrl(string $singleSignOnUrl): self
+    {
+        $this->singleSignOnUrl = $singleSignOnUrl;
+
+        return $this;
+    }
+
+    public function getWebhookUrl(): ?string
+    {
+        return $this->webhookUrl;
+    }
+
+    public function setWebhookUrl(string $webhookUrl): self
+    {
+        $this->webhookUrl = $webhookUrl;
+
+        return $this;
+    }
+
     public function getSecret(): ?string
     {
         return $this->secret;
@@ -245,6 +417,18 @@ class Application
     public function setSecret(string $secret): self
     {
         $this->secret = $secret;
+
+        return $this;
+    }
+
+    public function getTestSecret(): ?string
+    {
+        return $this->testSecret;
+    }
+
+    public function setTestSecret(string $testSecret): self
+    {
+        $this->testSecret = $testSecret;
 
         return $this;
     }
@@ -295,6 +479,126 @@ class Application
     }
 
     /**
+     * @return string
+     */
+    public function getNotificationEndpoint(): ?string
+    {
+        return $this->notificationEndpoint;
+    }
+
+    public function setNotificationEndpoint(string $notificationEndpoint): self
+    {
+        $this->notificationEndpoint = $notificationEndpoint;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGdprContact(): ?string
+    {
+        return $this->gdprContact;
+    }
+
+    public function setGdprContact(string $gdprContact): self
+    {
+        $this->gdprContact = $gdprContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTechnicalContact(): ?string
+    {
+        return $this->technicalContact;
+    }
+
+    public function setTechnicalContact(string $technicalContact): self
+    {
+        $this->technicalContact = $technicalContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrivacyContact(): ?string
+    {
+        return $this->privacyContact;
+    }
+
+    public function setPrivacyContact(string $privacyContact): self
+    {
+        $this->privacyContact = $privacyContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBillingContact(): ?string
+    {
+        return $this->billingContact;
+    }
+
+    public function setBillingContact(string $billingContact): self
+    {
+        $this->billingContact = $billingContact;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMailgunApiKey(): ?string
+    {
+        return $this->mailgunApiKey;
+    }
+
+    public function setMailgunApiKey(?string $mailgunApiKey): self
+    {
+        $this->mailgunApiKey = $mailgunApiKey;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMailgunDomain(): ?string
+    {
+        return $this->mailgunDomain;
+    }
+
+    public function setMailgunDomain(?string $mailgunDomain): self
+    {
+        $this->mailgunDomain = $mailgunDomain;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageBirdApiKey(): ?string
+    {
+        return $this->messageBirdApiKey;
+    }
+
+    public function setMessageBirdApiKey(?string $messageBirdApiKey): self
+    {
+        $this->messageBirdApiKey = $messageBirdApiKey;
+
+        return $this;
+    }
+
+    /**
      * @return Collection|Authorization[]
      */
     public function getAuthorizations(): Collection
@@ -321,6 +625,61 @@ class Application
                 $authorization->setApplication(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Proof[]
+     */
+    public function getProofs(): Collection
+    {
+        return $this->proofs;
+    }
+
+    public function addProof(Proof $proof): self
+    {
+        if (!$this->proofs->contains($proof)) {
+            $this->proofs[] = $proof;
+            $proof->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProof(Proof $proof): self
+    {
+        if ($this->proofs->contains($proof)) {
+            $this->proofs->removeElement($proof);
+            // set the owning side to null (unless already changed)
+            if ($proof->getApplication() === $this) {
+                $proof->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getScopes(): ?array
+    {
+        return $this->scopes;
+    }
+
+    public function setScopes(array $scopes): self
+    {
+        $this->scopes = $scopes;
+
+        return $this;
+    }
+
+    public function getSendLists(): ?array
+    {
+        return $this->sendLists;
+    }
+
+    public function setSendLists(array $sendLists): self
+    {
+        $this->sendLists = $sendLists;
 
         return $this;
     }
