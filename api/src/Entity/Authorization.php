@@ -67,6 +67,13 @@ class Authorization
     private $userUrl;
 
     /**
+     * @var string Indicator whether user is new or not
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $newUser = true;
+
+    /**
      * @var array scopes this authorization has access to
      *
      * @Gedmo\Versioned
@@ -255,6 +262,18 @@ class Authorization
     public function setGoal(string $goal): self
     {
         $this->goal = $goal;
+
+        return $this;
+    }
+
+    public function getNewUser(): ?bool
+    {
+        return $this->newUser;
+    }
+
+    public function setNewUser(?bool $newUser): self
+    {
+        $this->newUser = $newUser;
 
         return $this;
     }
