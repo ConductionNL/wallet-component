@@ -304,6 +304,12 @@ class Application
     private $proofs;
 
     /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity=Group::class, mappedBy="application", orphanRemoval=true)
+     */
+    private $userGroups;
+
+    /**
      * @var DateTime The moment this request was created by the submitter
      *
      * @example 20190101
@@ -347,6 +353,7 @@ class Application
     {
         $this->authorizations = new ArrayCollection();
         $this->proofs = new ArrayCollection();
+        $this->userGroups = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -654,6 +661,37 @@ class Application
             // set the owning side to null (unless already changed)
             if ($proof->getApplication() === $this) {
                 $proof->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getUserGroups(): Collection
+    {
+        return $this->userGroups;
+    }
+
+    public function addUserGroup(Group $userGroup): self
+    {
+        if (!$this->userGroups->contains($userGroup)) {
+            $this->userGroups[] = $userGroup;
+            $userGroup->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroup(Group $userGroup): self
+    {
+        if ($this->userGroups->contains($userGroup)) {
+            $this->userGroups->removeElement($userGroup);
+            // set the owning side to null (unless already changed)
+            if ($userGroup->getApplication() === $this) {
+                $userGroup->setApplication(null);
             }
         }
 
