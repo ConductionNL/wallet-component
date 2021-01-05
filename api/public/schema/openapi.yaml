@@ -941,9 +941,9 @@ paths:
   '/applications/{id}/audit_trail':
     get:
       tags:
-        - Application
-      operationId: get_audit_trailApplicationItem
-      summary: 'Retrieves a Application resource.'
+        - Group
+      operationId: get_audit_trailGroupItem
+      summary: 'Retrieves a Group resource.'
       parameters:
         -
           name: id
@@ -1024,47 +1024,47 @@ paths:
           in: query
       responses:
         200:
-          description: 'Application resource response'
+          description: 'Group resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Application:jsonld-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Application:jsonld-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
         404:
           description: 'Resource not found'
       produces:
@@ -1072,9 +1072,9 @@ paths:
   '/applications/{id}/change_log':
     get:
       tags:
-        - Application
-      operationId: get_change_logsApplicationItem
-      summary: 'Retrieves a Application resource.'
+        - Group
+      operationId: get_change_logsGroupItem
+      summary: 'Retrieves a Group resource.'
       parameters:
         -
           name: id
@@ -1155,47 +1155,47 @@ paths:
           in: query
       responses:
         200:
-          description: 'Application resource response'
+          description: 'Group resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Application:jsonld-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Application:jsonld-read'
+                $ref: '#/components/schemas/Group:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Application-read'
+                $ref: '#/components/schemas/Group-read'
         404:
           description: 'Resource not found'
       produces:
@@ -3205,6 +3205,12 @@ paths:
                   $ref: '#/components/schemas/Authorization-read'
       parameters:
         -
+          name: newUser
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
           name: 'order[id]'
           in: query
           required: false
@@ -3215,6 +3221,15 @@ paths:
               - desc
         -
           name: 'order[userUrl]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[newUser]'
           in: query
           required: false
           schema:
@@ -5166,6 +5181,22 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: property
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'property[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
         -
           name: page
           in: query
@@ -7569,6 +7600,834 @@ paths:
             schema:
               $ref: '#/components/schemas/Dossier-write'
         description: 'The updated Dossier resource'
+  /groups:
+    get:
+      tags:
+        - Group
+      operationId: getGroupCollection
+      summary: 'Retrieves the collection of Group resources.'
+      responses:
+        200:
+          description: 'Group collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Group:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Group:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[organization]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[users]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: organization
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'organization[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: users
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'users[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Group
+      operationId: postGroupCollection
+      summary: 'Creates a Group resource.'
+      responses:
+        201:
+          description: 'Group resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+          links:
+            GetGroupItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getGroupItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /groups/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Group:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Group:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+        description: 'The new Group resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/groups/{id}':
+    get:
+      tags:
+        - Group
+      operationId: getGroupItem
+      summary: 'Retrieves a Group resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Group resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    put:
+      tags:
+        - Group
+      operationId: putGroupItem
+      summary: 'Replaces the Group resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Group resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Group:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Group:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Group-write'
+        description: 'The updated Group resource'
+    delete:
+      tags:
+        - Group
+      operationId: deleteGroupItem
+      summary: 'Removes the Group resource.'
+      responses:
+        204:
+          description: 'Group resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
   /proofs:
     get:
       tags:
@@ -10331,6 +11190,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Proof-read'
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -10436,6 +11299,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Proof-write'
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-write'
     'Application:jsonld-read':
       type: object
       description: 'An entity representing an node.'
@@ -10547,6 +11414,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Proof:jsonld-read'
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -10661,6 +11532,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Proof:jsonld-write'
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-write'
     AuditTrail-read:
       type: object
       description: 'An resource representing a log line.'
@@ -10951,6 +11826,10 @@ components:
             url: 'http://schema.org/url'
           type: string
           nullable: true
+        newUser:
+          description: 'Indicator whether user is new or not'
+          type: boolean
+          nullable: true
         scopes:
           description: 'scopes this authorization has access to'
           type: array
@@ -11014,6 +11893,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
+        newUser:
+          description: 'Indicator whether user is new or not'
+          type: boolean
           nullable: true
         scopes:
           description: 'scopes this authorization has access to'
@@ -11084,6 +11967,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
+        newUser:
+          description: 'Indicator whether user is new or not'
+          type: boolean
           nullable: true
         scopes:
           description: 'scopes this authorization has access to'
@@ -11157,6 +12044,10 @@ components:
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+          nullable: true
+        newUser:
+          description: 'Indicator whether user is new or not'
+          type: boolean
           nullable: true
         scopes:
           description: 'scopes this authorization has access to'
@@ -12043,6 +12934,186 @@ components:
           type: array
           items:
             type: string
+    Group-read:
+      type: object
+      description: 'An entity representing a group.'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of this group'
+          type: string
+        description:
+          description: 'description of this group'
+          type: string
+          nullable: true
+        organization:
+          description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
+          type: string
+          nullable: true
+        users:
+          description: 'array of users that belong to this group (uri of the user object)'
+          type: array
+          items:
+            type: string
+        parentGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group-read'
+        childGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group-read'
+        application:
+          $ref: '#/components/schemas/Application-read'
+        dateCreated:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - name
+        - application
+    Group-write:
+      type: object
+      description: 'An entity representing a group.'
+      required:
+        - name
+        - application
+      properties:
+        name:
+          description: 'Name of this group'
+          type: string
+        description:
+          description: 'description of this group'
+          type: string
+          nullable: true
+        organization:
+          description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
+          type: string
+          nullable: true
+        users:
+          description: 'array of users that belong to this group (uri of the user object)'
+          type: array
+          items:
+            type: string
+        parentGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group-write'
+        application:
+          $ref: '#/components/schemas/Application-write'
+    'Group:jsonld-read':
+      type: object
+      description: 'An entity representing a group.'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of this group'
+          type: string
+        description:
+          description: 'description of this group'
+          type: string
+          nullable: true
+        organization:
+          description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
+          type: string
+          nullable: true
+        users:
+          description: 'array of users that belong to this group (uri of the user object)'
+          type: array
+          items:
+            type: string
+        parentGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group:jsonld-read'
+        childGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group:jsonld-read'
+        application:
+          $ref: '#/components/schemas/Application:jsonld-read'
+        dateCreated:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - name
+        - application
+    'Group:jsonld-write':
+      type: object
+      description: 'An entity representing a group.'
+      required:
+        - name
+        - application
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'Name of this group'
+          type: string
+        description:
+          description: 'description of this group'
+          type: string
+          nullable: true
+        organization:
+          description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
+          type: string
+          nullable: true
+        users:
+          description: 'array of users that belong to this group (uri of the user object)'
+          type: array
+          items:
+            type: string
+        parentGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group:jsonld-write'
+        application:
+          $ref: '#/components/schemas/Application:jsonld-write'
     Proof-read:
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -12696,6 +13767,7 @@ definitions:
         type: \DateTime
         example: '20190101'
       proofs: []
+      userGroups: []
     required:
       - name
       - organization
@@ -12773,6 +13845,7 @@ definitions:
         type: string
         example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
       proofs: []
+      userGroups: []
     required:
       - name
       - organization
@@ -12790,6 +13863,9 @@ definitions:
         example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
         format: url
         maxLength: 255
+      newUser:
+        description: 'Indicator whether user is new or not'
+        type: string
       scopes:
         description: 'scopes this authorization has access to'
         type: array
@@ -12831,6 +13907,9 @@ definitions:
         example: 'https://dev.zuid-drecht.nl/api/v1/cc/people/{{uuid}]'
         format: url
         maxLength: 255
+      newUser:
+        description: 'Indicator whether user is new or not'
+        type: string
       scopes:
         description: 'scopes this authorization has access to'
         type: array
@@ -13122,6 +14201,64 @@ definitions:
       authorization: []
     required:
       - name
+  Group-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of this group'
+        type: string
+        example: administrators
+      description:
+        description: 'description of this group'
+        type: string
+        example: 'group that holds all the administrators'
+      organization:
+        description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
+        type: string
+        example: 'https://example.org/organizations/1'
+      users:
+        description: 'array of users that belong to this group (uri of the user object)'
+        type: array
+      dateCreated:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      dateModified:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      parentGroup: []
+      childGroups: []
+      application: []
+    required:
+      - name
+      - application
+  Group-write:
+    properties:
+      name:
+        description: 'Name of this group'
+        type: string
+        example: administrators
+      description:
+        description: 'description of this group'
+        type: string
+        example: 'group that holds all the administrators'
+      organization:
+        description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
+        type: string
+        example: 'https://example.org/organizations/1'
+      users:
+        description: 'array of users that belong to this group (uri of the user object)'
+        type: array
+      parentGroup: []
+      application: []
+    required:
+      - name
+      - application
   Proof-read:
     properties:
       id:
@@ -13385,12 +14522,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-12-10 09:47:18'
+        example: '2021-01-05 15:02:28'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-12-10 09:47:18'
+        example: '2021-01-05 15:02:28'
     required: []
   AuditTrail-write:
     properties:
@@ -13438,12 +14575,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-12-10 09:47:18'
+        example: '2021-01-05 15:02:28'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-12-10 09:47:18'
+        example: '2021-01-05 15:02:28'
     required: []
   ChangeLog-write:
     properties:
@@ -13490,6 +14627,12 @@ tags:
       Dossier is a external data set that is blocking the cancellation of an authorization.
       
       
+  -
+    name: Group
+    description: |
+      An entity representing a group.
+      
+      entity that holds the groups linked to a application object
   -
     name: Proof
     description: |
