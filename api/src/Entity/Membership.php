@@ -64,7 +64,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact"})
  */
 class Membership
 {
