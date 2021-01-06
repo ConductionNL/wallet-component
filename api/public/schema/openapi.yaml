@@ -10,7 +10,7 @@ info:
     - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/wallet-component) / [zip](https://github.com/ConductionNL/wallet-component/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/wac-php) 
-    - Datamodel: [postman](/schema/wac.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
+    - Datamodel: [postman](schema/wac.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
     
     Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
@@ -32,7 +32,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Application:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -42,7 +42,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Application:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -941,9 +941,9 @@ paths:
   '/applications/{id}/audit_trail':
     get:
       tags:
-        - Group
-      operationId: get_audit_trailGroupItem
-      summary: 'Retrieves a Group resource.'
+        - Application
+      operationId: get_audit_trailApplicationItem
+      summary: 'Retrieves a Application resource.'
       parameters:
         -
           name: id
@@ -1024,47 +1024,47 @@ paths:
           in: query
       responses:
         200:
-          description: 'Group resource response'
+          description: 'Application resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Group:jsonld-read'
+                $ref: '#/components/schemas/Application:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Group:jsonld-read'
+                $ref: '#/components/schemas/Application:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
         404:
           description: 'Resource not found'
       produces:
@@ -1072,9 +1072,9 @@ paths:
   '/applications/{id}/change_log':
     get:
       tags:
-        - Group
-      operationId: get_change_logsGroupItem
-      summary: 'Retrieves a Group resource.'
+        - Application
+      operationId: get_change_logsApplicationItem
+      summary: 'Retrieves a Application resource.'
       parameters:
         -
           name: id
@@ -1155,47 +1155,47 @@ paths:
           in: query
       responses:
         200:
-          description: 'Group resource response'
+          description: 'Application resource response'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Group:jsonld-read'
+                $ref: '#/components/schemas/Application:jsonld-read'
             application/json+ld:
               schema:
-                $ref: '#/components/schemas/Group:jsonld-read'
+                $ref: '#/components/schemas/Application:jsonld-read'
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json+hal:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/vnd.api+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json+vnd.api:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/health+json:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/json+health:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             application/x-yaml:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             text/csv:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
             text/html:
               schema:
-                $ref: '#/components/schemas/Group-read'
+                $ref: '#/components/schemas/Application-read'
         404:
           description: 'Resource not found'
       produces:
@@ -1217,7 +1217,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/AuditTrail:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -1227,7 +1227,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/AuditTrail:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -2238,7 +2238,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/AuthorizationLog:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -2248,7 +2248,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/AuthorizationLog:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -3135,7 +3135,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Authorization:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -3145,7 +3145,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Authorization:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -4089,7 +4089,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/ChangeLog:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -4099,7 +4099,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/ChangeLog:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -4995,7 +4995,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -5005,7 +5005,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Claim:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -5859,7 +5859,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -5869,7 +5869,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Contract:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -6702,7 +6702,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Dossier:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -6712,7 +6712,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Dossier:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -7617,7 +7617,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Group:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -7627,7 +7627,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Group:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -7798,13 +7798,13 @@ paths:
           schema:
             type: string
         -
-          name: id
+          name: application.id
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'id[]'
+          name: 'application.id[]'
           in: query
           required: false
           schema:
@@ -7814,13 +7814,13 @@ paths:
           style: form
           explode: true
         -
-          name: name
+          name: application
           in: query
           required: false
           schema:
             type: string
         -
-          name: 'name[]'
+          name: 'application[]'
           in: query
           required: false
           schema:
@@ -7829,78 +7829,6 @@ paths:
               type: string
           style: form
           explode: true
-        -
-          name: description
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'description[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: organization
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'organization[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: users
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'users[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -8428,6 +8356,1418 @@ paths:
           name: X-NLX-Audit-Clarification
           description: 'A clarification as to why a request has been made  (doelbinding)'
           in: header
+  '/groups/{id}/audit_trail':
+    get:
+      tags:
+        - Group
+      operationId: get_audit_trailGroupItem
+      summary: 'Retrieves a Group resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Group resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  '/groups/{id}/change_log':
+    get:
+      tags:
+        - Group
+      operationId: get_change_logsGroupItem
+      summary: 'Retrieves a Group resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Group resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Group:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Group-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  /memberships:
+    get:
+      tags:
+        - Membership
+      operationId: getMembershipCollection
+      summary: 'Retrieves the collection of Membership resources.'
+      responses:
+        200:
+          description: 'Membership collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Membership:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Membership:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[userUrl]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateInvited]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateAcceptedGroup]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateAcceptedUser]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateInvited[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateInvited[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateInvited[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateInvited[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedGroup[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedGroup[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedGroup[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedGroup[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedUser[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedUser[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedUser[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedUser[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: userUrl
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'userUrl[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateInvited
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateInvited[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateAcceptedGroup
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedGroup[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateAcceptedUser
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateAcceptedUser[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Membership
+      operationId: postMembershipCollection
+      summary: 'Creates a Membership resource.'
+      responses:
+        201:
+          description: 'Membership resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+          links:
+            GetMembershipItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getMembershipItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /memberships/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Membership:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Membership:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+        description: 'The new Membership resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/memberships/{id}':
+    get:
+      tags:
+        - Membership
+      operationId: getMembershipItem
+      summary: 'Retrieves a Membership resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Membership resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    put:
+      tags:
+        - Membership
+      operationId: putMembershipItem
+      summary: 'Replaces the Membership resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Membership resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Membership:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Membership:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Membership-write'
+        description: 'The updated Membership resource'
+    delete:
+      tags:
+        - Membership
+      operationId: deleteMembershipItem
+      summary: 'Removes the Membership resource.'
+      responses:
+        204:
+          description: 'Membership resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/memberships/{id}/audit_trail':
+    get:
+      tags:
+        - Membership
+      operationId: get_audit_trailMembershipItem
+      summary: 'Retrieves a Membership resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Membership resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+  '/memberships/{id}/change_log':
+    get:
+      tags:
+        - Membership
+      operationId: get_change_logsMembershipItem
+      summary: 'Retrieves a Membership resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Membership resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Membership:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Membership-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
   /proofs:
     get:
       tags:
@@ -8445,7 +9785,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Proof:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -8455,7 +9795,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/Proof:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -9303,7 +10643,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/PurposeLimitation:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -9313,7 +10653,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/PurposeLimitation:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -10274,7 +11614,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/ScopeRequest:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/json+ld:
@@ -10284,7 +11624,7 @@ paths:
                   'hydra:member': { type: array, items: { $ref: '#/components/schemas/ScopeRequest:jsonld-read' } }
                   'hydra:totalItems': { type: integer, minimum: 0 }
                   'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
-                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
                 required:
                   - 'hydra:member'
             application/hal+json:
@@ -12972,6 +14312,10 @@ components:
             $ref: '#/components/schemas/Group-read'
         application:
           $ref: '#/components/schemas/Application-read'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -13015,6 +14359,10 @@ components:
               $ref: '#/components/schemas/Group-write'
         application:
           $ref: '#/components/schemas/Application-write'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership-write'
     'Group:jsonld-read':
       type: object
       description: 'An entity representing a group.'
@@ -13062,6 +14410,10 @@ components:
             $ref: '#/components/schemas/Group:jsonld-read'
         application:
           $ref: '#/components/schemas/Application:jsonld-read'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership:jsonld-read'
         dateCreated:
           description: 'The moment this request was created by the submitter'
           type: string
@@ -13114,6 +14466,168 @@ components:
               $ref: '#/components/schemas/Group:jsonld-write'
         application:
           $ref: '#/components/schemas/Application:jsonld-write'
+        memberships:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership:jsonld-write'
+    Membership-read:
+      type: object
+      description: 'An entity representing a membership'
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        userUrl:
+          description: 'User uri from user component'
+          type: string
+        userGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group-read'
+        dateInvited:
+          description: 'The moment the invite was send'
+          type: string
+          format: date-time
+          nullable: true
+        dateAcceptedGroup:
+          description: 'The moment the invite was accepted by the group'
+          type: string
+          format: date-time
+          nullable: true
+        dateAcceptedUser:
+          description: 'The moment the invite was accepted by the user'
+          type: string
+          format: date-time
+          nullable: true
+        dateCreated:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - userUrl
+    Membership-write:
+      type: object
+      description: 'An entity representing a membership'
+      required:
+        - userUrl
+      properties:
+        userUrl:
+          description: 'User uri from user component'
+          type: string
+        userGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group-write'
+        dateAcceptedGroup:
+          description: 'The moment the invite was accepted by the group'
+          type: string
+          format: date-time
+          nullable: true
+        dateAcceptedUser:
+          description: 'The moment the invite was accepted by the user'
+          type: string
+          format: date-time
+          nullable: true
+    'Membership:jsonld-read':
+      type: object
+      description: 'An entity representing a membership'
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        userUrl:
+          description: 'User uri from user component'
+          type: string
+        userGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group:jsonld-read'
+        dateInvited:
+          description: 'The moment the invite was send'
+          type: string
+          format: date-time
+          nullable: true
+        dateAcceptedGroup:
+          description: 'The moment the invite was accepted by the group'
+          type: string
+          format: date-time
+          nullable: true
+        dateAcceptedUser:
+          description: 'The moment the invite was accepted by the user'
+          type: string
+          format: date-time
+          nullable: true
+        dateCreated:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this request was created by the submitter'
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - userUrl
+    'Membership:jsonld-write':
+      type: object
+      description: 'An entity representing a membership'
+      required:
+        - userUrl
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        userUrl:
+          description: 'User uri from user component'
+          type: string
+        userGroup:
+          nullable: true
+          anyOf:
+            -
+              $ref: '#/components/schemas/Group:jsonld-write'
+        dateAcceptedGroup:
+          description: 'The moment the invite was accepted by the group'
+          type: string
+          format: date-time
+          nullable: true
+        dateAcceptedUser:
+          description: 'The moment the invite was accepted by the user'
+          type: string
+          format: date-time
+          nullable: true
     Proof-read:
       type: object
       description: 'Proof is a way to prove that claims are correct.'
@@ -14234,6 +15748,7 @@ definitions:
       parentGroup: []
       childGroups: []
       application: []
+      memberships: []
     required:
       - name
       - application
@@ -14256,9 +15771,61 @@ definitions:
         type: array
       parentGroup: []
       application: []
+      memberships: []
     required:
       - name
       - application
+  Membership-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      userUrl:
+        description: 'User uri from user component'
+        type: string
+        example: 'https://example.nl/user'
+      dateInvited:
+        description: 'The moment the invite was send'
+        type: \DateTime
+        example: '20190101'
+      dateAcceptedGroup:
+        description: 'The moment the invite was accepted by the group'
+        type: \DateTime
+        example: '20190101'
+      dateAcceptedUser:
+        description: 'The moment the invite was accepted by the user'
+        type: \DateTime
+        example: '20190101'
+      dateCreated:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      dateModified:
+        description: 'The moment this request was created by the submitter'
+        type: \DateTime
+        example: '20190101'
+      userGroup: []
+    required:
+      - userUrl
+  Membership-write:
+    properties:
+      userUrl:
+        description: 'User uri from user component'
+        type: string
+        example: 'https://example.nl/user'
+      dateAcceptedGroup:
+        description: 'The moment the invite was accepted by the group'
+        type: \DateTime
+        example: '20190101'
+      dateAcceptedUser:
+        description: 'The moment the invite was accepted by the user'
+        type: \DateTime
+        example: '20190101'
+      userGroup: []
+    required:
+      - userUrl
   Proof-read:
     properties:
       id:
@@ -14522,12 +16089,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-05 15:02:28'
+        example: '2021-01-06 12:31:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-05 15:02:28'
+        example: '2021-01-06 12:31:33'
     required: []
   AuditTrail-write:
     properties:
@@ -14575,12 +16142,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-05 15:02:28'
+        example: '2021-01-06 12:31:33'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-05 15:02:28'
+        example: '2021-01-06 12:31:33'
     required: []
   ChangeLog-write:
     properties:
@@ -14633,6 +16200,12 @@ tags:
       An entity representing a group.
       
       entity that holds the groups linked to a application object
+  -
+    name: Membership
+    description: |
+      An entity representing a membership
+      
+      entity that holds the memeberships linked to groups
   -
     name: Proof
     description: |
