@@ -17,8 +17,9 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
- * An entity representing a membership
+ * An entity representing a membership.
  *
  * entity that holds the memeberships linked to groups
  *
