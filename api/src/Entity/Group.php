@@ -17,6 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -38,7 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "put",
  *          "delete",
  *          "get_change_logs"={
- *              "path"="/applications/{id}/change_log",
+ *              "path"="/groups/{id}/change_log",
  *              "method"="get",
  *              "swagger_context" = {
  *                  "summary"="Changelogs",
@@ -46,7 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              }
  *          },
  *          "get_audit_trail"={
- *              "path"="/applications/{id}/audit_trail",
+ *              "path"="/groups/{id}/audit_trail",
  *              "method"="get",
  *              "swagger_context" = {
  *                  "summary"="Audittrail",
@@ -67,7 +68,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class)
+ * @ApiFilter(SearchFilter::class, properties={"application.id": "exact", "application": "exact"})
  */
 class Group
 {
@@ -75,7 +76,6 @@ class Group
      * @var UuidInterface The UUID identifier of this object
      *
      * @example e2984465-190a-4562-829e-a8cca81aa35d
-     *
      *
      * @Groups({"read"})
      * @Assert\Uuid
@@ -118,15 +118,6 @@ class Group
     private $organization;
 
     /**
-     * @var array array of users that belong to this group (uri of the user object)
-     *
-     * @Gedmo\Versioned
-     * @Groups({"read","write"})
-     * @ORM\Column(type="json")
-     */
-    private $users = [];
-
-    /**
      * @Groups({"read", "write"})
      *
      * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="childGroups")
@@ -142,10 +133,18 @@ class Group
     /**
      * @Assert\NotNull()
      * @Groups({"read", "write"})
+     * @MaxDepth(1)
      * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="userGroups")
      * @ORM\JoinColumn(nullable=false)
      */
     private $application;
+
+    /**
+     * @Groups({"read","write"})
+     * @MaxDepth(1)
+     * @ORM\OneToMany(targetEntity=Membership::class, mappedBy="userGroup", orphanRemoval=true)
+     */
+    private $memberships;
 
     /**
      * @var DateTime The moment this request was created by the submitter
@@ -172,6 +171,7 @@ class Group
     public function __construct()
     {
         $this->childGroups = new ArrayCollection();
+        $this->memberships = new ArrayCollection();
     }
 
     public function getId(): UuidInterface
@@ -222,18 +222,6 @@ class Group
         return $this;
     }
 
-    public function getUsers(): ?array
-    {
-        return $this->users;
-    }
-
-    public function setUsers(array $users): self
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
     public function getParentGroup(): ?self
     {
         return $this->parentGroup;
@@ -271,6 +259,37 @@ class Group
             // set the owning side to null (unless already changed)
             if ($childGroup->getParentGroup() === $this) {
                 $childGroup->setParentGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Membership[]
+     */
+    public function getMemberships(): Collection
+    {
+        return $this->memberships;
+    }
+
+    public function addMembership(Membership $membership): self
+    {
+        if (!$this->memberships->contains($membership)) {
+            $this->memberships[] = $membership;
+            $membership->setUserGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMembership(Membership $membership): self
+    {
+        if ($this->memberships->contains($membership)) {
+            $this->memberships->removeElement($membership);
+            // set the owning side to null (unless already changed)
+            if ($membership->getUserGroup() === $this) {
+                $membership->setUserGroup(null);
             }
         }
 

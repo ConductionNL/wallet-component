@@ -305,6 +305,7 @@ class Application
 
     /**
      * @Groups({"read","write"})
+     * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=Group::class, mappedBy="application", orphanRemoval=true)
      */
     private $userGroups;
