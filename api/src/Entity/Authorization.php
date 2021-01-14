@@ -149,35 +149,35 @@ class Authorization
     private $dateModified;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="authorizations")
      */
     private $claims;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="authorization", orphanRemoval=true, cascade={"persist"})
      */
     private $purposeLimitation;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="authorization")
      */
     private $dossiers;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=ScopeRequest::class, mappedBy="authorization")
      */
     private $scopeRequests;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=AuthorizationLog::class, mappedBy="authorization", orphanRemoval=true)
      */
