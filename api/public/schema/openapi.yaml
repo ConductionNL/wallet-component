@@ -7723,15 +7723,6 @@ paths:
               - asc
               - desc
         -
-          name: 'order[users]'
-          in: query
-          required: false
-          schema:
-            type: string
-            enum:
-              - asc
-              - desc
-        -
           name: 'order[dateCreated]'
           in: query
           required: false
@@ -8888,22 +8879,6 @@ paths:
           schema:
             type: string
         -
-          name: id
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'id[]'
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-          style: form
-          explode: true
-        -
           name: userUrl
           in: query
           required: false
@@ -8919,66 +8894,6 @@ paths:
               type: string
           style: form
           explode: true
-        -
-          name: dateInvited
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateInvited[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateAcceptedGroup
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateAcceptedGroup[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateAcceptedUser
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateAcceptedUser[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateCreated
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateCreated[]'
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: dateModified
-          in: query
-          required: false
-          schema:
-            type: string
-        -
-          name: 'dateModified[]'
-          in: query
-          required: false
-          schema:
-            type: string
         -
           name: page
           in: query
@@ -13200,27 +13115,6 @@ components:
           type: string
           format: date-time
           nullable: true
-        claims:
-          type: array
-          items:
-            $ref: '#/components/schemas/Claim-read'
-        purposeLimitation:
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/PurposeLimitation-read'
-        dossiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dossier-read'
-        scopeRequests:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScopeRequest-read'
-        authorizationLogs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationLog-read'
       required:
         - goal
         - application
@@ -13342,27 +13236,6 @@ components:
           type: string
           format: date-time
           nullable: true
-        claims:
-          type: array
-          items:
-            $ref: '#/components/schemas/Claim:jsonld-read'
-        purposeLimitation:
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/PurposeLimitation:jsonld-read'
-        dossiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dossier:jsonld-read'
-        scopeRequests:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScopeRequest:jsonld-read'
-        authorizationLogs:
-          type: array
-          items:
-            $ref: '#/components/schemas/AuthorizationLog:jsonld-read'
       required:
         - goal
         - application
@@ -14296,11 +14169,6 @@ components:
           description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
           type: string
           nullable: true
-        users:
-          description: 'array of users that belong to this group (uri of the user object)'
-          type: array
-          items:
-            type: string
         parentGroup:
           nullable: true
           anyOf:
@@ -14347,11 +14215,6 @@ components:
           description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
           type: string
           nullable: true
-        users:
-          description: 'array of users that belong to this group (uri of the user object)'
-          type: array
-          items:
-            type: string
         parentGroup:
           nullable: true
           anyOf:
@@ -14394,11 +14257,6 @@ components:
           description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
           type: string
           nullable: true
-        users:
-          description: 'array of users that belong to this group (uri of the user object)'
-          type: array
-          items:
-            type: string
         parentGroup:
           nullable: true
           anyOf:
@@ -14454,11 +14312,6 @@ components:
           description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
           type: string
           nullable: true
-        users:
-          description: 'array of users that belong to this group (uri of the user object)'
-          type: array
-          items:
-            type: string
         parentGroup:
           nullable: true
           anyOf:
@@ -14472,7 +14325,7 @@ components:
             $ref: '#/components/schemas/Membership:jsonld-write'
     Membership-read:
       type: object
-      description: 'An entity representing a membership'
+      description: 'An entity representing a membership.'
       properties:
         id:
           readOnly: true
@@ -14518,7 +14371,7 @@ components:
         - userUrl
     Membership-write:
       type: object
-      description: 'An entity representing a membership'
+      description: 'An entity representing a membership.'
       required:
         - userUrl
       properties:
@@ -14542,7 +14395,7 @@ components:
           nullable: true
     'Membership:jsonld-read':
       type: object
-      description: 'An entity representing a membership'
+      description: 'An entity representing a membership.'
       properties:
         '@context':
           readOnly: true
@@ -14597,7 +14450,7 @@ components:
         - userUrl
     'Membership:jsonld-write':
       type: object
-      description: 'An entity representing a membership'
+      description: 'An entity representing a membership.'
       required:
         - userUrl
       properties:
@@ -15405,11 +15258,6 @@ definitions:
       application:
         description: 'The node where this checkin takes place'
         type: \Application
-      claims: []
-      purposeLimitation: []
-      dossiers: []
-      scopeRequests: []
-      authorizationLogs: []
     required:
       - goal
       - application
@@ -15734,9 +15582,6 @@ definitions:
         description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
         type: string
         example: 'https://example.org/organizations/1'
-      users:
-        description: 'array of users that belong to this group (uri of the user object)'
-        type: array
       dateCreated:
         description: 'The moment this request was created by the submitter'
         type: \DateTime
@@ -15766,9 +15611,6 @@ definitions:
         description: 'The organization linked to this group (uri or string) that can be used to retrieve a organization object'
         type: string
         example: 'https://example.org/organizations/1'
-      users:
-        description: 'array of users that belong to this group (uri of the user object)'
-        type: array
       parentGroup: []
       application: []
       memberships: []
@@ -16089,12 +15931,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-06 12:31:33'
+        example: '2021-01-14 12:27:53'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-06 12:31:33'
+        example: '2021-01-14 12:27:53'
     required: []
   AuditTrail-write:
     properties:
@@ -16142,12 +15984,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-06 12:31:33'
+        example: '2021-01-14 12:27:53'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-06 12:31:33'
+        example: '2021-01-14 12:27:53'
     required: []
   ChangeLog-write:
     properties:
@@ -16203,7 +16045,7 @@ tags:
   -
     name: Membership
     description: |
-      An entity representing a membership
+      An entity representing a membership.
       
       entity that holds the memeberships linked to groups
   -
