@@ -292,6 +292,16 @@ class Application
     private $messageBirdApiKey;
 
     /**
+     * @var string publicKey linked to the application
+     *
+     * @example 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $publicKey;
+
+    /**
      * @ORM\OneToMany(targetEntity=Authorization::class, mappedBy="application", orphanRemoval=true)
      */
     private $authorizations;
@@ -602,6 +612,18 @@ class Application
     public function setMessageBirdApiKey(?string $messageBirdApiKey): self
     {
         $this->messageBirdApiKey = $messageBirdApiKey;
+
+        return $this;
+    }
+
+    public function getPublicKey(): ?string
+    {
+        return $this->publicKey;
+    }
+
+    public function setPublicKey(?string $publicKey): self
+    {
+        $this->publicKey = $publicKey;
 
         return $this;
     }
