@@ -302,6 +302,16 @@ class Application
     private $publicKey;
 
     /**
+     * @var string privateKey linked to the application
+     *
+     * @example 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+     *
+     * @Groups({"read","write"})
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $privateKey;
+
+    /**
      * @ORM\OneToMany(targetEntity=Authorization::class, mappedBy="application", orphanRemoval=true)
      */
     private $authorizations;
@@ -624,6 +634,18 @@ class Application
     public function setPublicKey(?string $publicKey): self
     {
         $this->publicKey = $publicKey;
+
+        return $this;
+    }
+
+    public function getPrivateKey(): ?string
+    {
+        return $this->privateKey;
+    }
+
+    public function setPrivateKey(?string $privateKey): self
+    {
+        $this->privateKey = $privateKey;
 
         return $this;
     }
