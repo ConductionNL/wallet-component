@@ -297,7 +297,7 @@ class Application
      * @example 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
      *
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $publicKey;
 
