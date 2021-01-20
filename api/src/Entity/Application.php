@@ -401,7 +401,7 @@ class Application
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -413,7 +413,7 @@ class Application
         return $this->authorizationUrl;
     }
 
-    public function setAuthorizationUrl(string $authorizationUrl): self
+    public function setAuthorizationUrl(?string $authorizationUrl): self
     {
         $this->authorizationUrl = $authorizationUrl;
 
@@ -425,7 +425,7 @@ class Application
         return $this->singleSignOnUrl;
     }
 
-    public function setSingleSignOnUrl(string $singleSignOnUrl): self
+    public function setSingleSignOnUrl(?string $singleSignOnUrl): self
     {
         $this->singleSignOnUrl = $singleSignOnUrl;
 
@@ -437,7 +437,7 @@ class Application
         return $this->webhookUrl;
     }
 
-    public function setWebhookUrl(string $webhookUrl): self
+    public function setWebhookUrl(?string $webhookUrl): self
     {
         $this->webhookUrl = $webhookUrl;
 
@@ -449,7 +449,7 @@ class Application
         return $this->secret;
     }
 
-    public function setSecret(string $secret): self
+    public function setSecret(?string $secret): self
     {
         $this->secret = $secret;
 
@@ -461,7 +461,7 @@ class Application
         return $this->testSecret;
     }
 
-    public function setTestSecret(string $testSecret): self
+    public function setTestSecret(?string $testSecret): self
     {
         $this->testSecret = $testSecret;
 
@@ -476,7 +476,7 @@ class Application
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -491,7 +491,7 @@ class Application
         return $this->organization;
     }
 
-    public function setOrganization(string $organization): self
+    public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
 
@@ -506,7 +506,7 @@ class Application
         return $this->contact;
     }
 
-    public function setContact(string $contact): self
+    public function setContact(?string $contact): self
     {
         $this->contact = $contact;
 
@@ -521,7 +521,7 @@ class Application
         return $this->notificationEndpoint;
     }
 
-    public function setNotificationEndpoint(string $notificationEndpoint): self
+    public function setNotificationEndpoint(?string $notificationEndpoint): self
     {
         $this->notificationEndpoint = $notificationEndpoint;
 
@@ -536,7 +536,7 @@ class Application
         return $this->gdprContact;
     }
 
-    public function setGdprContact(string $gdprContact): self
+    public function setGdprContact(?string $gdprContact): self
     {
         $this->gdprContact = $gdprContact;
 
@@ -551,7 +551,7 @@ class Application
         return $this->technicalContact;
     }
 
-    public function setTechnicalContact(string $technicalContact): self
+    public function setTechnicalContact(?string $technicalContact): self
     {
         $this->technicalContact = $technicalContact;
 
@@ -566,7 +566,7 @@ class Application
         return $this->privacyContact;
     }
 
-    public function setPrivacyContact(string $privacyContact): self
+    public function setPrivacyContact(?string $privacyContact): self
     {
         $this->privacyContact = $privacyContact;
 
@@ -581,7 +581,7 @@ class Application
         return $this->billingContact;
     }
 
-    public function setBillingContact(string $billingContact): self
+    public function setBillingContact(?string $billingContact): self
     {
         $this->billingContact = $billingContact;
 
@@ -755,7 +755,7 @@ class Application
         return $this->scopes;
     }
 
-    public function setScopes(array $scopes): self
+    public function setScopes(?array $scopes): self
     {
         $this->scopes = $scopes;
 
@@ -767,7 +767,7 @@ class Application
         return $this->configuration;
     }
 
-    public function setConfiguration(array $configuration): self
+    public function setConfiguration(?array $configuration): self
     {
         $this->configuration = $configuration;
 
@@ -779,7 +779,7 @@ class Application
         return $this->sendLists;
     }
 
-    public function setSendLists(array $sendLists): self
+    public function setSendLists(?array $sendLists): self
     {
         $this->sendLists = $sendLists;
 
