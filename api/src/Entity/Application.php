@@ -215,6 +215,13 @@ class Application
      * @Groups({"read","write"})
      * @ORM\Column(type="json", nullable=true)
      */
+    private $configuration = [];
+
+    /**
+     * @Gedmo\Versioned
+     * @Groups({"read","write"})
+     * @ORM\Column(type="json", nullable=true)
+     */
     private $sendLists = [];
 
     /**
@@ -751,6 +758,18 @@ class Application
     public function setScopes(array $scopes): self
     {
         $this->scopes = $scopes;
+
+        return $this;
+    }
+
+    public function getConfiguration(): ?array
+    {
+        return $this->configuration;
+    }
+
+    public function setConfiguration(array $configuration): self
+    {
+        $this->configuration = $configuration;
 
         return $this;
     }
