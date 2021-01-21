@@ -97,10 +97,6 @@ class Claim
      * @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
      *
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *      max = 255
-     * )
-     * @Gedmo\Versioned
      * @Groups({"read","write"})
      * @ORM\Column(type="text", nullable=true)
      */
