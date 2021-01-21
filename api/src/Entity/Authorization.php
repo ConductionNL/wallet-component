@@ -113,7 +113,7 @@ class Authorization
     private $goal;
 
     /**
-     * @var integer The weight of the authorization in points
+     * @var int The weight of the authorization in points
      *
      * @example 4
      *
@@ -212,7 +212,6 @@ class Authorization
         if (count($scopes) > $this->getPoints()) {
             $this->setPoints(count($scopes));
         }
-
     }
 
     public function __construct()
