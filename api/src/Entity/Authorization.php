@@ -113,6 +113,17 @@ class Authorization
     private $goal;
 
     /**
+     * @var int The weight of the authorization in points
+     *
+     * @example 4
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read"})
+     * @ORM\Column(type="integer", length=255, nullable=true)
+     */
+    private $points = 0;
+
+    /**
      * @var Application The node where this checkin takes place
      *
      * @Groups({"read","write"})
@@ -196,6 +207,11 @@ class Authorization
             $code = substr(str_shuffle(str_repeat($validChars, ceil(30 / strlen($validChars)))), 1, 30);
             $this->setCode($code);
         }
+
+        $scopes = $this->getScopes();
+        if (count($scopes) > $this->getPoints()) {
+            $this->setPoints(count($scopes));
+        }
     }
 
     public function __construct()
@@ -226,6 +242,18 @@ class Authorization
     public function setUserUrl(?string $userUrl): self
     {
         $this->userUrl = $userUrl;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(?int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }
