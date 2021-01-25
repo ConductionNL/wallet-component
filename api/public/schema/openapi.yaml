@@ -210,6 +210,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[configuration]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[sendLists]'
           in: query
           required: false
@@ -274,6 +283,24 @@ paths:
               - desc
         -
           name: 'order[messageBirdApiKey]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[publicKey]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[privateKey]'
           in: query
           required: false
           schema:
@@ -3119,6 +3146,136 @@ paths:
               $ref: '#/components/schemas/AuthorizationLog-write'
         description: 'The updated AuthorizationLog resource'
   /authorizations:
+    post:
+      tags:
+        - Authorization
+      operationId: postAuthorizationCollection
+      summary: 'Creates a Authorization resource.'
+      responses:
+        201:
+          description: 'Authorization resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Authorization:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Authorization:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Authorization-read'
+          links:
+            GetAuthorizationItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getAuthorizationItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /authorizations/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Authorization:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Authorization:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Authorization-write'
+        description: 'The new Authorization resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
     get:
       tags:
         - Authorization
@@ -3257,6 +3414,15 @@ paths:
               - desc
         -
           name: 'order[goal]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[points]'
           in: query
           required: false
           schema:
@@ -3428,6 +3594,22 @@ paths:
           style: form
           explode: true
         -
+          name: application.id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'application.id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -3517,136 +3699,6 @@ paths:
           in: query
       produces:
         - application/health+json
-    post:
-      tags:
-        - Authorization
-      operationId: postAuthorizationCollection
-      summary: 'Creates a Authorization resource.'
-      responses:
-        201:
-          description: 'Authorization resource created'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Authorization:jsonld-read'
-            application/json+ld:
-              schema:
-                $ref: '#/components/schemas/Authorization:jsonld-read'
-            application/hal+json:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/json+hal:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/vnd.api+json:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/json+vnd.api:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/health+json:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/json+health:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            application/x-yaml:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            text/csv:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Authorization-read'
-          links:
-            GetAuthorizationItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getAuthorizationItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /authorizations/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Authorization:jsonld-write'
-          application/json+ld:
-            schema:
-              $ref: '#/components/schemas/Authorization:jsonld-write'
-          application/hal+json:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/json+hal:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/vnd.api+json:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/json+vnd.api:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/health+json:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/json+health:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          application/x-yaml:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          text/csv:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Authorization-write'
-        description: 'The new Authorization resource'
-      parameters:
-        -
-          name: Authorization
-          description: 'The JWT of the entity performing the request'
-          in: header
-        -
-          name: API-Version
-          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
-          example: 1.0.1
-          in: header
-        -
-          name: X-NLX-Logrecord-ID
-          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
-          in: header
-        -
-          name: X-NLX-Request-Process-Id
-          description: 'A process id for purpose registration (doelbinding)'
-          in: header
-        -
-          name: X-NLX-Request-Data-Elements
-          description: 'A list of requested data elements'
-          in: header
-        -
-          name: X-NLX-Request-Data-Subject
-          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
-          in: header
-        -
-          name: X-NLX-Audit-Clarification
-          description: 'A clarification as to why a request has been made  (doelbinding)'
-          in: header
   '/authorizations/{id}':
     get:
       tags:
@@ -9683,6 +9735,854 @@ paths:
           description: 'Resource not found'
       produces:
         - application/health+json
+  '/points_application/{id}':
+    get:
+      tags:
+        - Authorization
+      operationId: get_points_by_applicationAuthorizationCollection
+      summary: 'Retrieves the collection of Authorization resources.'
+      responses:
+        200:
+          description: 'Authorization collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Authorization:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Authorization:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+      parameters:
+        -
+          name: newUser
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[userUrl]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[newUser]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[scopes]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[code]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[goal]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[points]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[startingDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'startingDate[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startingDate[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startingDate[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startingDate[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: userUrl
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'userUrl[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: application
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'application[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'code[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: application.id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'application.id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+  '/points_organization/{id}':
+    get:
+      tags:
+        - Authorization
+      operationId: get_points_by_organizationAuthorizationCollection
+      summary: 'Retrieves the collection of Authorization resources.'
+      responses:
+        200:
+          description: 'Authorization collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Authorization:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Authorization:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Authorization-read'
+      parameters:
+        -
+          name: newUser
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[userUrl]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[newUser]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[scopes]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[code]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[goal]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[points]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[startingDate]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'startingDate[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startingDate[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startingDate[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'startingDate[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: userUrl
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'userUrl[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: application
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'application[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'code[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: application.id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'application.id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
   /proofs:
     get:
       tags:
@@ -12401,10 +13301,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12439,6 +13346,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -12510,10 +13425,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12548,6 +13470,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -12625,10 +13555,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12663,6 +13600,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -12743,10 +13688,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12781,6 +13733,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -13097,6 +14057,10 @@ components:
         goal:
           description: 'The goal of this Authorization (what are the data used for).'
           type: string
+        points:
+          description: 'The weight of the authorization in points'
+          type: integer
+          nullable: true
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application-read'
@@ -13218,6 +14182,10 @@ components:
         goal:
           description: 'The goal of this Authorization (what are the data used for).'
           type: string
+        points:
+          description: 'The weight of the authorization in points'
+          type: integer
+          nullable: true
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application:jsonld-read'
@@ -15092,6 +16060,7 @@ definitions:
         format: url
         maxLength: 255
       scopes: []
+      configuration: []
       sendLists: []
       gdprContact:
         description: 'The gdprContact of this application'
@@ -15123,6 +16092,14 @@ definitions:
         example: mail.zuid-drecht.nl
       messageBirdApiKey:
         description: 'The messageBird api key of this application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      publicKey:
+        description: 'publicKey linked to the application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      privateKey:
+        description: 'privateKey linked to the application'
         type: string
         example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
       dateCreated:
@@ -15178,6 +16155,7 @@ definitions:
         format: url
         maxLength: 255
       scopes: []
+      configuration: []
       sendLists: []
       gdprContact:
         description: 'The gdprContact of this application'
@@ -15209,6 +16187,14 @@ definitions:
         example: mail.zuid-drecht.nl
       messageBirdApiKey:
         description: 'The messageBird api key of this application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      publicKey:
+        description: 'publicKey linked to the application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      privateKey:
+        description: 'privateKey linked to the application'
         type: string
         example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
       proofs: []
@@ -15246,6 +16232,10 @@ definitions:
         type: string
         example: 'Get email adres for sending news every week'
         maxLength: 255
+      points:
+        description: 'The weight of the authorization in points'
+        type: int
+        example: '4'
       startingDate:
         description: 'The date access was obtained to the data of this authorization'
         type: \Datetime
@@ -15377,7 +16367,6 @@ definitions:
         description: 'The jwt token of this Claim.'
         type: string
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
       dateCreated:
         description: 'The moment this claim was created'
         type: \Datetime
@@ -15410,7 +16399,6 @@ definitions:
         description: 'The jwt token of this Claim.'
         type: string
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
       authorizations: []
       proofs: []
     required:
@@ -15931,12 +16919,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 12:59:27'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 12:59:27'
     required: []
   AuditTrail-write:
     properties:
@@ -15984,12 +16972,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 12:59:27'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 12:59:27'
     required: []
   ChangeLog-write:
     properties:

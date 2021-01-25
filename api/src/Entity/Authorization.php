@@ -24,7 +24,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
- *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
+ *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
+ *     collectionOperations={
+ *          "post",
+ *          "get",
+ *          "get_points_by_application"={
+ *              "method"="GET",
+ *              "path"="/points_application/{id}",
+ *          },
+ *          "get_points_by_organization"={
+ *              "method"="GET",
+ *              "path"="/points_organization/{id}",
+ *          }
+ *     }
  * )
  * @ORM\Entity(repositoryClass=AuthorizationRepository::class)
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
@@ -34,7 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact", "id": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact", "id": "exact", "application.id": "exact"})
  */
 class Authorization
 {

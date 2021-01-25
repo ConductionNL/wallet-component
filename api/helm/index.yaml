@@ -5,7 +5,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-01-14T12:25:05.6643974Z"
+    created: "2021-01-25T12:58:10.0548865Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -34,4 +34,17 @@ entries:
     urls:
     - charts/postgresql-10.1.1.tgz
     version: 10.1.1
-generated: "2021-01-14T12:25:05.47344Z"
+  wac:
+  - apiVersion: v1
+    appVersion: V1.0
+    created: "2021-01-25T12:58:10.0457787Z"
+    description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
+      beschikbaar.
+    digest: b072ff45a08514a035e897c0e87f97f8df7e49ab8c7f374a66400ad661c7b0c6
+    home: wac.zaakonline.nl
+    icon: wac.zaakonline.nl
+    name: wac
+    urls:
+    - wac-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-01-25T12:58:10.0156508Z"
