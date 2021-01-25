@@ -19,32 +19,27 @@ class AuthorizationRepository extends ServiceEntityRepository
         parent::__construct($registry, Authorization::class);
     }
 
-    // /**
-    //  * @return Contract[] Returns an array of Contract objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function getPointsByApplication($application) {
+        $points = $this->createQueryBuilder('p')
+        ->select('SUM(p.points) as points')
+        ->andWhere('p.application = :application')
+        ->setParameter('application', $application)
+        ->getQuery()
+        ->getResult();
 
-    /*
-    public function findOneBySomeField($value): ?Contract
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $points;
     }
-    */
+
+    public function getPointsByOrganization($organization) {
+        $points = $this->createQueryBuilder('p')
+        ->select('SUM(p.points) as points')
+        ->leftJoin('p.application', 'application')
+        ->andWhere('application.organization = :organization')
+        ->setParameter('organization', $organization)
+        ->getQuery()
+        ->getResult();
+
+        return $points;
+    }
+
 }
