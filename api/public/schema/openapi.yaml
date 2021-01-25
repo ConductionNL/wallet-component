@@ -210,6 +210,15 @@ paths:
               - asc
               - desc
         -
+          name: 'order[configuration]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
           name: 'order[sendLists]'
           in: query
           required: false
@@ -274,6 +283,24 @@ paths:
               - desc
         -
           name: 'order[messageBirdApiKey]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[publicKey]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[privateKey]'
           in: query
           required: false
           schema:
@@ -3257,6 +3284,15 @@ paths:
               - desc
         -
           name: 'order[goal]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[points]'
           in: query
           required: false
           schema:
@@ -12401,10 +12437,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12439,6 +12482,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -12510,10 +12561,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12548,6 +12606,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -12625,10 +12691,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12663,6 +12736,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -12743,10 +12824,17 @@ components:
           type: array
           items:
             type: string
+          nullable: true
+        configuration:
+          type: array
+          items:
+            type: string
+          nullable: true
         sendLists:
           type: array
           items:
             type: string
+          nullable: true
         gdprContact:
           description: 'The gdprContact of this application'
           externalDocs:
@@ -12781,6 +12869,14 @@ components:
           nullable: true
         messageBirdApiKey:
           description: 'The messageBird api key of this application'
+          type: string
+          nullable: true
+        publicKey:
+          description: 'publicKey linked to the application'
+          type: string
+          nullable: true
+        privateKey:
+          description: 'privateKey linked to the application'
           type: string
           nullable: true
         proofs:
@@ -13097,6 +13193,10 @@ components:
         goal:
           description: 'The goal of this Authorization (what are the data used for).'
           type: string
+        points:
+          description: 'The weight of the authorization in points'
+          type: integer
+          nullable: true
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application-read'
@@ -13218,6 +13318,10 @@ components:
         goal:
           description: 'The goal of this Authorization (what are the data used for).'
           type: string
+        points:
+          description: 'The weight of the authorization in points'
+          type: integer
+          nullable: true
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application:jsonld-read'
@@ -15092,6 +15196,7 @@ definitions:
         format: url
         maxLength: 255
       scopes: []
+      configuration: []
       sendLists: []
       gdprContact:
         description: 'The gdprContact of this application'
@@ -15123,6 +15228,14 @@ definitions:
         example: mail.zuid-drecht.nl
       messageBirdApiKey:
         description: 'The messageBird api key of this application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      publicKey:
+        description: 'publicKey linked to the application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      privateKey:
+        description: 'privateKey linked to the application'
         type: string
         example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
       dateCreated:
@@ -15178,6 +15291,7 @@ definitions:
         format: url
         maxLength: 255
       scopes: []
+      configuration: []
       sendLists: []
       gdprContact:
         description: 'The gdprContact of this application'
@@ -15209,6 +15323,14 @@ definitions:
         example: mail.zuid-drecht.nl
       messageBirdApiKey:
         description: 'The messageBird api key of this application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      publicKey:
+        description: 'publicKey linked to the application'
+        type: string
+        example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
+      privateKey:
+        description: 'privateKey linked to the application'
         type: string
         example: 9dja5d6a6dasda-dsadas6azd-dz5dzadzasdd5e45ad5a3g223
       proofs: []
@@ -15246,6 +15368,10 @@ definitions:
         type: string
         example: 'Get email adres for sending news every week'
         maxLength: 255
+      points:
+        description: 'The weight of the authorization in points'
+        type: int
+        example: '4'
       startingDate:
         description: 'The date access was obtained to the data of this authorization'
         type: \Datetime
@@ -15377,7 +15503,6 @@ definitions:
         description: 'The jwt token of this Claim.'
         type: string
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
       dateCreated:
         description: 'The moment this claim was created'
         type: \Datetime
@@ -15410,7 +15535,6 @@ definitions:
         description: 'The jwt token of this Claim.'
         type: string
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
-        maxLength: 255
       authorizations: []
       proofs: []
     required:
@@ -15931,12 +16055,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 10:09:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 10:09:11'
     required: []
   AuditTrail-write:
     properties:
@@ -15984,12 +16108,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 10:09:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-14 12:27:53'
+        example: '2021-01-25 10:09:11'
     required: []
   ChangeLog-write:
     properties:
