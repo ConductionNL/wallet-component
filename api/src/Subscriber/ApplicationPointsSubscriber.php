@@ -39,7 +39,7 @@ class ApplicationPointsSubscriber implements EventSubscriberInterface
             $id = $event->getRequest()->attributes->get('id');
 
             $points = [];
-            $points['points'] = (int)$this->pointService->getPointsByApplication($id)[0]['points'];
+            $points['points'] = (int) $this->pointService->getPointsByApplication($id)[0]['points'];
 
             $json = $this->serializer->serialize(
                 $points,
