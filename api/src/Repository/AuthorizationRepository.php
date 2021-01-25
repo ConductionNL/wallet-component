@@ -19,7 +19,8 @@ class AuthorizationRepository extends ServiceEntityRepository
         parent::__construct($registry, Authorization::class);
     }
 
-    public function getPointsByApplication($application) {
+    public function getPointsByApplication($application)
+    {
         $points = $this->createQueryBuilder('p')
         ->select('SUM(p.points) as points')
         ->andWhere('p.application = :application')
@@ -30,7 +31,8 @@ class AuthorizationRepository extends ServiceEntityRepository
         return $points;
     }
 
-    public function getPointsByOrganization($organization) {
+    public function getPointsByOrganization($organization)
+    {
         $points = $this->createQueryBuilder('p')
         ->select('SUM(p.points) as points')
         ->leftJoin('p.application', 'application')
@@ -41,5 +43,4 @@ class AuthorizationRepository extends ServiceEntityRepository
 
         return $points;
     }
-
 }

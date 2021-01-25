@@ -38,7 +38,6 @@ class ApplicationPointsSubscriber implements EventSubscriberInterface
         if ($event->getRequest()->getMethod() == 'GET' && $event->getRequest()->get('_route') == 'api_authorizations_get_points_by_application_collection') {
             $id = $event->getRequest()->attributes->get('id');
 
-
             $points = $this->pointService->getPointsByApplication($id);
 
             $json = $this->serializer->serialize(
