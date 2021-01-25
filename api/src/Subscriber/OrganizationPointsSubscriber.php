@@ -39,7 +39,8 @@ class OrganizationPointsSubscriber implements EventSubscriberInterface
             $id = $event->getRequest()->attributes->get('id');
             $organization = $this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => $id]);
 
-            $points = $this->pointService->getPointsByOrganization($organization);
+            $points = [];
+            $points['points'] = (int)$this->pointService->getPointsByOrganization($organization)[0]['points'];
 
             $json = $this->serializer->serialize(
                 $points,
