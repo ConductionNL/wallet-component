@@ -221,7 +221,7 @@ class Authorization
         }
 
         $scopes = $this->getScopes();
-        if (count($scopes) > $this->getPoints()) {
+        if (count($scopes) > $this->getPoints() || $this->getPoints() == null) {
             $this->setPoints(count($scopes));
         }
     }
