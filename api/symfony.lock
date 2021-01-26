@@ -37,6 +37,9 @@
     "composer/xdebug-handler": {
         "version": "1.3.3"
     },
+    "conduction/balancebundle": {
+        "version": "dev-master"
+    },
     "conduction/commongroundbundle": {
         "version": "dev-master"
     },
