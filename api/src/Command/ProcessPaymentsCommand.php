@@ -4,6 +4,7 @@
 
 namespace App\Command;
 
+use App\Service\PaymentService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,9 +15,10 @@ class ProcessPaymentsCommand extends Command
     private $em;
     private $paymentService;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, PaymentService $paymentService)
     {
         $this->em = $em;
+        $this->paymentService = $paymentService;
 
         parent::__construct();
     }
@@ -27,7 +29,7 @@ class ProcessPaymentsCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('process:payment')
+            ->setName('app:process:payments')
             // the short description shown while running "php bin/console list"
             ->setDescription('Command to process all the payments for the organizations');
     }
@@ -38,6 +40,7 @@ class ProcessPaymentsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
+        $this->paymentService->processPayments();
 
         return Command::SUCCESS;
     }
