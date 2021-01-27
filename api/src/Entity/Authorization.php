@@ -130,7 +130,7 @@ class Authorization
      * @example 4
      *
      * @Gedmo\Versioned
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      * @ORM\Column(type="integer", length=255, nullable=true)
      */
     private $points = 0;

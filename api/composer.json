@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",
+        "conduction/balancebundle": "dev-master",
         "conduction/commongroundbundle": "dev-symfony51",
         "phpdocumentor/reflection-docblock": "^4.3",
         "sensio/framework-extra-bundle": "^5.5",
@@ -55,6 +56,7 @@
     "conflict" : {
         "symfony/symfony" : "*"
     },
+    "minimum-stability" : "dev",
     "extra" : {
         "symfony" : {
             "allow-contrib" : false,
