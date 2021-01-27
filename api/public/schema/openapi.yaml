@@ -7873,6 +7873,22 @@ paths:
           style: form
           explode: true
         -
+          name: memberships.userUrl
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'memberships.userUrl[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -16919,12 +16935,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-25 12:59:27'
+        example: '2021-01-26 10:49:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-25 12:59:27'
+        example: '2021-01-26 10:49:56'
     required: []
   AuditTrail-write:
     properties:
@@ -16972,12 +16988,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-25 12:59:27'
+        example: '2021-01-26 10:49:56'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-25 12:59:27'
+        example: '2021-01-26 10:49:56'
     required: []
   ChangeLog-write:
     properties:
