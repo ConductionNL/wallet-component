@@ -22,31 +22,35 @@ class PaymentService
     }
 
     /**
-     * This function processes the payments for the organizations
+     * This function processes the payments for the organizations.
      */
-    public function processPayments() {
+    public function processPayments()
+    {
         $organizations = $this->getOrganizations();
 
         foreach ($organizations as $organization) {
             $url = $this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => $organization['id']]);
-            $points = (int)$this->em->getRepository('App:Authorization')->getPointsByOrganization($organization['@id'])[0]['points'];
+            $points = (int) $this->em->getRepository('App:Authorization')->getPointsByOrganization($organization['@id'])[0]['points'];
             $this->balanceService->removeCredit(Money::EUR($points), $url, 'Id-vault payment');
-            $this->createInvoice((string)$points / 100, $url);
+            $this->createInvoice((string) $points / 100, $url);
         }
 
         $this->resetPoints();
     }
 
     /**
-     * This function gets the organizations with an account linked to them
+     * This function gets the organizations with an account linked to them.
+     *
      * @return array Array of organizations with an account linked to them
      */
-    public function getOrganizations() {
+    public function getOrganizations()
+    {
         $organizations = $this->commonGroundService->getResourceList(['component' => 'wrc', 'type' => 'organizations'])['hydra:member'];
 
         $results = array_filter($organizations, function ($organization) {
             $url = $this->commonGroundService->cleanUrl(['component' => 'wrc', 'type' => 'organizations', 'id' => $organization['id']]);
             $account = $this->balanceService->getAcount($url);
+
             return $account ? true : false;
         });
 
@@ -54,12 +58,13 @@ class PaymentService
     }
 
     /**
-     * This function creates an invoice for the payment
+     * This function creates an invoice for the payment.
      *
-     * @param string $price price of the invoice
+     * @param string $price    price of the invoice
      * @param string $customer uri of the organization
      */
-    public function createInvoice(string $price, string $customer) {
+    public function createInvoice(string $price, string $customer)
+    {
         $invoice = [];
         $invoice['name'] = 'id-vault monthly payment';
         $invoice['price'] = $price;
@@ -69,9 +74,10 @@ class PaymentService
     }
 
     /**
-     * This functions resets the points of all authorizations to the current count of scopes
+     * This functions resets the points of all authorizations to the current count of scopes.
      */
-    public function resetPoints() {
+    public function resetPoints()
+    {
         $authorizations = $this->em->getRepository('App:Authorization')->findAll();
         foreach ($authorizations as $authorization) {
             if ($authorization instanceof Authorization) {
@@ -81,5 +87,4 @@ class PaymentService
             }
         }
     }
-
 }
