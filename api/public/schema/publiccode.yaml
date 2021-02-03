@@ -119,4 +119,4 @@ dependsOn:
 
 installations:
     - type: helm
-      url: "https://github.com/ConductionNL/wallet-component/raw/master/api/helm/wac-0.1.0.tgz"
+      url: "https://raw.githubusercontent.com/ConductionNL/wallet-component/master/api/helm/"
