@@ -1,14 +1,19 @@
 apiVersion: v1
 entries:
   postgresql:
-  - apiVersion: v1
-    appVersion: 11.7.0
-    created: "2020-12-10T09:46:11.3434198Z"
-    deprecated: true
-    description: DEPRECATED Chart for PostgreSQL, an object-relational database management
-      system (ORDBMS) with an emphasis on extensibility and on standards-compliance.
-    digest: 00745b88e84403be696b7514c6e8c02710d81eb6074876b0700fa28fd47a9b43
-    home: https://www.postgresql.org/
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 11.10.0
+    created: "2021-01-26T10:48:31.977641Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for PostgreSQL, an object-relational database management system
+      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    digest: eebe8f456cf98d5927a35666d1d899174dc4d3e09f26788033f761527bc90749
+    home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
     icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-110x117.png
     keywords:
     - postgresql
@@ -17,23 +22,29 @@ entries:
     - sql
     - replication
     - cluster
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
     name: postgresql
     sources:
     - https://github.com/bitnami/bitnami-docker-postgresql
+    - https://www.postgresql.org/
     urls:
-    - charts/postgresql-8.6.4.tgz
-    version: 8.6.4
+    - charts/postgresql-10.1.1.tgz
+    version: 10.1.1
   wac:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2020-12-10T09:46:11.3325318Z"
+    created: "2021-01-26T10:48:31.9625585Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 80aff174ca4549072f2f0ea83d16f0ce453dce111312750f18f0a95d82122377
+    digest: 014aef8955d2031134a0a29fcad2e45d04719b39e11b01e30f052330502123be
     home: wac.zaakonline.nl
     icon: wac.zaakonline.nl
     name: wac
     urls:
     - wac-0.1.0.tgz
     version: 0.1.0
-generated: "2020-12-10T09:46:11.3266607Z"
+generated: "2021-01-26T10:48:31.926238Z"

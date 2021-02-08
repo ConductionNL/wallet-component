@@ -33,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"person": "partial"})
+ * @ApiFilter(SearchFilter::class, properties={"person": "partial", "property": "exact"})
  */
 class Claim
 {
@@ -97,12 +97,8 @@ class Claim
      * @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWRJbkFzIjoiYWRtaW4iLCJpYXQiOjE0MjI3Nzk2Mzh9.gzSraSYS8EXBxLN_oWnFSRgCzcmJmMjLiuyu5CSpyHI
      *
      * @Gedmo\Versioned
-     * @Assert\Length(
-     *      max = 255
-     * )
-     * @Gedmo\Versioned
      * @Groups({"read","write"})
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $token;
 

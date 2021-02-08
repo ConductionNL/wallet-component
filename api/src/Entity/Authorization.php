@@ -24,7 +24,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(
  *     normalizationContext={"groups"={"read"}, "enable_max_depth"=true},
- *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true}
+ *     denormalizationContext={"groups"={"write"}, "enable_max_depth"=true},
+ *     collectionOperations={
+ *          "post",
+ *          "get",
+ *          "get_points_by_application"={
+ *              "method"="GET",
+ *              "path"="/points_application/{id}",
+ *          },
+ *          "get_points_by_organization"={
+ *              "method"="GET",
+ *              "path"="/points_organization/{id}",
+ *          }
+ *     }
  * )
  * @ORM\Entity(repositoryClass=AuthorizationRepository::class)
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
@@ -34,7 +46,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(BooleanFilter::class)
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
- * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact", "id": "exact"})
+ * @ApiFilter(SearchFilter::class, properties={"userUrl": "exact", "application": "partial", "code": "exact", "id": "exact", "application.id": "exact"})
  */
 class Authorization
 {
@@ -65,6 +77,13 @@ class Authorization
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $userUrl;
+
+    /**
+     * @var string Indicator whether user is new or not
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $newUser = true;
 
     /**
      * @var array scopes this authorization has access to
@@ -106,6 +125,17 @@ class Authorization
     private $goal;
 
     /**
+     * @var int The weight of the authorization in points
+     *
+     * @example 4
+     *
+     * @Gedmo\Versioned
+     * @Groups({"read", "write"})
+     * @ORM\Column(type="integer", length=255, nullable=true)
+     */
+    private $points = 0;
+
+    /**
      * @var Application The node where this checkin takes place
      *
      * @Groups({"read","write"})
@@ -142,35 +172,35 @@ class Authorization
     private $dateModified;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\ManyToMany(targetEntity=Claim::class, mappedBy="authorizations")
      */
     private $claims;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToOne(targetEntity=PurposeLimitation::class, mappedBy="authorization", orphanRemoval=true, cascade={"persist"})
      */
     private $purposeLimitation;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=Dossier::class, mappedBy="authorization")
      */
     private $dossiers;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=ScopeRequest::class, mappedBy="authorization")
      */
     private $scopeRequests;
 
     /**
-     * @Groups({"read","write"})
+     * @Groups({"write"})
      * @MaxDepth(1)
      * @ORM\OneToMany(targetEntity=AuthorizationLog::class, mappedBy="authorization", orphanRemoval=true)
      */
@@ -188,6 +218,11 @@ class Authorization
 
             $code = substr(str_shuffle(str_repeat($validChars, ceil(30 / strlen($validChars)))), 1, 30);
             $this->setCode($code);
+        }
+
+        $scopes = $this->getScopes();
+        if (count($scopes) > $this->getPoints() || $this->getPoints() == null) {
+            $this->setPoints(count($scopes));
         }
     }
 
@@ -219,6 +254,18 @@ class Authorization
     public function setUserUrl(?string $userUrl): self
     {
         $this->userUrl = $userUrl;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(?int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }
@@ -255,6 +302,18 @@ class Authorization
     public function setGoal(string $goal): self
     {
         $this->goal = $goal;
+
+        return $this;
+    }
+
+    public function getNewUser(): ?bool
+    {
+        return $this->newUser;
+    }
+
+    public function setNewUser(?bool $newUser): self
+    {
+        $this->newUser = $newUser;
 
         return $this;
     }
