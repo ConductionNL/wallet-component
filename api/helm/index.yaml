@@ -5,7 +5,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.10.0
-    created: "2021-01-26T10:48:31.977641Z"
+    created: "2021-03-02T06:19:12.3140852Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -34,17 +34,30 @@ entries:
     urls:
     - charts/postgresql-10.1.1.tgz
     version: 10.1.1
-  wac:
+  wallet-component:
   - apiVersion: v1
     appVersion: V1.0
-    created: "2021-01-26T10:48:31.9625585Z"
+    created: "2021-03-02T06:19:12.304214Z"
     description: Naast deze JSON rest API is er ook een [graphql](/graphql) interface
       beschikbaar.
-    digest: 014aef8955d2031134a0a29fcad2e45d04719b39e11b01e30f052330502123be
-    home: wac.zaakonline.nl
-    icon: wac.zaakonline.nl
-    name: wac
+    digest: a935b9142760d51ca290ca6f6c6cdb9cc9fb8b04b1a9671d5130fa88420f3dc7
+    home: https://www.conduction.nl
+    icon: https://conductionnl.github.io/images/conduction_avatar_blue_on_transparant.svg
+    keywords:
+    - commonground
+    - haven
+    - nlx
+    - component
+    maintainers:
+    - email: ruben@conduction.nl
+      name: Ruben van der Linde
+    - email: info@conduction.nl
+      name: Conduction
+    name: wallet-component
+    sources:
+    - https://commonground.conduction.nl/
+    - https://www.commonground.nl/
     urls:
-    - wac-0.1.0.tgz
+    - wallet-component-0.1.0.tgz
     version: 0.1.0
-generated: "2021-01-26T10:48:31.926238Z"
+generated: "2021-03-02T06:19:12.2864854Z"

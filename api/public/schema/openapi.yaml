@@ -1,16 +1,16 @@
 openapi: 3.0.2
 info:
-  title: 'Wallet Component'
+  title: ''
   version: V1.0
   description: |
     API Details
-    - Component: Wallet Component
-    - Reference: wac
+    - Component: 
+    - Reference: wallet-component
     - Enviroment: dev
     - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/wallet-component) / [zip](https://github.com/ConductionNL/wallet-component/archive/master.zip)
-    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/wac-php) 
-    - Datamodel: [postman](schema/wac.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
+    - Docker Image: [online]() 
+    - Datamodel: [postman](schema/wallet-component.postman_collection.json) / [oas](schema/openapi.yaml) / [pdf](schema/datamodel.pdf) / [modelio (zip)](schema/Datamodel_Modelio.zip) 
     
     Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
@@ -7889,6 +7889,22 @@ paths:
           style: form
           explode: true
         -
+          name: organization
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'organization[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
           name: page
           in: query
           required: false
@@ -14124,6 +14140,10 @@ components:
         goal:
           description: 'The goal of this Authorization (what are the data used for).'
           type: string
+        points:
+          description: 'The weight of the authorization in points'
+          type: integer
+          nullable: true
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application-write'
@@ -14258,6 +14278,10 @@ components:
         goal:
           description: 'The goal of this Authorization (what are the data used for).'
           type: string
+        points:
+          description: 'The weight of the authorization in points'
+          type: integer
+          nullable: true
         application:
           description: 'The node where this checkin takes place'
           $ref: '#/components/schemas/Application:jsonld-write'
@@ -16291,6 +16315,10 @@ definitions:
         type: string
         example: 'Get email adres for sending news every week'
         maxLength: 255
+      points:
+        description: 'The weight of the authorization in points'
+        type: int
+        example: '4'
       startingDate:
         description: 'The date access was obtained to the data of this authorization'
         type: \Datetime
@@ -16935,12 +16963,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-26 10:49:56'
+        example: '2021-03-02 06:18:51'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-26 10:49:56'
+        example: '2021-03-02 06:18:51'
     required: []
   AuditTrail-write:
     properties:
@@ -16988,12 +17016,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2021-01-26 10:49:56'
+        example: '2021-03-02 06:18:51'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2021-01-26 10:49:56'
+        example: '2021-03-02 06:18:51'
     required: []
   ChangeLog-write:
     properties:
@@ -17101,7 +17129,7 @@ host: irc.zaakonline.nl
 servers:
   -
     name: zuid-drecht.nl
-    url: wac.dev.zuid-drecht.nl
+    url: wallet-component.dev.zuid-drecht.nl
 externalDocs:
   -
     description: 'OAS Documentatie'
