@@ -104,7 +104,7 @@ class Authorization
      * @Assert\Length(
      *     max=255
      * )
-     * @ORM\Column(type="string", length=30, nullable=true, unique=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      */
     private $code;
 
