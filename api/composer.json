@@ -9,6 +9,7 @@
         "conduction/balancebundle": "dev-master",
         "conduction/commongroundbundle": "dev-symfony51",
         "doctrine/annotations": "^1.0",
+        "doctrine/cache": "^1.11",
         "doctrine/doctrine-bundle": "2.3.x-dev",
         "doctrine/doctrine-migrations-bundle": "3.3.x-dev",
         "doctrine/orm": "2.13.x-dev",
