@@ -10,6 +10,7 @@ FROM conduction/pc-php:prod AS api_platform_php
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN rm -r vendor/
 
 # install Symfony Flex globally to speed up download of Composer packages (parallelized prefetching)
 RUN set -eux; \
